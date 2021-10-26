@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Startup{% endblock %}</title>
+        {% block stylesheets %}
+            {# {{ encore_entry_link_tags('app') }} #}
+            <!-- Google Font: Source Sans Pro -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+            <!-- Font Awesome Icons -->
+            <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+            <!-- Theme style -->
+            <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+            <style>
+                .alert {
+                padding: 10px;
+                color: white;
+                text-align: center;
+                margin: 0;
+                border: none;
+                border-radius: 0;
+
+                &.alert-success {
+                    background-color: green;
+                }
+
+                &.alert-error {
+                    background-color: red;
+                }
+
+                &.alert-info {
+                    background-color: blue;
+                }
+                }
+            </style>
+        {% endblock %}
+    </head>
+    <body class="hold-transition sidebar-mini">
+        {{ include('layouts/partials/_flash_messages.html.twig') }}
+        <div class="wrapper">
+            {{ include('layouts/partials/_nav.html.twig') }}
+            {{ include('layouts/partials/_aside.html.twig') }}
+            
+            <!-- Content Wrapper. Contains page content -->
+            <main class="content-wrapper">
+                    {% block body %}{% endblock %}
+            </main>
+            <!-- /.content-wrapper -->
+
+            {{ include('layouts/partials/_footer.html.twig') }}
+        </div>
+
+        {% block javascripts %}
+            {# {{ encore_entry_script_tags('app') }} #}
+            <!-- jQuery -->
+            <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+            <!-- Bootstrap 4 -->
+            <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <!-- AdminLTE App -->
+            <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
