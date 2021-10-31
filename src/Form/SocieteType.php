@@ -17,7 +17,8 @@ class SocieteType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => "Nom Sté"
+                'label' => "Nom Sté",
+                'attr' => ['name' => 'name'],
             ])
             ->add('code_societe', NumberType::class, [
                 'label' => "Code Sté Titulaire"

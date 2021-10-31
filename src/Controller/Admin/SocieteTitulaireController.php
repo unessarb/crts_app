@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\SocieteTitulaire;
 use App\Form\TitulaireType;
@@ -17,7 +17,7 @@ class SocieteTitulaireController extends AbstractController
     public function index(SocieteTitulaireRepository $societeTitulaireRepository): Response
     {
         $titulaires = $societeTitulaireRepository->findBy([], ["createdAt"=>"desc"]);
-        return $this->render('titulaire/index.html.twig', [
+        return $this->render('admin/titulaire/index.html.twig', [
             'titulaires' => $titulaires,
         ]);
     }
@@ -37,7 +37,7 @@ class SocieteTitulaireController extends AbstractController
 
             return $this->redirectToRoute('app_titulaires');
         }
-        return $this->render('titulaire/new.html.twig', [
+        return $this->render('admin/titulaire/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -45,7 +45,7 @@ class SocieteTitulaireController extends AbstractController
     #[Route('/titulaires/edit/{id<[0-9]+>}', name: 'app_edit_titulaires', methods: ["GET", "POST"])]
     public function edit(Request $request, EntityManagerInterface $em,SocieteTitulaire $titulaire): Response
     {
-        $form = $this->createForm(SocieteType::class, $titulaire);
+        $form = $this->createForm(TitulaireType::class, $titulaire);
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid()){
 
@@ -54,7 +54,7 @@ class SocieteTitulaireController extends AbstractController
             return $this->redirectToRoute('app_titulaires');
             
         }
-        return $this->render('titulaire/edit.html.twig', [
+        return $this->render('admin/titulaire/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }

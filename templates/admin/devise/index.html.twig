@@ -1,0 +1,78 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Liste des devises' %}
+
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Liste des devises</h1>
+          </div>
+          <div class="col-sm-6 text-right">
+            <a role="link" href="{{path('app_new_devises')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouveau devise</a>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Nom </th>
+                    <th>Crée le</th>
+                    <th>Modifié le</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in devises %}
+                        <tr>
+                            <td>{{item.name}}</td>                        
+                            <td>{{item.createdAt | date() }}</td>                        
+                            <td>{{item.updatedAt | date() }}</td>                        
+                            <td>
+                                <a class="btn btn-info btn-sm" href="{{ path('app_edit_devises', {id: item.id}) }}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Edit
+                                </a>  
+                                <a href="#" 
+                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-devise-delete-form').submit();" 
+                                class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                    Supprimer
+                                </a>
+
+                                <form id="js-devise-delete-form" action="{{ path('app_devises_delete', {id: item.id}) }}" method="post" style="display: none;">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('devise_deletion_' ~ item.id) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                </form> 
+                            </td>                        
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+{% endblock %}

@@ -53,18 +53,87 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ path('app_societes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_societes' %}active{% endif %}">
+              <a href="{{ path('app_societes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>MAJ Société</p>
+                <p>MAJ Sociétés</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ path('app_titulaires') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_titulaires' %}active{% endif %}">
+              <a href="{{ path('app_titulaires') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_titulaires' or app.request.attributes.get('_route') == 'app_new_titulaires' or app.request.attributes.get('_route') == 'app_edit_titulaires' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>MAJ Sté Titulaire</p>
+                <p>MAJ Sté Titulaires</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ path('app_devises') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_devises' or app.request.attributes.get('_route') == 'app_new_devises' or app.request.attributes.get('_route') == 'app_edit_devises' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>MAJ Devises</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ path('app_tfs') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>MAJ TFS</p>
+              </a>
+            </li>
+            <li class="nav-item 
+            {% if 
+                  app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_marche_unique' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_marche_unique' or 
+                  app.request.attributes.get('_route') == 'app_nature_operation_marche_reconductible' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_marche_reconductible' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_marche_reconductible' or
+                  app.request.attributes.get('_route') == 'app_nature_operation_contrat' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_contrat' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_contrat' or
+                  app.request.attributes.get('_route') == 'app_nature_operation_bon_commande' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande'
+                   %}menu-is-opening menu-open{% endif %}
+            ">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Nature opération
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ path('app_nature_operation_marche_unique') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or app.request.attributes.get('_route') == 'app_new_nature_operation_marche_unique' or app.request.attributes.get('_route') == 'app_edit_nature_operation_marche_unique' %}active{% endif %}">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Marché Unique / Cadre</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ path('app_nature_operation_marche_reconductible') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_nature_operation_marche_reconductible' or app.request.attributes.get('_route') == 'app_new_nature_operation_marche_reconductible' or app.request.attributes.get('_route') == 'app_edit_nature_operation_marche_reconductible' %}active{% endif %}">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Marché Reconductible</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ path('app_nature_operation_contrat') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_nature_operation_contrat' or app.request.attributes.get('_route') == 'app_new_nature_operation_contrat' or app.request.attributes.get('_route') == 'app_edit_nature_operation_contrat' %}active{% endif %}">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Contrat</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ path('app_nature_operation_bon_commande') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_nature_operation_bon_commande' or app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande' %}active{% endif %}">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Bon commande</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            
           </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('app_marches') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_marches' or app.request.attributes.get('_route') == 'app_new_marches' or app.request.attributes.get('_route') == 'app_edit_marches' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Marchés Unique / Cadre</p>
+          </a>
         </li>
         
       </ul>
