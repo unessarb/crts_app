@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title 'Archive Marché Unique / Cadre' %}
+{% block title 'Archive Bon de commandes' %}
 
 {% block body %}
 
@@ -9,10 +9,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Archive Marché Unique / Cadre</h1>
+            <h1>Archive Bon de commandes</h1>
           </div>
           <div class="col-sm-6 text-right">
-            <a role="link" href="{{path('app_new_marches')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouveau marché</a>
+            <a role="link" href="{{path('app_new_bon_commande')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouveau bon de commande</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -28,9 +28,9 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>N° Marché</th>
+                    <th>N° BC-FN</th>
                     <th>TFS</th>
-                    <th>Type Marché</th>
+                    <th>Type BC</th>
                     <th>Société</th>
                     <th>Nature Opération</th>
                     <th>Montant TTC</th>
@@ -42,34 +42,34 @@
                   </tr>
                   </thead>
                   <tbody>
-                    {% for item in marches %}
+                    {% for item in bon_commandes %}
                         <tr>
-                            <td>{{item.numMarche}}</td>                        
+                            <td>{{item.numBc}}</td>                        
                             <td>{{item.tfs.code}}</td>                        
-                            <td>{{item.typeMarche == '0' ? "Unique" : "Cadre"}}</td>                        
+                            <td>{{item.typeBc == '0' ? "Sans FN" : "Avec FN"}}</td>                        
                             <td>{{item.societe.name}}</td>                        
                             <td>{{item.natureOperation.natureOperation}}</td>                        
                             <td>{{item.montant ~ ' ' ~ item.devise.name}}</td>                        
                             <td>{{item.createdAt | date() }}</td>                        
                             <td>{{item.updatedAt | date() }}</td>        
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{ path('app_show_marches', {id: item.id}) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ path('app_show_bon_commande', {id: item.id}) }}">
                                     <i class="fas fa-eye"></i>
                                 </a>  
                             </td>                 
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{ path('app_edit_marches', {id: item.id}) }}">
+                                <a class="btn btn-info btn-sm" href="{{ path('app_edit_bon_commande', {id: item.id}) }}">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>  
                             </td>      
                             <td>
                                 <a href="#" 
-                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-marche-delete-form').submit();" 
+                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-bon_commande-delete-form').submit();" 
                                 class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
-                                <form id="js-marche-delete-form" action="{{ path('app_marches_delete', {id: item.id}) }}" method="post" style="display: none;">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('marche_deletion_' ~ item.id) }}">
+                                <form id="js-bon_commande-delete-form" action="{{ path('app_bon_commande_delete', {id: item.id}) }}" method="post" style="display: none;">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('bon_commande_deletion_' ~ item.id) }}">
                                     <input type="hidden" name="_method" value="DELETE">
                                 </form> 
                             </td>                        

@@ -1,4 +1,17 @@
 $(document).ready(() => {
+  $(".select2bs4").select2({
+    theme: "bootstrap4",
+  });
+  $(".table").DataTable({
+    paging: true,
+    lengthChange: false,
+    searching: true,
+    ordering: true,
+    info: true,
+    autoWidth: true,
+    responsive: true,
+  });
+
   if ($(".custom-file-input").length > 0) {
     $(".custom-file-input").on("change", function (e) {
       var inputFile = e.currentTarget;

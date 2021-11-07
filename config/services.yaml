@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
   app.path.marche_unique_files: /uploads/files/marche_unique
+  app.path.bon_commande_files: /uploads/files/bon_commande
+  app.path.contrat_files: /uploads/files/contrat
 
 services:
   # default configuration for services in *this* file

@@ -2,9 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\BonCommande;
 use App\Entity\Devise;
-use App\Entity\MarcheUnique;
-use App\Entity\NatureOperationMarcheUnique;
+use App\Entity\NatureOperationBonCommande;
 use App\Entity\Societe;
 use App\Entity\SocieteTitulaire;
 use App\Entity\Tfs;
@@ -15,13 +15,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class MarcheUniqueType extends AbstractType
+class BonCommandesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('numMarche', null, [
-                "label" => "N° Marché"
+            ->add('numBc', null, [
+                "label" => "N° BC-FN"
                 ])
             ->add('tfs', EntityType::class, [
                 // looks for choices from this entity
@@ -38,22 +38,13 @@ class MarcheUniqueType extends AbstractType
                     "class" => "select2bs4"
                 ]
             ])
-            ->add('typeMarche', ChoiceType::class, [
+            ->add('typeBc', ChoiceType::class, [
                 'choices'  => [
-                    '0 | Unique' => 0,
-                    '1 | Cadre' => 1,
+                    '0 | Sans FN' => 0,
+                    '1 | Avec FN' => 1,
                 ],
-                "placeholder" => "Selectionner le type du marché",
-                "label" => "Type Marché"
-                ])
-            ->add('modePassassion', ChoiceType::class, [
-                'choices'  => [
-                    '0 | Ouvert' => 0,
-                    '1 | Négocié' => 1,
-                    '2 | Restreint' => 2
-                ],
-                "placeholder" => "Selectionner le mode de passassion",
-                "label" => "Mode passassion"
+                "placeholder" => "Selectionner le type BC",
+                "label" => "Type BC"
                 ])
             ->add('titulaire', EntityType::class, [
                 // looks for choices from this entity
@@ -77,7 +68,7 @@ class MarcheUniqueType extends AbstractType
                 ])
             ->add('natureOperation', EntityType::class, [
                 // looks for choices from this entity
-                'class' => NatureOperationMarcheUnique::class,
+                'class' => NatureOperationBonCommande::class,
                 'choice_label' => "natureOperation",
                 "placeholder" => "Selectionner la nature opération",
                 'label' => "Nature opération",
@@ -134,7 +125,7 @@ class MarcheUniqueType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MarcheUnique::class,
+            'data_class' => BonCommande::class,
         ]);
     }
 }

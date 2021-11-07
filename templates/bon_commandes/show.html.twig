@@ -1,0 +1,169 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Détails marché ' %}
+
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Code à barres pour Bon de commande {{ bon_commande.typeBc == 0 ? "Sans FN" : "Avec FN" }}</h1>
+          </div>
+		   <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ path('app_bon_commandes') }}">Archive Bon de commandes</a></li>
+              <li class="breadcrumb-item active">Détails marché {{ bon_commande.numBc }}</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+	<!-- Main content -->
+    <section class="content">
+
+		<div class="row">
+				<div class="col-md-6">
+					<div class="card card-primary">
+						<div class="card-header text-center text-uppercase">
+							Code Doc						
+						</div>
+						<div class="card-body text-center ">
+							<strong>
+								{{ bon_commande.codeDoc }}
+							</strong>
+							<br>
+							<a class="btn btn-app mt-5" data-toggle="modal" data-target="#exampleModal">
+								<i class="fas fa-barcode"></i> <strong>Code à barres</strong>
+							</a>
+						</div>
+					<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+				<div class="col-md-6">
+					<div class="card card-secondary">
+					<div class="card-body">
+						<table class="table table-striped">
+							<tbody>
+								<tr>
+									<td class="label-table" width="50%">N° Enregistrement</td>
+									<td width="50%">{{ bon_commande.id }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">N° BC-FN</td>
+									<td width="50%">{{ bon_commande.numBc }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">TFS</td>
+									<td width="50%">{{ bon_commande.tfs.name }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Type Opération</td>
+									<td width="50%">Bon de commande</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Type Bc</td>
+									<td width="50%">{{ bon_commande.typeBc == 0 ? "Sans FN" : "Avec FN" }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Sté Titulaire</td>
+									<td width="50%">{{ bon_commande.titulaire.name }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Nom Sté</td>
+									<td width="50%">{{ bon_commande.societe.name }}</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<table class="table table-striped mt-5">
+							<tbody>
+								
+								<tr>
+									<td class="label-table" width="50%" >Code TFS</td>
+									<td width="50%">{{ bon_commande.tfs.code }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Code Type Opération</td>
+									<td width="50%">1</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Code Type Bc</td>
+									<td width="50%">{{ bon_commande.typeBc }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Code Sté Titulaire</td>
+									<td width="50%">{{ bon_commande.titulaire.id }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Code Nature Opération</td>
+									<td width="50%">{{ bon_commande.natureOperation.code }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Ligne Budgétaire</td>
+									<td width="50%">{{ bon_commande.lineBudgetaire }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Fontionnement (F) <br>Investissement (I) </td>
+									<td width="50%">{{ bon_commande.fontionnementInvestissement }}</td>
+								</tr>
+								<tr>
+									<td class="label-table" width="50%">Année Budgétaire</td>
+									<td width="50%">{{ bon_commande.anneeBudgetaire }}</td>
+								</tr>
+							</tbody>
+						</table>
+						
+					</div>
+					<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+		</div>
+	
+    </section>
+    <!-- /.content -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Code à barres</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body text-center">
+					<div id="codeBar" class="text-center">
+						<img src="{{ asset('uploads/barcode/' ~ bon_commande.codeBarImg ) }}" style="width:200px; height: 100px" alt="">
+						<br>
+						<strong>
+							{{ bon_commande.codeDoc }}
+						</strong>	
+					</div>
+					<button type="button" onclick="printContent('codeBar')" class="btn btn-outline-info btn-block btn-flat mt-3"><i class="fa fa-print"></i> Imprimer</button>
+					
+					{# <a href="{{ asset('uploads/barcode/' ~ bon_commande.codeBarImg ) }}" download class="btn btn-outline-info btn-block btn-flat mt-5"><i class="fa fa-download"></i> Télécharger</a> #}
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	function printContent(el) {
+		var restorepage = document.body.innerHTML;
+		var printcontent = document.getElementById(el).innerHTML;
+		document.body.innerHTML = "<div style='width:100%;text-align:center'> "+printcontent+"</div>";
+		window.print();
+		document.body.innerHTML = restorepage;
+	}
+	</script>
+
+				
+			
+
+{% endblock %}

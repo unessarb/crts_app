@@ -2,9 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Contrat;
 use App\Entity\Devise;
-use App\Entity\MarcheUnique;
-use App\Entity\NatureOperationMarcheUnique;
+use App\Entity\NatureOperationContrat;
 use App\Entity\Societe;
 use App\Entity\SocieteTitulaire;
 use App\Entity\Tfs;
@@ -15,45 +15,21 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class MarcheUniqueType extends AbstractType
+class ContratType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('numMarche', null, [
-                "label" => "N° Marché"
+            ->add('numCC', null, [
+                "label" => "N° C-C"
                 ])
-            ->add('tfs', EntityType::class, [
-                // looks for choices from this entity
-                'class' => Tfs::class,
-                "placeholder" => "Selectionner le TFS",
-                'choice_label' => function (Tfs $tfs) {
-                    return $tfs->getCode() . ' | ' . $tfs->getName();
-            
-                    // or better, move this logic to Customer, and return:
-                    // return $customer->getFullname();
-                },
-                'label' => "TFS",
-                "attr"=> [
-                    "class" => "select2bs4"
-                ]
-            ])
-            ->add('typeMarche', ChoiceType::class, [
+            ->add('typeContrat', ChoiceType::class, [
                 'choices'  => [
-                    '0 | Unique' => 0,
-                    '1 | Cadre' => 1,
+                    '0 | Contrat' => 0,
+                    '1 | Contrat de droit commun' => 1,
                 ],
-                "placeholder" => "Selectionner le type du marché",
-                "label" => "Type Marché"
-                ])
-            ->add('modePassassion', ChoiceType::class, [
-                'choices'  => [
-                    '0 | Ouvert' => 0,
-                    '1 | Négocié' => 1,
-                    '2 | Restreint' => 2
-                ],
-                "placeholder" => "Selectionner le mode de passassion",
-                "label" => "Mode passassion"
+                "placeholder" => "Selectionner le type contrat",
+                "label" => "Type contrat"
                 ])
             ->add('titulaire', EntityType::class, [
                 // looks for choices from this entity
@@ -77,7 +53,7 @@ class MarcheUniqueType extends AbstractType
                 ])
             ->add('natureOperation', EntityType::class, [
                 // looks for choices from this entity
-                'class' => NatureOperationMarcheUnique::class,
+                'class' => NatureOperationContrat::class,
                 'choice_label' => "natureOperation",
                 "placeholder" => "Selectionner la nature opération",
                 'label' => "Nature opération",
@@ -134,7 +110,7 @@ class MarcheUniqueType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MarcheUnique::class,
+            'data_class' => Contrat::class,
         ]);
     }
 }

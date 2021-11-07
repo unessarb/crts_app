@@ -43,7 +43,25 @@
             </p>
           </a>
         </li>
-        <li class="nav-item menu-open">
+        <li class="nav-item {% if 
+                  app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_marche_unique' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_marche_unique' or 
+                  app.request.attributes.get('_route') == 'app_nature_operation_marche_reconductible' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_marche_reconductible' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_marche_reconductible' or
+                  app.request.attributes.get('_route') == 'app_nature_operation_contrat' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_contrat' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_contrat' or
+                  app.request.attributes.get('_route') == 'app_nature_operation_bon_commande' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande' or
+                  app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' or
+                  app.request.attributes.get('_route') == 'app_titulaires' or app.request.attributes.get('_route') == 'app_new_titulaires' or app.request.attributes.get('_route') == 'app_edit_titulaires' or
+                  app.request.attributes.get('_route') == 'app_devises' or app.request.attributes.get('_route') == 'app_new_devises' or app.request.attributes.get('_route') == 'app_edit_devises' or
+                  app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs'
+                   %}menu-is-opening menu-open
+            {% endif %}">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-lock"></i>
             <p>
@@ -90,7 +108,8 @@
                   app.request.attributes.get('_route') == 'app_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande'
-                   %}menu-is-opening menu-open{% endif %}
+                   %}menu-is-opening menu-open
+            {% endif %}
             ">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -130,9 +149,21 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="{{ path('app_marches') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_marches' or app.request.attributes.get('_route') == 'app_new_marches' or app.request.attributes.get('_route') == 'app_edit_marches' %}active{% endif %}">
+          <a href="{{ path('app_marches') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_marches' or app.request.attributes.get('_route') == 'app_new_marches' or app.request.attributes.get('_route') == 'app_edit_marches' or app.request.attributes.get('_route') == 'app_show_marches' %}active{% endif %}">
             <i class="far fa-folder-open nav-icon"></i>
             <p>Marchés Unique / Cadre</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('app_bon_commandes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_bon_commandes' or app.request.attributes.get('_route') == 'app_new_bon_commande' or app.request.attributes.get('_route') == 'app_edit_bon_commande' or app.request.attributes.get('_route') == 'app_show_bon_commande' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Bon de commandes</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('app_contrats') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_contrats' or app.request.attributes.get('_route') == 'app_new_contrat' or app.request.attributes.get('_route') == 'app_edit_contrat' or app.request.attributes.get('_route') == 'app_show_contrat' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Contrat / Convention</p>
           </a>
         </li>
         

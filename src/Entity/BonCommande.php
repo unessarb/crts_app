@@ -2,18 +2,19 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\Timestampable;
-use App\Repository\MarcheUniqueRepository;
+use App\Repository\BonCommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Entity\Traits\Timestampable;
+
 /**
- * @ORM\Entity(repositoryClass=MarcheUniqueRepository::class)
+ * @ORM\Entity(repositoryClass=BonCommandeRepository::class)
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
-class MarcheUnique
+class BonCommande
 {
     use Timestampable;
     /**
@@ -27,20 +28,13 @@ class MarcheUnique
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $numMarche;
-
-
-    /**
-     * @ORM\Column(type="smallint")
-     * @Assert\NotBlank()
-     */
-    private $typeMarche;
+    private $numBc;
 
     /**
      * @ORM\Column(type="smallint")
      * @Assert\NotBlank()
      */
-    private $modePassassion;
+    private $typeBc;
 
     /**
      * @ORM\ManyToOne(targetEntity=SocieteTitulaire::class)
@@ -57,7 +51,7 @@ class MarcheUnique
     private $societe;
 
     /**
-     * @ORM\ManyToOne(targetEntity=NatureOperationMarcheUnique::class)
+     * @ORM\ManyToOne(targetEntity=NatureOperationBonCommande::class)
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
@@ -109,7 +103,7 @@ class MarcheUnique
     private $documentPassation;
 
     /**
-     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="documentPassation")
+     * @Vich\UploadableField(mapping="bon_commande_files", fileNameProperty="documentPassation")
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
@@ -126,7 +120,7 @@ class MarcheUnique
     private $documentExecution;
 
     /**
-     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="documentExecution")
+     * @Vich\UploadableField(mapping="bon_commande_files", fileNameProperty="documentExecution")
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
@@ -151,41 +145,30 @@ class MarcheUnique
         return $this->id;
     }
 
-    public function getNumMarche(): ?string
+    public function getNumBc(): ?string
     {
-        return $this->numMarche;
+        return $this->numBc;
     }
 
-    public function setNumMarche(string $numMarche): self
+    public function setNumBc(string $numBc): self
     {
-        $this->numMarche = $numMarche;
+        $this->numBc = $numBc;
 
         return $this;
     }
 
-    public function getTypeMarche(): ?int
+    public function getTypeBc(): ?int
     {
-        return $this->typeMarche;
+        return $this->typeBc;
     }
 
-    public function setTypeMarche(int $typeMarche): self
+    public function setTypeBc(int $typeBc): self
     {
-        $this->typeMarche = $typeMarche;
+        $this->typeBc = $typeBc;
 
         return $this;
     }
 
-    public function getModePassassion(): ?int
-    {
-        return $this->modePassassion;
-    }
-
-    public function setModePassassion(int $modePassassion): self
-    {
-        $this->modePassassion = $modePassassion;
-
-        return $this;
-    }
 
     public function getTitulaire(): ?SocieteTitulaire
     {
@@ -211,12 +194,12 @@ class MarcheUnique
         return $this;
     }
 
-    public function getNatureOperation(): ?NatureOperationMarcheUnique
+    public function getNatureOperation(): ?NatureOperationBonCommande
     {
         return $this->natureOperation;
     }
 
-    public function setNatureOperation(?NatureOperationMarcheUnique $natureOperation): self
+    public function setNatureOperation(?NatureOperationBonCommande $natureOperation): self
     {
         $this->natureOperation = $natureOperation;
 
