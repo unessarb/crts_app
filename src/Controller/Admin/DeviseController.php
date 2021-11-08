@@ -20,7 +20,7 @@ class DeviseController extends AbstractController
     #[Route('/devises', name: 'app_devises')]
     public function index(DeviseRepository $deviseRepository): Response
     {
-        $devises = $deviseRepository->findBy([], ["id"=>"desc"]);
+        $devises = $deviseRepository->findAll();
         return $this->render('admin/devise/index.html.twig', [
             'devises' => $devises,
         ]);

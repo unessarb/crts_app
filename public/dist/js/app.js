@@ -10,6 +10,7 @@ $(document).ready(() => {
     info: true,
     autoWidth: true,
     responsive: false,
+    order: [[0, "desc"]],
     language: {
       emptyTable: "Aucune donnée disponible dans le tableau",
       lengthMenu: "Afficher _MENU_ éléments",

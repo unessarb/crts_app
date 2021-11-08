@@ -20,7 +20,7 @@ class ContratController extends AbstractController
     #[Route('/contrats', name: 'app_contrats')]
     public function index(ContratRepository $contratRepository): Response
     {
-        $contrats = $contratRepository->findBy([], ["createdAt"=>"desc"]);
+        $contrats = $contratRepository->findAll();
         return $this->render('contrats/index.html.twig', [
             'contrats' => $contrats,
         ]);

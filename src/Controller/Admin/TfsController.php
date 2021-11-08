@@ -20,7 +20,7 @@ class TfsController extends AbstractController
     #[Route('/tfs', name: 'app_tfs')]
     public function index(TfsRepository $tfsRepository): Response
     {
-        $tfs = $tfsRepository->findBy([], ["id"=>"desc"]);
+        $tfs = $tfsRepository->findAll();
         return $this->render('admin/tfs/index.html.twig', [
             'tfs' => $tfs,
         ]);

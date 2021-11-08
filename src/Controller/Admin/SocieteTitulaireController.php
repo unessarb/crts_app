@@ -20,7 +20,7 @@ class SocieteTitulaireController extends AbstractController
     #[Route('/titulaires', name: 'app_titulaires')]
     public function index(SocieteTitulaireRepository $societeTitulaireRepository): Response
     {
-        $titulaires = $societeTitulaireRepository->findBy([], ["createdAt"=>"desc"]);
+        $titulaires = $societeTitulaireRepository->findAll();
         return $this->render('admin/titulaire/index.html.twig', [
             'titulaires' => $titulaires,
         ]);

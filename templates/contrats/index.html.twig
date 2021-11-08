@@ -48,6 +48,8 @@
                     <tbody>
                       {% for item in contrats %}
                           <tr>
+                              <th>#</th>
+                              <td >{{ loop.index }}</td> 
                               <td>{{item.numCC}}</td>                        
                               <td>{{item.typeContrat == '0' ? "Contrat" : "Contrat de droit commun"}}</td>                        
                               <td>{{item.societe.name}}</td>                        

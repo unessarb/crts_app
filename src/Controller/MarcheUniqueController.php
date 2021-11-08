@@ -20,7 +20,7 @@ class MarcheUniqueController extends AbstractController
     #[Route('/marches', name: 'app_marches')]
     public function index(MarcheUniqueRepository $marcheUniqueRepository): Response
     {
-        $marches = $marcheUniqueRepository->findBy([], ["createdAt"=>"desc"]);
+        $marches = $marcheUniqueRepository->findAll();
         return $this->render('marche_unique/index.html.twig', [
             'marches' => $marches,
         ]);

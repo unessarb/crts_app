@@ -24,7 +24,7 @@ class SocieteController extends AbstractController
     #[Route('/societes', name: 'app_societes')]
     public function index(SocieteRepository $societeRepository): Response
     {
-        $societes = $societeRepository->findBy([], ["createdAt"=>"desc"]);
+        $societes = $societeRepository->findAll();
         return $this->render('admin/societe/index.html.twig', [
             'societes' => $societes,
         ]);

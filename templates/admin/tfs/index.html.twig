@@ -28,6 +28,7 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>#</th>
                     <th>TFS </th>
                     <th>Code </th>
                     <th>Crée le</th>
@@ -38,6 +39,7 @@
                   <tbody>
                     {% for item in tfs %}
                         <tr>
+                         <td >{{ loop.index }}</td> 
                             <td>{{item.name}}</td>                        
                             <td>{{item.code}}</td>                        
                             <td>{{item.createdAt | date() }}</td>                        

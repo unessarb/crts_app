@@ -34,7 +34,7 @@ class NatureOperationController extends AbstractController
     #[Route('/nature-operation-marche-unique', name: 'app_nature_operation_marche_unique')]
     public function index_marche_unique(NatureOperationMarcheUniqueRepository $natureOperation): Response
     {
-        $marches = $natureOperation->findBy([], ["id"=>"desc"]);
+        $marches = $natureOperation->findAll();
         return $this->render('admin/nature_operation/marche_unique/index.html.twig', [
             'marches' => $marches,
         ]);

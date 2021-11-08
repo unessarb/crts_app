@@ -28,6 +28,7 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>#</th>
                     <th>Nom Sté</th>
                     <th>Adresse</th>
                     <th>Code Sté Titulaire</th>
@@ -38,6 +39,7 @@
                   <tbody>
                     {% for item in societes %}
                         <tr>
+                            <td >{{ loop.index }}</td>          
                             <td>{{item.name}}</td>                        
                             <td>{{item.adresse}}</td>                        
                             <td>{{item.codesociete}}</td>                        

@@ -28,6 +28,7 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>#</th>
                     <th>TFS</th>
                     <th>Nature Opération</th>
                     <th>Code</th>
@@ -37,6 +38,7 @@
                   <tbody>
                     {% for item in marches %}
                         <tr>
+                            <td >{{ loop.index }}</td>    
                             <td>{{item.tfs.code}}</td>                        
                             <td>{{item.natureOperation}}</td>                        
                             <td>{{item.code}}</td>                        

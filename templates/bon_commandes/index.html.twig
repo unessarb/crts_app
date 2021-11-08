@@ -31,6 +31,7 @@
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
+                      <th>#</th>
                       <th>N° BC-FN</th>
                       <th>TFS</th>
                       <th>Type BC</th>
@@ -49,6 +50,7 @@
                     <tbody>
                       {% for item in bon_commandes %}
                           <tr>
+                              <td >{{ loop.index }}</td> 
                               <td>{{item.numBc}}</td>                        
                               <td>{{item.tfs.code}}</td>                        
                               <td>{{item.typeBc == '0' ? "Sans FN" : "Avec FN"}}</td>                        

@@ -20,7 +20,7 @@ class BonCommandeController extends AbstractController
     #[Route('/bon_commandes', name: 'app_bon_commandes')]
     public function index(BonCommandeRepository $bonCommandeRepository): Response
     {
-        $bon_commandes = $bonCommandeRepository->findBy([], ["createdAt"=>"desc"]);
+        $bon_commandes = $bonCommandeRepository->findAll();
         return $this->render('bon_commandes/index.html.twig', [
             'bon_commandes' => $bon_commandes,
         ]);

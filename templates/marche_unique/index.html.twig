@@ -31,6 +31,7 @@
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
+                      <th>#</th>
                       <th>N° Marché</th>
                       <th>TFS</th>
                       <th>Type Marché</th>
@@ -49,6 +50,7 @@
                     <tbody>
                       {% for item in marches %}
                           <tr>
+                              <td >{{ loop.index }}</td>          
                               <td>{{item.numMarche}}</td>                        
                               <td>{{item.tfs.code}}</td>                        
                               <td>{{item.typeMarche == '0' ? "Unique" : "Cadre"}}</td>                        
