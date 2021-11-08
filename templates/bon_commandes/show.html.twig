@@ -157,7 +157,7 @@
 	function printContent(el) {
 		var restorepage = document.body.innerHTML;
 		var printcontent = document.getElementById(el).innerHTML;
-		document.body.innerHTML = "<div style='width:100%;text-align:center'> "+printcontent+"</div>";
+		document.body.innerHTML = "<div style='width:100%;margin-top:100px;text-align:center'> "+printcontent+"</div>";
 		window.print();
 		document.body.innerHTML = restorepage;
 	}
