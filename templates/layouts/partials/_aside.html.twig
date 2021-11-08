@@ -9,10 +9,8 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="info">
-        <a href="#" class="d-block">{{ app.user.fullname }} | {{ app.user.roles[0] == "ROLE_ADMIN" ? "Administrateur" : app.user.roles[0] == "ROLE_AGENT" ? "Agent Saisi" : "Utilisateur" }}</a>
-      </div>
+    <div class="user-panel mt-3 pb-3 mb-3 w-100 text-center ">
+        <a href="#" class="d-block">{{ app.user.fullname }} <br> {{ app.user.roles[0] == "ROLE_ADMIN" ? "Administrateur" : app.user.roles[0] == "ROLE_AGENT" ? "Agent Saisi" : "Utilisateur" }}</a>
     </div>
 
     {# <!-- SidebarSearch Form -->
