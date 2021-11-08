@@ -27,14 +27,14 @@
 				<!-- small box -->
 				<div class="small-box bg-success">
 					<div class="inner">
-					<h3>53<sup style="font-size: 20px">%</sup></h3>
+					<h3>{{ countMarche }}</h3>
 
 					<p>Marchés Unique / Cadre</p>
 					</div>
 					<div class="icon">
 					<i class="ion ion-stats-bars"></i>
 					</div>
-					<a href="#" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="{{ path('app_marches') }}" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -42,14 +42,14 @@
 				<!-- small box -->
 				<div class="small-box bg-warning">
 					<div class="inner">
-					<h3>44</h3>
+					<h3>{{ countBonCmd }}</h3>
 
 					<p>Bon Commandes</p>
 					</div>
 					<div class="icon">
 					<i class="ion ion-person-add"></i>
 					</div>
-					<a href="#" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="{{ path('app_bon_commandes') }}" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -57,14 +57,14 @@
 				<!-- small box -->
 				<div class="small-box bg-danger">
 					<div class="inner">
-					<h3>65</h3>
+					<h3>{{ countContrat }}</h3>
 
 					<p>Contrats - Conventions</p>
 					</div>
 					<div class="icon">
 					<i class="ion ion-pie-graph"></i>
 					</div>
-					<a href="#" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="{{ path('app_contrats') }}" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -72,14 +72,19 @@
 				<!-- small box -->
 				<div class="small-box bg-info">
 					<div class="inner">
-					<h3>150</h3>
+					<h3>{{ countSociete }}</h3>
 
 					<p>Nombre de sociétés</p>
 					</div>
 					<div class="icon">
 					<i class="ion ion-bag"></i>
 					</div>
-					<a href="#" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('app_societes') }}" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
+					{% else %}
+						<a href="#" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
+
+					{% endif %}
 				</div>
 			</div>
 			<!-- ./col -->
