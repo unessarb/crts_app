@@ -72,7 +72,8 @@ class MarcheUniqueType extends AbstractType
                 'choice_label' => "name",
                 'label' => "Nom de la société",
                 "attr"=> [
-                    "class" => "select2bs4"
+                    "class" => "select2bs4",
+                    "id"=> "societe"
                 ]
                 ])
             ->add('natureOperation', EntityType::class, [

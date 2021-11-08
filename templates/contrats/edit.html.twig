@@ -38,7 +38,7 @@
 								
 							</div>
 							<div class="col-2">
-								<button type="button" class="btn btn-primary float-right"><i class="fa fa-plus"></i>  </button>
+								<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>  </button>
 							</div>
 							
 						</div>
@@ -90,7 +90,34 @@
     <!-- /.content -->
 
 				
+<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Nouvelle société</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger d-none" id="alert-errors">
+						<h5><i class="icon fas fa-ban"></i> Erreurs!</h5>
+						<div id="list_errors">
+						</div>
+					</div>
+					{{ form_start(form2, {'action': path('app_new_ajax_societes'), 'method': 'POST'}) }}
+						{{ form_row(form2.name) }}
+						{{ form_row(form2.code_societe) }}
+						{{ form_row(form2.adresse) }}
+						{{ form_row(form2.titulaire) }}
 
+						<input type="button" value="Enregistrer" class="btn btn-primary btn-block my-3 add_societe" formnovalidate>
+					{{ form_end(form2) }}
+				</div>
+			</div>
+		</div>
+	</div>
 				
 			
 

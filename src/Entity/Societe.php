@@ -29,6 +29,7 @@ class Societe
 
     /**
      * @ORM\Column(type="integer", nullable= true)
+     * @Assert\NotBlank()
      */
     private $code_societe;
 

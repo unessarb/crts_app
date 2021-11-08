@@ -1,0 +1,111 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Gestion d\'utilisateur : Agents' %}
+
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Gestion d'utilisateur : Agents</h1>
+          </div>
+          <div class="col-sm-6 text-right">
+            <a role="link" href="{{path('app_new_agent')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouveau Agent</a>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th style="max-width:122px!important">Nom & Prénom</th>
+                      <th style="max-width:122px!important">Email</th>
+                      <th style="max-width:122px!important">Téléphone</th>
+                      <th>Status</th>
+                      <th style="max-width:122px!important">Crée le</th>
+                      <th style="max-width:122px!important">Modifié le</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in agents %}
+                          <tr>
+                              <td>{{ loop.index }}</td>                        
+                              <td style="max-width:122px!important">{{item.fullName}}</td>                        
+                              <td style="max-width:122px!important">{{item.email}}</td>                        
+                              <td style="max-width:122px!important">{{item.phone}}</td>                        
+                              <td>{{item.isVerified == false ? '<span class="badge badge-danger">Inactif</span>' : '<span class="badge badge-success">Actif</span>'}}</td>                        
+                              <td style="max-width:122px!important">{{item.createdAt | date() }}</td>                        
+                              <td style="max-width:122px!important">{{item.updatedAt | date() }}</td>    
+                              <td>
+                                {% if item.isVerified == false %}
+                                  <a class="btn btn-success btn-sm" 
+                                  onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-agent-actif-form').submit();" 
+                                  data-toggle="tooltip" data-placement="top" title="Activer ce compte" href="{{ path('app_agent_actif', {id: item.id}) }}">
+                                      <i class="fas fa-check"></i>
+                                  </a>  
+                                {% else %}
+                                  <a class="btn btn-danger btn-sm" 
+                                  onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-agent-actif-form').submit();" 
+                                  data-toggle="tooltip" data-placement="top" title="Désactiver ce compte" href="{{ path('app_agent_actif', {id: item.id}) }}">
+                                      <i class="fas fa-minus"></i>
+                                  </a>  
+                                {% endif %}
+                                <form id="js-agent-actif-form" action="{{ path('app_agent_actif', {id: item.id}) }}" method="post" style="display: none;">
+                                      <input type="hidden" name="csrf_token" value="{{ csrf_token('agent_actif_' ~ item.id) }}">
+                                      <input type="hidden" name="_method" value="PUT">
+                                  </form> 
+                              </td>    
+                              <td>
+                                  <a class="btn btn-info btn-sm"
+                                  data-toggle="tooltip" data-placement="top" title="Editer ce compte" 
+                                  href="{{ path('app_edit_agent', {id: item.id}) }}">
+                                      <i class="fas fa-pencil-alt"></i>
+                                  </a>  
+                              </td>      
+                              <td>
+                                  <a href="#" 
+                                  data-toggle="tooltip" data-placement="top" title="Supprimer ce compte" 
+                                  onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-agent-delete-form').submit();" 
+                                  class="btn btn-danger btn-sm">
+                                      <i class="fas fa-trash"></i>
+                                  </a>
+                                  <form id="js-agent-delete-form" action="{{ path('app_agent_delete', {id: item.id}) }}" method="post" style="display: none;">
+                                      <input type="hidden" name="csrf_token" value="{{ csrf_token('agent_deletion_' ~ item.id) }}">
+                                      <input type="hidden" name="_method" value="DELETE">
+                                  </form> 
+                              </td>                        
+                          </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+{% endblock %}

@@ -9,6 +9,7 @@ use App\Form\SocieteType;
 use App\Repository\BonCommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Picqer\Barcode\BarcodeGeneratorJPG;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,7 @@ class BonCommandeController extends AbstractController
     }
 
     #[Route('/bon_commandes/new', name: 'app_new_bon_commande', methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $bnCommande = new BonCommande;
@@ -72,9 +74,12 @@ class BonCommandeController extends AbstractController
     }
 
     #[Route('/bon_commandes/{id<[0-9]+>}/edit', name: 'app_edit_bon_commande', methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function edit(Request $request, EntityManagerInterface $em,BonCommande $bon_commande): Response
     {
         $form = $this->createForm(BonCommandesType::class, $bon_commande);
+        $societe = new Societe;
+        $form2 = $this->createForm(SocieteType::class, $societe);
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid()){
 
@@ -104,6 +109,7 @@ class BonCommandeController extends AbstractController
             } catch (\Exception $ex) {
                 return $this->render('bon_commandes/edit.html.twig', [
                     'form' => $form->createView(),
+                    'form2' => $form2->createView(),
                 ]);
             }
 
@@ -111,6 +117,7 @@ class BonCommandeController extends AbstractController
         }
         return $this->render('bon_commandes/edit.html.twig', [
             'form' => $form->createView(),
+            'form2' => $form2->createView(),
         ]);
     }
 
@@ -124,6 +131,7 @@ class BonCommandeController extends AbstractController
     }
 
     #[Route('/bon_commandes/{id<[0-9]+>}', name: 'app_bon_commande_delete', methods: ["POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function delete(Request $request, BonCommande $bon_commande, EntityManagerInterface $em): Response
     {
 

@@ -9,6 +9,7 @@ use App\Form\SocieteType;
 use App\Repository\MarcheUniqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Picqer\Barcode\BarcodeGeneratorJPG;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,7 @@ class MarcheUniqueController extends AbstractController
     }
 
     #[Route('/marches/new', name: 'app_new_marches', methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $marche = new MarcheUnique;
@@ -81,9 +83,12 @@ class MarcheUniqueController extends AbstractController
     }
 
     #[Route('/marches/{id<[0-9]+>}/edit', name: 'app_edit_marches', methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function edit(Request $request, EntityManagerInterface $em,MarcheUnique $marche): Response
     {
         $form = $this->createForm(MarcheUniqueType::class, $marche);
+        $societe = new Societe;
+        $form2 = $this->createForm(SocieteType::class, $societe);
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid()){
 
@@ -121,6 +126,7 @@ class MarcheUniqueController extends AbstractController
             } catch (\Exception $ex) {
                 return $this->render('marche_unique/edit.html.twig', [
                     'form' => $form->createView(),
+                    'form2' => $form2->createView(),
                 ]);
             }
 
@@ -128,6 +134,7 @@ class MarcheUniqueController extends AbstractController
         }
         return $this->render('marche_unique/edit.html.twig', [
             'form' => $form->createView(),
+            'form2' => $form2->createView(),
         ]);
     }
 
@@ -141,6 +148,7 @@ class MarcheUniqueController extends AbstractController
     }
 
     #[Route('/marches/{id<[0-9]+>}', name: 'app_marches_delete', methods: ["POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function delete(Request $request, MarcheUnique $marche, EntityManagerInterface $em): Response
     {
 

@@ -41,11 +41,14 @@
                             <td>{{item.createdAt | date() }}</td>                        
                             <td>{{item.updatedAt | date() }}</td>                        
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{ path('app_edit_titulaires', {id: item.id}) }}">
+                                <a class="btn btn-info btn-sm"
+                                data-toggle="tooltip" data-placement="top" title="Editer"
+                                 href="{{ path('app_edit_titulaires', {id: item.id}) }}">
                                     <i class="fas fa-pencil-alt"></i>
                                     Edit
                                 </a>  
                                 <a href="#" 
+                                data-toggle="tooltip" data-placement="top" title="Supprimer"
                                 onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-titulaire-delete-form').submit();" 
                                 class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>

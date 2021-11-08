@@ -1,13 +1,19 @@
 {% if app.user and app.user.isVerified == false %}
-	<div class="alert alert-error" role="alert">
-		Your account has not been verified yet.
+	<div class="alert alert-error alert-dismissible fade show" role="alert">
+		Votre compte n'a pas encore été vérifié.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
 	</div>
 {% endif %}
 
 {% for type, messages in app.flashes(['success', 'error', 'info']) %}
 	{% for message in messages %}
-		<div class="alert alert-{{ type }}" role="alert">
+		<div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
 			{{ message }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
 	{% endfor %}
 {% endfor %}

@@ -9,6 +9,7 @@ use App\Form\SocieteType;
 use App\Repository\ContratRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Picqer\Barcode\BarcodeGeneratorJPG;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,7 @@ class ContratController extends AbstractController
     }
 
     #[Route('/contrats/new', name: 'app_new_contrat', methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $contrat = new Contrat;
@@ -72,9 +74,12 @@ class ContratController extends AbstractController
     }
 
     #[Route('/contrats/{id<[0-9]+>}/edit', name: 'app_edit_contrat', methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function edit(Request $request, EntityManagerInterface $em,Contrat $contrat): Response
     {
         $form = $this->createForm(ContratType::class, $contrat);
+        $societe = new Societe;
+        $form2 = $this->createForm(SocieteType::class, $societe);
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid()){
 
@@ -104,6 +109,7 @@ class ContratController extends AbstractController
             } catch (\Exception $ex) {
                 return $this->render('contrats/edit.html.twig', [
                     'form' => $form->createView(),
+                    'form2' => $form2->createView(),
                 ]);
             }
 
@@ -111,6 +117,7 @@ class ContratController extends AbstractController
         }
         return $this->render('contrats/edit.html.twig', [
             'form' => $form->createView(),
+            'form2' => $form2->createView(),
         ]);
     }
 
@@ -124,6 +131,7 @@ class ContratController extends AbstractController
     }
 
     #[Route('/contrats/{id<[0-9]+>}', name: 'app_contrat_delete', methods: ["POST"])]
+    #[IsGranted("ROLE_AGENT")]
     public function delete(Request $request, Contrat $contrat, EntityManagerInterface $em): Response
     {
 

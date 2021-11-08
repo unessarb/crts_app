@@ -12,7 +12,9 @@
             <h1>Archive Marché Unique / Cadre</h1>
           </div>
           <div class="col-sm-6 text-right">
-            <a role="link" href="{{path('app_new_marches')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouveau marché</a>
+            {% if is_granted('ROLE_AGENT') %}  
+              <a role="link" href="{{path('app_new_marches')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouveau marché</a>
+            {% endif %}
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -25,58 +27,69 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>N° Marché</th>
-                    <th>TFS</th>
-                    <th>Type Marché</th>
-                    <th>Société</th>
-                    <th>Nature Opération</th>
-                    <th>Montant TTC</th>
-                    <th>Crée le</th>
-                    <th>Modifié le</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    {% for item in marches %}
-                        <tr>
-                            <td>{{item.numMarche}}</td>                        
-                            <td>{{item.tfs.code}}</td>                        
-                            <td>{{item.typeMarche == '0' ? "Unique" : "Cadre"}}</td>                        
-                            <td>{{item.societe.name}}</td>                        
-                            <td>{{item.natureOperation.natureOperation}}</td>                        
-                            <td>{{item.montant ~ ' ' ~ item.devise.name}}</td>                        
-                            <td>{{item.createdAt | date() }}</td>                        
-                            <td>{{item.updatedAt | date() }}</td>        
-                            <td>
-                                <a class="btn btn-primary btn-sm" href="{{ path('app_show_marches', {id: item.id}) }}">
-                                    <i class="fas fa-eye"></i>
-                                </a>  
-                            </td>                 
-                            <td>
-                                <a class="btn btn-info btn-sm" href="{{ path('app_edit_marches', {id: item.id}) }}">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>  
-                            </td>      
-                            <td>
-                                <a href="#" 
-                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-marche-delete-form').submit();" 
-                                class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                                <form id="js-marche-delete-form" action="{{ path('app_marches_delete', {id: item.id}) }}" method="post" style="display: none;">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('marche_deletion_' ~ item.id) }}">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                </form> 
-                            </td>                        
-                        </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
+                <div class="table-responsive">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>N° Marché</th>
+                      <th>TFS</th>
+                      <th>Type Marché</th>
+                      <th>Société</th>
+                      <th>Nature Opération</th>
+                      <th>Montant TTC</th>
+                      <th>Crée le</th>
+                      <th>Modifié le</th>
+                      <th></th>
+                      {% if is_granted('ROLE_AGENT') %}  
+                      <th></th>
+                      <th></th>
+                      {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in marches %}
+                          <tr>
+                              <td>{{item.numMarche}}</td>                        
+                              <td>{{item.tfs.code}}</td>                        
+                              <td>{{item.typeMarche == '0' ? "Unique" : "Cadre"}}</td>                        
+                              <td>{{item.societe.name}}</td>                        
+                              <td>{{item.natureOperation.natureOperation}}</td>                        
+                              <td>{{item.montant ~ ' ' ~ item.devise.name}}</td>                        
+                              <td>{{item.createdAt | date() }}</td>                        
+                              <td>{{item.updatedAt | date() }}</td>        
+                              <td>
+                                  <a class="btn btn-primary btn-sm"
+                                  data-toggle="tooltip" data-placement="top" title="Afficher détails"
+                                   href="{{ path('app_show_marches', {id: item.id}) }}">
+                                      <i class="fas fa-eye"></i>
+                                  </a>  
+                              </td>      
+                              {% if is_granted('ROLE_AGENT') %}             
+                              <td>
+                                  <a class="btn btn-info btn-sm"
+                                  data-toggle="tooltip" data-placement="top" title="Editer"
+                                   href="{{ path('app_edit_marches', {id: item.id}) }}">
+                                      <i class="fas fa-pencil-alt"></i>
+                                  </a>  
+                              </td>      
+                              <td>
+                                  <a href="#" 
+                                  data-toggle="tooltip" data-placement="top" title="Supprimer"
+                                  onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-marche-delete-form').submit();" 
+                                  class="btn btn-danger btn-sm">
+                                      <i class="fas fa-trash"></i>
+                                  </a>
+                                  <form id="js-marche-delete-form" action="{{ path('app_marches_delete', {id: item.id}) }}" method="post" style="display: none;">
+                                      <input type="hidden" name="csrf_token" value="{{ csrf_token('marche_deletion_' ~ item.id) }}">
+                                      <input type="hidden" name="_method" value="DELETE">
+                                  </form> 
+                              </td>   
+                              {% endif %}                     
+                          </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>

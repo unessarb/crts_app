@@ -9,7 +9,7 @@ $(document).ready(() => {
     ordering: true,
     info: true,
     autoWidth: true,
-    responsive: true,
+    responsive: false,
     language: {
       emptyTable: "Aucune donnée disponible dans le tableau",
       lengthMenu: "Afficher _MENU_ éléments",
@@ -204,6 +204,8 @@ $(document).ready(() => {
     },
   });
 
+  $('[data-toggle="tooltip"]').tooltip();
+
   if ($(".custom-file-input").length > 0) {
     $(".custom-file-input").on("change", function (e) {
       var inputFile = e.currentTarget;
@@ -213,7 +215,9 @@ $(document).ready(() => {
         .html(inputFile.files[0].name);
     });
   }
-
+  $("#exampleModal").on("hide.bs.modal", function () {
+    $("#alert-errors").addClass("d-none");
+  });
   if ($(".add_societe").length > 0) {
     function onClickAddSociete(event) {
       event.preventDefault();
@@ -228,16 +232,40 @@ $(document).ready(() => {
           obj[mySubString] = item.value;
           return obj;
         }, {});
-      console.log(data);
       $.ajax({
         type: "POST",
         url: $(this).parent().attr("action"),
         data: data,
         success: function (result) {
           console.log(result);
+          var o = new Option(result.name, result.id);
+          /// jquerify the DOM object 'o' so we can use the html method
+          $(o).html(result.name);
+          $('select[id*="_societe"]').append(o);
+          $("#exampleModal").modal("hide");
+          $("#alert-errors").addClass("d-none");
         },
         error: function (err) {
-          console.log("error", err);
+          $("#alert-errors").removeClass("d-none");
+          document.getElementById("list_errors").innerHTML = "";
+          if (err.responseJSON && err.responseJSON.violations.length > 0) {
+            var errors = err.responseJSON.violations;
+            let text = "";
+            errors.forEach(myFunction);
+            function myFunction(item) {
+              text +=
+                (item.propertyPath === "name"
+                  ? "NOM STE"
+                  : item.propertyPath.toUpperCase()) +
+                ": " +
+                item.title +
+                "<br>";
+            }
+            document.getElementById("list_errors").innerHTML = text;
+          } else {
+            document.getElementById("list_errors").innerHTML =
+              "une erreur est survenue veuillez réessayer ultérieurement";
+          }
         },
       });
     }

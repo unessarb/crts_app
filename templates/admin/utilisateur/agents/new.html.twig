@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Nouveau Agent' %}
+
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Nouveau Agent</h1>
+          </div>
+		   <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ path('app_admins') }}">Agents</a></li>
+              <li class="breadcrumb-item active">Nouveau Agent</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+	<!-- Main content -->
+    <section class="content">
+	{{ form_start(form) }}
+		<div class="row">
+			<div class="col-md-6 mx-auto">
+				<div class="card card-primary">
+				<div class="card-body">
+					{{ form_widget(form) }}
+				</div>
+				<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+		</div>
+          <!-- /.card -->
+      <div class="row">
+        <div class="col-6 mx-auto">
+          <a href="{{ path('app_agents') }}" class="btn btn-secondary mb-5">Annuler</a>
+          <input type="submit" value="Enregistrer" class="btn btn-primary float-right" formnovalidate>
+        </div>
+      </div>
+	  {{ form_end(form) }}
+    </section>
+    <!-- /.content -->
+{% endblock %}

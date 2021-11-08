@@ -102,6 +102,11 @@
 					</button>
 				</div>
 				<div class="modal-body">
+					<div class="alert alert-danger d-none" id="alert-errors">
+						<h5><i class="icon fas fa-ban"></i> Erreurs!</h5>
+						<div id="list_errors">
+						</div>
+					</div>
 					{{ form_start(form2, {'action': path('app_new_ajax_societes'), 'method': 'POST'}) }}
 						{{ form_row(form2.name) }}
 						{{ form_row(form2.code_societe) }}
@@ -114,6 +119,7 @@
 			</div>
 		</div>
 	</div>
+
 
 				
 

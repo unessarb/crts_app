@@ -14,7 +14,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class SocieteController extends AbstractController
 {
     #[Route('/societes', name: 'app_societes')]
@@ -81,27 +85,31 @@ class SocieteController extends AbstractController
     public function newAjax(
         Request $request, 
         EntityManagerInterface $em, 
-        SerializerInterface $serializer,
         ValidatorInterface $validator,
-        SocieteRepository $societeRepository,
         SocieteTitulaireRepository $societeTitulaireRepository
         ): JsonResponse
     {
         try {
-            // $data = $request->request->all();
-            // $societe = new Societe();
-            // $societe->setName($data['name']);
-            // $societe->setAdresse($data['adresse']);
-            // $societe->setCodeSociete( (int) $data['code_societe']);
-            // $societe->setTitulaire($societeTitulaireRepository->find($data['titulaire']));
-            // $errors = $validator->validate($societe);
-            // if(count($errors) != 0){
-            //     return $this->json($errors, JsonResponse::HTTP_BAD_REQUEST);
-            // }
-            // return $this->json($societe);
-            // $em->persist($societe);
-            // $em->flush();
-            // return $this->json($societeRepository->findAll());
+            $data = $request->request->all();
+            $societe = new Societe();
+            $societe->setName($data['name']);
+            $societe->setAdresse($data['adresse']);
+            $societe->setCodeSociete( (int) $data['code_societe']);
+
+            $titulaire = $societeTitulaireRepository->find($data['titulaire']);
+            // return $this->json($titulaire->getId());
+            $societe->setTitulaire($titulaire);
+            $errors = $validator->validate($societe);
+            if(count($errors) != 0){
+                return $this->json($errors, JsonResponse::HTTP_BAD_REQUEST);
+            }
+            $em->persist($societe);
+            $em->flush();
+           
+            return $this->json([
+                "id"=> $societe->getId(),
+                "name" => $societe->getName()
+            ]);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }

@@ -9,16 +9,13 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    {# <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-      </div> 
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="info">
-        <a href="#" class="d-block">{{ app.user.fullname }}</a>
+        <a href="#" class="d-block">{{ app.user.fullname }} | {{ app.user.roles[0] == "ROLE_ADMIN" ? "Administrateur" : app.user.roles[0] == "ROLE_AGENT" ? "Agent Saisi" : "Utilisateur" }}</a>
       </div>
-    </div>#}
+    </div>
 
-    <!-- SidebarSearch Form -->
+    {# <!-- SidebarSearch Form -->
     <div class="form-inline mt-3">
       <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -28,7 +25,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> #}
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -61,7 +58,8 @@
             <p>Contrat / Convention</p>
           </a>
         </li>
-          <li class="nav-item {% if 
+        {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item {% if 
                   app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_marche_unique' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_marche_unique' or 
@@ -165,6 +163,51 @@
               </li>
             
           </ul>
+        </li>
+
+        <li class="nav-item 
+            {% if app.request.attributes.get('_route') == 'app_admins' or app.request.attributes.get('_route') == 'app_new_admin' or app.request.attributes.get('_route') == 'app_edit_admin' or
+                  app.request.attributes.get('_route') == 'app_agents' or app.request.attributes.get('_route') == 'app_new_agent' or app.request.attributes.get('_route') == 'app_edit_agent' or
+                  app.request.attributes.get('_route') == 'app_users' or app.request.attributes.get('_route') == 'app_new_user' or app.request.attributes.get('_route') == 'app_edit_user'
+            %}
+            menu-is-opening menu-open
+            {% endif %}">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Gestion utilisateur
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ path('app_admins') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_admins' or app.request.attributes.get('_route') == 'app_new_admin' or app.request.attributes.get('_route') == 'app_edit_admin' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Administrateurs</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ path('app_agents') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_agents' or app.request.attributes.get('_route') == 'app_new_agent' or app.request.attributes.get('_route') == 'app_edit_agent' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Agents</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ path('app_users') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_users' or app.request.attributes.get('_route') == 'app_new_user' or app.request.attributes.get('_route') == 'app_edit_user' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Utilisateurs</p>
+              </a>
+            </li>
+           </ul>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a href="{{ path('app_profil',{id : app.user.id}) }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_profil' %}active{% endif %}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Edit Profile
+            </p>
+          </a>
         </li>
         
       </ul>
