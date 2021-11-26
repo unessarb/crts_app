@@ -73,7 +73,8 @@
                   app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' or
                   app.request.attributes.get('_route') == 'app_titulaires' or app.request.attributes.get('_route') == 'app_new_titulaires' or app.request.attributes.get('_route') == 'app_edit_titulaires' or
                   app.request.attributes.get('_route') == 'app_devises' or app.request.attributes.get('_route') == 'app_new_devises' or app.request.attributes.get('_route') == 'app_edit_devises' or
-                  app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs'
+                  app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs' or
+                  app.request.attributes.get('_route') == 'ligne_budgetaire_index' or app.request.attributes.get('_route') == 'ligne_budgetaire_new' or app.request.attributes.get('_route') == 'ligne_budgetaire_edit'
                    %}menu-is-opening menu-open
             {% endif %}">
           <a href="#" class="nav-link">
@@ -106,6 +107,12 @@
               <a href="{{ path('app_tfs') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>MAJ TFS</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ path('ligne_budgetaire_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'ligne_budgetaire_index' or app.request.attributes.get('_route') == 'ligne_budgetaire_new' or app.request.attributes.get('_route') == 'ligne_budgetaire_edit' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>MAJ Lignes</p>
               </a>
             </li>
             <li class="nav-item 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>LigneBudgetaire</title>
+
+{% block body %}
+    <h1>LigneBudgetaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_budgetaire.id }}</td>
+            </tr>
+            <tr>
+                <th>NumMarche</th>
+                <td>{{ ligne_budgetaire.numMarche }}</td>
+            </tr>
+            <tr>
+                <th>FontionnementInvestissement</th>
+                <td>{{ ligne_budgetaire.fontionnementInvestissement }}</td>
+            </tr>
+            <tr>
+                <th>Rubrique</th>
+                <td>{{ ligne_budgetaire.rubrique }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ ligne_budgetaire.createdAt ? ligne_budgetaire.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ ligne_budgetaire.updatedAt ? ligne_budgetaire.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_budgetaire_index') }}">back to list</a>
+
+    <a href="{{ path('ligne_budgetaire_edit', {'id': ligne_budgetaire.id}) }}">edit</a>
+
+    {{ include('ligne_budgetaire/_delete_form.html.twig') }}
+{% endblock %}
