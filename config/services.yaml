@@ -7,6 +7,7 @@ parameters:
   app.path.marche_unique_files: /uploads/files/marche_unique
   app.path.bon_commande_files: /uploads/files/bon_commande
   app.path.contrat_files: /uploads/files/contrat
+  app.path.recette_files: /uploads/files/recette
 
 services:
   # default configuration for services in *this* file

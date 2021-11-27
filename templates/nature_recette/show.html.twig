@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<title>NatureRecette</title>
+
+{% block body %}
+    <h1>NatureRecette</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ nature_recette.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ nature_recette.code }}</td>
+            </tr>
+            <tr>
+                <th>NatureOperation</th>
+                <td>{{ nature_recette.natureOperation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('nature_recette_index') }}">back to list</a>
+
+    <a href="{{ path('nature_recette_edit', {'id': nature_recette.id}) }}">edit</a>
+
+    {{ include('nature_recette/_delete_form.html.twig') }}
+{% endblock %}

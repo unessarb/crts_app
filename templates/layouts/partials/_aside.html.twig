@@ -45,6 +45,12 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ path('recette_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'recette_index' or app.request.attributes.get('_route') == 'recette_new' or app.request.attributes.get('_route') == 'recette_edit' or app.request.attributes.get('_route') == 'recette_show' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Recettes</p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ path('app_bon_commandes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_bon_commandes' or app.request.attributes.get('_route') == 'app_new_bon_commande' or app.request.attributes.get('_route') == 'app_edit_bon_commande' or app.request.attributes.get('_route') == 'app_show_bon_commande' %}active{% endif %}">
             <i class="far fa-folder-open nav-icon"></i>
             <p>Bon de commandes</p>
@@ -71,6 +77,7 @@
                   app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande' or
                   app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' or
+                  app.request.attributes.get('_route') == 'nature_recette_index' or app.request.attributes.get('_route') == 'nature_recette_new' or app.request.attributes.get('_route') == 'nature_recette_edit' or
                   app.request.attributes.get('_route') == 'app_titulaires' or app.request.attributes.get('_route') == 'app_new_titulaires' or app.request.attributes.get('_route') == 'app_edit_titulaires' or
                   app.request.attributes.get('_route') == 'app_devises' or app.request.attributes.get('_route') == 'app_new_devises' or app.request.attributes.get('_route') == 'app_edit_devises' or
                   app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs' or
@@ -86,11 +93,18 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
+              <a href="{{ path('nature_recette_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'nature_recette_index' or app.request.attributes.get('_route') == 'nature_recette_new' or app.request.attributes.get('_route') == 'nature_recette_edit' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>MAJ Nature Recette</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ path('app_societes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>MAJ Sociétés</p>
               </a>
             </li>
+
             <li class="nav-item">
               <a href="{{ path('app_titulaires') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_titulaires' or app.request.attributes.get('_route') == 'app_new_titulaires' or app.request.attributes.get('_route') == 'app_edit_titulaires' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>

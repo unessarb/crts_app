@@ -2,14 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\NatureRecette;
 use App\Entity\NatureOperationBonCommande;
 use App\Entity\NatureOperationContrat;
 use App\Entity\NatureOperationMarcheReconductible;
 use App\Entity\NatureOperationMarcheUnique;
+use App\Form\NatureOperRecetteType;
 use App\Form\NatureNatureOperMarcheReconductibleType;
 use App\Form\NatureOperBonCommandeType;
 use App\Form\NatureOperContactType;
 use App\Form\NatureOperMarcheUniqueType;
+use App\Repository\NatureRecetteRepository;
 use App\Repository\NatureOperationBonCommandeRepository;
 use App\Repository\NatureOperationContratRepository;
 use App\Repository\NatureOperationMarcheReconductibleRepository;
@@ -287,4 +290,79 @@ class NatureOperationController extends AbstractController
 
         return $this->redirectToRoute('app_nature_operation_bon_commande');
     }
+
+
+
+
+
+
+
+    /**
+     * ======================================
+     * NATURE OPERATION Recette
+     * ======================================
+     */
+/*
+    #[Route('/nature-operation-recette', name: 'app_nature_operation_recette')]
+    public function index_recette(NatureRecetteRepository $natureOperation): Response
+    {
+        $operations = $natureOperation->findBy([], ["id"=>"desc"]);
+        return $this->render('admin/nature_operation/recette/index.html.twig', [
+            'operations' => $operations,
+        ]);
+    }
+
+    #[Route('/nature-operation-recette/new', name: 'app_new_nature_operation_recette', methods: ["GET", "POST"])]
+    public function new_recette(Request $request, EntityManagerInterface $em): Response
+    {
+        $operation = new NatureRecette;
+        $form = $this->createForm(NatureOperRecetteType::class, $operation);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em->persist($operation);
+            $em->flush();
+
+            $this->addFlash('success', 'Nature opération recette ajoutée avec succès !');
+
+            return $this->redirectToRoute('app_nature_operation_recette');
+        }
+        return $this->render('admin/nature_operation/recette/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/nature-operation-recette/edit/{id<[0-9]+>}', name: 'app_edit_nature_operation_recette', methods: ["GET", "POST"])]
+    public function edit_recette(Request $request, EntityManagerInterface $em, NatureOperationBonCommande $operation): Response
+    {
+        $form = $this->createForm(NatureRecetteType::class, $operation);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em->flush();
+            $this->addFlash('success', 'Nature opération recette modifiée avec succès !');
+            return $this->redirectToRoute('app_nature_operation_recette');
+            
+        }
+        return $this->render('admin/nature_operation/recette/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/nature-operation-recette/{id<[0-9]+>}', name: 'app_delete_nature_operation_recette', methods: ["POST"])]
+    public function delete_recette(Request $request, NatureRecette $operation, EntityManagerInterface $em): Response
+    {
+
+        if ($this->isCsrfTokenValid('recette_deletion_' . $operation->getId(), $request->request->get('csrf_token'))) {
+            $em->remove($operation);
+            $em->flush();
+
+            $this->addFlash('info', 'Nature opération recette supprimée avec succès !');
+        }
+
+        return $this->redirectToRoute('app_nature_operation_recette');
+    }
+
+*/
+
 }

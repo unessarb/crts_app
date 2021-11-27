@@ -141,6 +141,7 @@ $("#marche_unique_fontionnementInvestissement").on('change', function() {
     success: function (data, status, xhr) {
         console.log(data);
 		$('#marche_unique_lineBudgetaire').empty();
+		$('#marche_unique_lineBudgetaire').append('<option value="0">Séléctionner Ligne Budgétaire</option>');
 		var option = '';
 			for (var i=0;i<data.length;i++){
    			option += '<option value="'+ data[i]['ligne_id'] + '">' + data[i]['ligne_rubrique'] + '</option>';

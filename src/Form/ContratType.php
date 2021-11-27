@@ -61,9 +61,11 @@ class ContratType extends AbstractType
                     "class" => "select2bs4"
                 ]
                 ])
-            ->add('lineBudgetaire', null, [
-                "label" => "Ligne Budgétaire"
-                ])
+                ->add('lineBudgetaire', ChoiceType::class, [
+                    'choices'  => [
+                    ],
+                     "label" => "Ligne Budgétaire"
+                    ])
             ->add('fontionnementInvestissement', ChoiceType::class, [
                 'choices'  => [
                     'F' => "F",
