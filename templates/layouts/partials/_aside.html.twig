@@ -57,6 +57,14 @@
           </a>
         </li>
         {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item">
+          <a href="{{ path('app_recettes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_recettes' or app.request.attributes.get('_route') == 'app_new_recettes' or app.request.attributes.get('_route') == 'app_edit_recettes' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Recettes</p>
+          </a>
+        </li>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
         <li class="nav-item {% if 
                   app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_marche_unique' or 
@@ -67,12 +75,16 @@
                   app.request.attributes.get('_route') == 'app_nature_operation_contrat' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_contrat' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_contrat' or
+                  app.request.attributes.get('_route') == 'app_nature_operation_depense' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_depense' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_depense' or
                   app.request.attributes.get('_route') == 'app_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande' or
                   app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' or
                   app.request.attributes.get('_route') == 'app_titulaires' or app.request.attributes.get('_route') == 'app_new_titulaires' or app.request.attributes.get('_route') == 'app_edit_titulaires' or
                   app.request.attributes.get('_route') == 'app_devises' or app.request.attributes.get('_route') == 'app_new_devises' or app.request.attributes.get('_route') == 'app_edit_devises' or
+                  app.request.attributes.get('_route') == 'app_ligne_budgetaire' or app.request.attributes.get('_route') == 'app_new_ligne_budgetaire' or app.request.attributes.get('_route') == 'app_edit_ligne_budgetaire' or
                   app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs'
                    %}menu-is-opening menu-open
             {% endif %}">
@@ -103,6 +115,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ path('app_ligne_budgetaire') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_ligne_budgetaire' or app.request.attributes.get('_route') == 'app_new_ligne_budgetaire' or app.request.attributes.get('_route') == 'app_edit_ligne_budgetaire' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>MAJ Lignes Budgétaires</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ path('app_tfs') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>MAJ TFS</p>
@@ -119,6 +137,9 @@
                   app.request.attributes.get('_route') == 'app_nature_operation_contrat' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_contrat' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_contrat' or
+                  app.request.attributes.get('_route') == 'app_nature_operation_depense' or 
+                  app.request.attributes.get('_route') == 'app_new_nature_operation_depense' or 
+                  app.request.attributes.get('_route') == 'app_edit_nature_operation_depense' or
                   app.request.attributes.get('_route') == 'app_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande'
@@ -155,6 +176,12 @@
                     <a href="{{ path('app_nature_operation_bon_commande') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_nature_operation_bon_commande' or app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande' %}active{% endif %}">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Bon commande</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ path('app_nature_operation_depense') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_nature_operation_depense' or app.request.attributes.get('_route') == 'app_new_nature_operation_depense' or app.request.attributes.get('_route') == 'app_edit_nature_operation_depense' %}active{% endif %}">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>Dépense</p>
                     </a>
                   </li>
                 </ul>

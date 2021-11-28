@@ -51,13 +51,13 @@
                                 </a>  
                                 <a href="#" 
                                 data-toggle="tooltip" data-placement="top" title="Supprimer"
-                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-societe-delete-form').submit();" 
+                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-societe-delete-form-{{ loop.index }}').submit();" 
                                 class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                     Supprimer
                                 </a>
 
-                                <form id="js-societe-delete-form" action="{{ path('app_delete_nature_operation_contrat', {id: item.id}) }}" method="post" style="display: none;">
+                                <form id="js-societe-delete-form-{{ loop.index }}" action="{{ path('app_delete_nature_operation_contrat', {id: item.id}) }}" method="post" style="display: none;">
                                     <input type="hidden" name="csrf_token" value="{{ csrf_token('contrat_deletion_' ~ item.id) }}">
                                     <input type="hidden" name="_method" value="DELETE">
                                 </form> 

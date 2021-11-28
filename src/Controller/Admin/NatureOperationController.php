@@ -4,14 +4,17 @@ namespace App\Controller\Admin;
 
 use App\Entity\NatureOperationBonCommande;
 use App\Entity\NatureOperationContrat;
+use App\Entity\NatureOperationDepense;
 use App\Entity\NatureOperationMarcheReconductible;
 use App\Entity\NatureOperationMarcheUnique;
 use App\Form\NatureNatureOperMarcheReconductibleType;
 use App\Form\NatureOperBonCommandeType;
 use App\Form\NatureOperContactType;
+use App\Form\NatureOperDepenseType;
 use App\Form\NatureOperMarcheUniqueType;
 use App\Repository\NatureOperationBonCommandeRepository;
 use App\Repository\NatureOperationContratRepository;
+use App\Repository\NatureOperationDepenseRepository;
 use App\Repository\NatureOperationMarcheReconductibleRepository;
 use App\Repository\NatureOperationMarcheUniqueRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -100,7 +103,7 @@ class NatureOperationController extends AbstractController
     #[Route('/nature-operation-marche-reconductible', name: 'app_nature_operation_marche_reconductible')]
     public function index_marche_reconductible(NatureOperationMarcheReconductibleRepository $natureOperation): Response
     {
-        $marches = $natureOperation->findBy([], ["id"=>"desc"]);
+        $marches = $natureOperation->findAll();
         return $this->render('admin/nature_operation/marche_reconductible/index.html.twig', [
             'marches' => $marches,
         ]);
@@ -165,7 +168,7 @@ class NatureOperationController extends AbstractController
     #[Route('/nature-operation-contrat', name: 'app_nature_operation_contrat')]
     public function index_contrat(NatureOperationContratRepository $natureOperation): Response
     {
-        $operations = $natureOperation->findBy([], ["id"=>"desc"]);
+        $operations = $natureOperation->findAll();
         return $this->render('admin/nature_operation/contrat/index.html.twig', [
             'operations' => $operations,
         ]);
@@ -231,7 +234,7 @@ class NatureOperationController extends AbstractController
     #[Route('/nature-operation-bon-commande', name: 'app_nature_operation_bon_commande')]
     public function index_bon_commande(NatureOperationBonCommandeRepository $natureOperation): Response
     {
-        $operations = $natureOperation->findBy([], ["id"=>"desc"]);
+        $operations = $natureOperation->findAll();
         return $this->render('admin/nature_operation/bon_commande/index.html.twig', [
             'operations' => $operations,
         ]);
@@ -286,5 +289,71 @@ class NatureOperationController extends AbstractController
         }
 
         return $this->redirectToRoute('app_nature_operation_bon_commande');
+    }
+
+     /**
+     * ======================================
+     * NATURE OPERATION DEPENSES
+     * ======================================
+     */
+
+    #[Route('/nature-operation-depense', name: 'app_nature_operation_depense')]
+    public function index_depense(NatureOperationDepenseRepository $natureOperation): Response
+    {
+        $operations = $natureOperation->findAll();
+        return $this->render('admin/nature_operation/depense/index.html.twig', [
+            'operations' => $operations,
+        ]);
+    }
+
+    #[Route('/nature-operation-depense/new', name: 'app_new_nature_operation_depense', methods: ["GET", "POST"])]
+    public function new_depense(Request $request, EntityManagerInterface $em): Response
+    {
+        $operation = new NatureOperationDepense;
+        $form = $this->createForm(NatureOperDepenseType::class, $operation);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em->persist($operation);
+            $em->flush();
+
+            $this->addFlash('success', 'Nature opération dépense ajoutée avec succès !');
+
+            return $this->redirectToRoute('app_nature_operation_depense');
+        }
+        return $this->render('admin/nature_operation/depense/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/nature-operation-depense/edit/{id<[0-9]+>}', name: 'app_edit_nature_operation_depense', methods: ["GET", "POST"])]
+    public function edit_depense(Request $request, EntityManagerInterface $em, NatureOperationDepense $operation): Response
+    {
+        $form = $this->createForm(NatureOperDepenseType::class, $operation);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em->flush();
+            $this->addFlash('success', 'Nature opération dépense modifiée avec succès !');
+            return $this->redirectToRoute('app_nature_operation_depense');
+            
+        }
+        return $this->render('admin/nature_operation/depense/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/nature-operation-depense/{id<[0-9]+>}', name: 'app_delete_nature_operation_depense', methods: ["POST"])]
+    public function delete_depense(Request $request, NatureOperationDepense $operation, EntityManagerInterface $em): Response
+    {
+
+        if ($this->isCsrfTokenValid('depense_deletion_' . $operation->getId(), $request->request->get('csrf_token'))) {
+            $em->remove($operation);
+            $em->flush();
+
+            $this->addFlash('info', 'Nature opération dépense supprimée avec succès !');
+        }
+
+        return $this->redirectToRoute('app_nature_operation_depense');
     }
 }

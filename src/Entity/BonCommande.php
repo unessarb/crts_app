@@ -90,9 +90,9 @@ class BonCommande
     private $devise;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=LigneBudgetaire::class)
+     * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
-     * 
      */
     private $lineBudgetaire;
 
@@ -266,12 +266,12 @@ class BonCommande
         return $this;
     }
 
-    public function getLineBudgetaire(): ?int
+    public function getLineBudgetaire(): ?LigneBudgetaire
     {
         return $this->lineBudgetaire;
     }
 
-    public function setLineBudgetaire(int $lineBudgetaire): self
+    public function setLineBudgetaire(?LigneBudgetaire $lineBudgetaire): self
     {
         $this->lineBudgetaire = $lineBudgetaire;
 

@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title 'Nature opération pour marchés Reconductible' %}
+{% block title 'Liste des lignes budgétaires' %}
 
 {% block body %}
 
@@ -8,11 +8,11 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-8">
-            <h1>Nature opération pour marchés Reconductible</h1>
+          <div class="col-sm-6">
+            <h1>Liste des lignes budgétaires</h1>
           </div>
-          <div class="col-sm-4 text-right">
-            <a role="link" href="{{path('app_new_nature_operation_marche_reconductible')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouvelle nature opération</a>
+          <div class="col-sm-6 text-right">
+            <a role="link" href="{{path('app_new_ligne_budgetaire')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouvelle ligne budgétaire</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -29,36 +29,38 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>TFS</th>
-                    <th>Nature Opération</th>
-                    <th>Code</th>
+                    <th>Ligne budgétaire </th>
+                    <th>Code </th>
+                    <th>Crée le</th>
+                    <th>Modifié le</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
                   <tbody>
-                    {% for item in marches %}
+                    {% for item in ligne_budgetaires %}
                         <tr>
-                            <td >{{ loop.index }}</td>    
-                            <td>{{item.tfs.code}}</td>                        
-                            <td>{{item.natureOperation}}</td>                        
+                            <td >{{ loop.index }}</td>          
+                            <td>{{item.name}}</td>                        
                             <td>{{item.code}}</td>                        
+                            <td>{{item.createdAt | date() }}</td>                        
+                            <td>{{item.updatedAt | date() }}</td>                        
                             <td>
-                                <a class="btn btn-info btn-sm" 
+                                <a class="btn btn-info btn-sm"
                                 data-toggle="tooltip" data-placement="top" title="Editer"
-                                href="{{ path('app_edit_nature_operation_marche_reconductible', {id: item.id}) }}">
+                                 href="{{ path('app_edit_ligne_budgetaire', {id: item.id}) }}">
                                     <i class="fas fa-pencil-alt"></i>
                                     Edit
                                 </a>  
                                 <a href="#" 
                                 data-toggle="tooltip" data-placement="top" title="Supprimer"
-                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-societe-delete-form-{{ loop.index }}').submit();" 
+                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-ligne-budgetaire-delete-form-{{ loop.index }}').submit();" 
                                 class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                     Supprimer
                                 </a>
 
-                                <form id="js-societe-delete-form-{{ loop.index }}" action="{{ path('app_delete_nature_operation_marche_reconductible', {id: item.id}) }}" method="post" style="display: none;">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('marche_reconductible_deletion_' ~ item.id) }}">
+                                <form id="js-ligne-budgetaire-delete-form-{{ loop.index }}" action="{{ path('app_ligne_budgetaire_delete', {id: item.id}) }}" method="post" style="display: none;">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('ligne_budgetaire_deletion_' ~ item.id) }}">
                                     <input type="hidden" name="_method" value="DELETE">
                                 </form> 
                             </td>                        

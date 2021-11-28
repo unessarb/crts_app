@@ -158,7 +158,7 @@ class BonCommandeController extends AbstractController
                 $bon_commande->getTypeBc() . 
                 $bon_commande->getTitulaire()->getId().' '.
                 $bon_commande->getNatureOperation()->getCode().' '.
-                $bon_commande->getLineBudgetaire().' '.
+                $bon_commande->getLineBudgetaire()->getCode().' '.
                 $bon_commande->getFontionnementInvestissement().' '.
                 $bon_commande->getAnneeBudgetaire();
     }

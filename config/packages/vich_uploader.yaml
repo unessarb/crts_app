@@ -16,3 +16,8 @@ vich_uploader:
       uri_prefix: "%app.path.contrat_files%"
       upload_destination: "%kernel.project_dir%/public%app.path.contrat_files%"
       namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    justificatif:
+      uri_prefix: "%app.path.justificatif%"
+      upload_destination: "%kernel.project_dir%/public%app.path.justificatif%"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

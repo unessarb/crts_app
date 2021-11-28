@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Devise;
+use App\Entity\LigneBudgetaire;
 use App\Entity\MarcheUnique;
 use App\Entity\NatureOperationMarcheUnique;
 use App\Entity\Societe;
@@ -21,7 +22,8 @@ class MarcheUniqueType extends AbstractType
     {
         $builder
             ->add('numMarche', null, [
-                "label" => "N° Marché"
+                "label" => "N° Marché",
+                "html5" => true
                 ])
             ->add('tfs', EntityType::class, [
                 // looks for choices from this entity
@@ -86,9 +88,16 @@ class MarcheUniqueType extends AbstractType
                     "class" => "select2bs4"
                 ]
                 ])
-            ->add('lineBudgetaire', null, [
-                "label" => "Ligne Budgétaire"
-                ])
+                ->add('lineBudgetaire', EntityType::class, [
+                    // looks for choices from this entity
+                    'class' => LigneBudgetaire::class,
+                    'choice_label' => "name",
+                    "placeholder" => "Selectionner la ligne budgétaire",
+                    'label' => "Ligne budgétaire",
+                    "attr"=> [
+                        "class" => "select2bs4"
+                    ]
+                    ])
             ->add('fontionnementInvestissement', ChoiceType::class, [
                 'choices'  => [
                     'F' => "F",
@@ -98,10 +107,12 @@ class MarcheUniqueType extends AbstractType
                 "label" => "Fonctionnement (F) Investissement (I)"
                 ])
             ->add('anneeBudgetaire', null, [
-                "label" => "Annee budgétaire"
+                "label" => "Annee budgétaire",
+                "html5" => true
                 ])
             ->add('montant', null, [
-                "label" => "Montant TTC"
+                "label" => "Montant TTC",
+                "html5" => true
                 ])
             ->add('devise', EntityType::class, [
                 // looks for choices from this entity

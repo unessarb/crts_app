@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\BonCommande;
 use App\Entity\Devise;
+use App\Entity\LigneBudgetaire;
 use App\Entity\NatureOperationBonCommande;
 use App\Entity\Societe;
 use App\Entity\SocieteTitulaire;
@@ -21,7 +22,8 @@ class BonCommandesType extends AbstractType
     {
         $builder
             ->add('numBc', null, [
-                "label" => "N° BC-FN"
+                "label" => "N° BC-FN",
+                "html5" => true
                 ])
             ->add('tfs', EntityType::class, [
                 // looks for choices from this entity
@@ -76,8 +78,15 @@ class BonCommandesType extends AbstractType
                     "class" => "select2bs4"
                 ]
                 ])
-            ->add('lineBudgetaire', null, [
-                "label" => "Ligne Budgétaire"
+            ->add('lineBudgetaire', EntityType::class, [
+                // looks for choices from this entity
+                'class' => LigneBudgetaire::class,
+                'choice_label' => "name",
+                "placeholder" => "Selectionner la ligne budgétaire",
+                'label' => "Ligne budgétaire",
+                "attr"=> [
+                    "class" => "select2bs4"
+                ]
                 ])
             ->add('fontionnementInvestissement', ChoiceType::class, [
                 'choices'  => [
@@ -88,10 +97,12 @@ class BonCommandesType extends AbstractType
                 "label" => "Fonctionnement (F) Investissement (I)"
                 ])
             ->add('anneeBudgetaire', null, [
-                "label" => "Annee budgétaire"
+                "label" => "Annee budgétaire",
+                "html5" => true
                 ])
             ->add('montant', null, [
-                "label" => "Montant TTC"
+                "label" => "Montant TTC",
+                "html5" => true
                 ])
             ->add('devise', EntityType::class, [
                 // looks for choices from this entity

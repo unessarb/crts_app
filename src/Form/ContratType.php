@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Contrat;
 use App\Entity\Devise;
+use App\Entity\LigneBudgetaire;
 use App\Entity\NatureOperationContrat;
 use App\Entity\Societe;
 use App\Entity\SocieteTitulaire;
@@ -21,7 +22,8 @@ class ContratType extends AbstractType
     {
         $builder
             ->add('numCC', null, [
-                "label" => "N° C-C"
+                "label" => "N° C-C",
+                "html5" => true
                 ])
             ->add('typeContrat', ChoiceType::class, [
                 'choices'  => [
@@ -61,8 +63,15 @@ class ContratType extends AbstractType
                     "class" => "select2bs4"
                 ]
                 ])
-            ->add('lineBudgetaire', null, [
-                "label" => "Ligne Budgétaire"
+            ->add('lineBudgetaire', EntityType::class, [
+                // looks for choices from this entity
+                'class' => LigneBudgetaire::class,
+                'choice_label' => "name",
+                "placeholder" => "Selectionner la ligne budgétaire",
+                'label' => "Ligne budgétaire",
+                "attr"=> [
+                    "class" => "select2bs4"
+                ]
                 ])
             ->add('fontionnementInvestissement', ChoiceType::class, [
                 'choices'  => [
@@ -73,10 +82,12 @@ class ContratType extends AbstractType
                 "label" => "Fonctionnement (F) Investissement (I)"
                 ])
             ->add('anneeBudgetaire', null, [
-                "label" => "Annee budgétaire"
+                "label" => "Annee budgétaire",
+                "html5" => true
                 ])
             ->add('montant', null, [
-                "label" => "Montant TTC"
+                "label" => "Montant TTC",
+                "html5" => true
                 ])
             ->add('devise', EntityType::class, [
                 // looks for choices from this entity

@@ -157,7 +157,7 @@ class ContratController extends AbstractController
                 $contrat->getTypeContrat() . 
                 $contrat->getTitulaire()->getId().' '.
                 $contrat->getNatureOperation()->getCode().' '.
-                $contrat->getLineBudgetaire().' '.
+                $contrat->getLineBudgetaire()->getCode().' '.
                 $contrat->getFontionnementInvestissement().' '.
                 $contrat->getAnneeBudgetaire();
     }
