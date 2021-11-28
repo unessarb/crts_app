@@ -33,12 +33,13 @@
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                      <th>#</th>
+                     
                       <th>N° des quittances à souches</th>
                       <th>Partie versante</th>
                       <th>Nature Recette</th>
                       <th>Montant TTC</th>
                       <th>Observations</th>
+                      <th>Justificatifs</th>
                       <th>Crée le</th>
                       <th>Modifié le</th>
                       <th></th>
@@ -51,13 +52,21 @@
                     <tbody>
                       {% for item in recettes %}
                           <tr>
-                              <td >{{ loop.index }}</td> 
+                              
                               <td>{{item.numCC}}</td>                        
                               <td>{{item.Partieversantes}}</td>                        
                                                      
                               <td>{{item.natureRecette.natureOperation}}</td>                        
                               <td>{{item.montant}}</td>       
-                              <td>{{item.obs}}</td>                  
+                              <td>{{item.obs}}</td>  
+                              <td> 
+                              {% if item.documentPassation %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentPassationFile') }}">Justificatif 1</a>
+                              {% endif %}  -
+                              {% if item.documentExecution %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentExecutionFile') }}">Justificatif 2</a>
+                              {% endif %} 
+                              </td>                
                               <td>{{item.createdAt | date() }}</td>                        
                               <td>{{item.updatedAt | date() }}</td>        
                               <td>

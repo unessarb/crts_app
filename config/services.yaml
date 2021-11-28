@@ -8,6 +8,8 @@ parameters:
   app.path.bon_commande_files: /uploads/files/bon_commande
   app.path.contrat_files: /uploads/files/contrat
   app.path.recette_files: /uploads/files/recette
+  app.path.depense_files: /uploads/files/depense
+
 
 services:
   # default configuration for services in *this* file

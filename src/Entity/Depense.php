@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\RecetteRepository;
+use App\Repository\DepenseRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -10,11 +10,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Entity\Traits\Timestampable;
 
 /**
- * @ORM\Entity(repositoryClass=RecetteRepository::class)
+ * @ORM\Entity(repositoryClass=DepenseRepository::class)
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
-class Recette
+class Depense
 {
     use Timestampable;
     /**
@@ -30,23 +30,31 @@ class Recette
      */
     private $numCC;
 
-
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $reference;
 
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=NatureRecette::class)
+     * @ORM\ManyToOne(targetEntity=Personnel::class)
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
-    private $natureRecette;
+    private $beneficiaire;
 
     /**
      * @ORM\Column(type="string", length=800)
      * @Assert\NotBlank()
      */
-    private $partieversantes;
+    private $typeDpense;
 
+    /**
+     * @ORM\Column(type="string", length=1000, nullable = true)
+     */
+    private $objet;
 
     /**
      * @ORM\Column(type="string", length=1000, nullable = true)
@@ -68,7 +76,7 @@ class Recette
     private $documentPassation;
 
     /**
-     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentPassation")
+     * @Vich\UploadableField(mapping="Depense_files", fileNameProperty="documentPassation")
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
@@ -85,7 +93,7 @@ class Recette
     private $documentExecution;
 
     /**
-     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentExecution")
+     * @Vich\UploadableField(mapping="Depense_files", fileNameProperty="documentExecution")
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
@@ -118,26 +126,26 @@ class Recette
 
 
 
-    public function getNatureRecette(): ?NatureRecette
+    public function getBeneficiaire(): ?Personnel
     {
-        return $this->natureRecette;
+        return $this->beneficiaire;
     }
 
-    public function setNatureRecette(?NatureRecette $natureOperation): self
+    public function setBeneficiaire(?Personnel $personnel): self
     {
-        $this->natureRecette = $natureOperation;
+        $this->beneficiaire = $personnel;
 
         return $this;
     }
 
-    public function getPartieversantes(): ?string
+    public function getTypeDepense(): ?string
     {
-        return $this->partieversantes;
+        return $this->typeDepense;
     }
 
-    public function setPartieversantes(string $fontionnementInvestissement): self
+    public function setTypeDepense(string $typeDepense): self
     {
-        $this->partieversantes = $fontionnementInvestissement;
+        $this->typeDepense = $typeDepense;
 
         return $this;
     }
@@ -150,6 +158,19 @@ class Recette
     public function setObs(string $fontionnementInvestissement): self
     {
         $this->obs = $fontionnementInvestissement;
+
+        return $this;
+    }
+
+
+    public function getObjet(): ?string
+    {
+        return $this->objet;
+    }
+
+    public function setObjet(string $fontionnementInvestissement): self
+    {
+        $this->objet = $fontionnementInvestissement;
 
         return $this;
     }
