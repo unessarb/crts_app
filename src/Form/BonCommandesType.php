@@ -23,7 +23,6 @@ class BonCommandesType extends AbstractType
         $builder
             ->add('numBc', null, [
                 "label" => "N° BC-FN",
-                "html5" => true
                 ])
             ->add('tfs', EntityType::class, [
                 // looks for choices from this entity
@@ -81,7 +80,7 @@ class BonCommandesType extends AbstractType
             ->add('lineBudgetaire', EntityType::class, [
                 // looks for choices from this entity
                 'class' => LigneBudgetaire::class,
-                'choice_label' => "name",
+                'choice_label' => "rubrique",
                 "placeholder" => "Selectionner la ligne budgétaire",
                 'label' => "Ligne budgétaire",
                 "attr"=> [
@@ -98,11 +97,9 @@ class BonCommandesType extends AbstractType
                 ])
             ->add('anneeBudgetaire', null, [
                 "label" => "Annee budgétaire",
-                "html5" => true
                 ])
             ->add('montant', null, [
                 "label" => "Montant TTC",
-                "html5" => true
                 ])
             ->add('devise', EntityType::class, [
                 // looks for choices from this entity
@@ -114,22 +111,62 @@ class BonCommandesType extends AbstractType
                     "class" => "select2bs4"
                 ]
                 ])
-            ->add('documentPassationFile', VichFileType::class, [
-                'required' => false,
-                'allow_delete' => true,
-                'delete_label' => 'Supprimer',
-                'download_label' => 'Télécharger',
-                'asset_helper' => true,
-                'label' => 'Document Passation'
-            ])
-            ->add('documentExecutionFile', VichFileType::class, [
-                'required' => false,
-                'allow_delete' => true,
-                'delete_label' => 'Supprimer',
-                'download_label' => 'Télécharger',
-                'asset_helper' => true,
-                'label' => 'Document Execution'
-            ])
+                ->add('demandeDevisFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Demande de devis x 3'
+                ])
+                ->add('devisContradictoireFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Devis contradictoires x 3'
+                ])
+                ->add('bonLivraisonFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Bon de livraison'
+                ])
+                ->add('factureFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Facture'
+                ])
+                ->add('bordereauFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => "Bordereau d’émission"
+                ])
+                ->add('ordonnancementFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Ordonnancement'
+                ])
+                ->add('avisVirementFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Avis de virement'
+                ])
         ;
     }
 

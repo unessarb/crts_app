@@ -52,7 +52,7 @@ class MarcheUniqueController extends AbstractController
                             $marche->getModePassassion().
                             $marche->getTitulaire()->getId().' '.
                             $marche->getNatureOperation()->getCode().' '.
-                            $marche->getLineBudgetaire()->getCode().' '.
+                            $marche->getLineBudgetaire()->getNum().' '.
                             $marche->getFontionnementInvestissement().' '.
                             $marche->getAnneeBudgetaire();
 
@@ -110,7 +110,7 @@ class MarcheUniqueController extends AbstractController
                             $marche->getModePassassion().
                             $marche->getTitulaire()->getId().' '.
                             $marche->getNatureOperation()->getCode().' '.
-                            $marche->getLineBudgetaire()->getCode().' '.
+                            $marche->getLineBudgetaire()->getNum().' '.
                             $marche->getFontionnementInvestissement().' '.
                             $marche->getAnneeBudgetaire();
 

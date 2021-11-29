@@ -66,19 +66,89 @@
 				</div>
 			</div>
 			<div class="card card-secondary">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-6">
-							{{ form_row(form.documentPassationFile) }}
-						</div>
-						<div class="col-6">
-							{{ form_row(form.documentExecutionFile) }}
-						</div>
+			<div class="card-header">
+			Dossier Lancement et passation
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.demandeDevisFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.lettreSntlFile) }}
 					</div>
 				</div>
-			<!-- /.card-body -->
 			</div>
-			<!-- /.card -->
+		<!-- /.card-body -->
+		</div>
+          <!-- /.card -->
+
+
+		<div class="card card-secondary">
+			<div class="card-header">
+			Dossier exécution - Engagement
+			</div>
+			<div class="card-body">
+				
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.contratSigneFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.conventionSigneFile) }}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.devisContradictoireFile) }}
+					</div>
+					
+				</div>
+
+				
+			</div>
+		<!-- /.card-body -->
+		</div>
+          <!-- /.card -->
+
+		<div class="card card-secondary">
+			<div class="card-header">
+			Dossier exécution - Paiement
+			</div>
+			<div class="card-body">
+				
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.contratSignePaiementFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.bonLivraisonFile) }}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.factureFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.bordereauFile) }}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.ordonnancementFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.avisVirementFile) }}
+					</div>
+				</div>
+				
+			</div>
+		<!-- /.card-body -->
+		</div>
+		
 			<div class="row">
 				<div class="col-12">
 				<a href="{{ path('app_marches') }}" class="btn btn-secondary mb-5">Annuler</a>

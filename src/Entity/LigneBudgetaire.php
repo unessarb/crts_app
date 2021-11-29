@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestampable;
 use App\Repository\LigneBudgetaireRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\Timestampable;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=LigneBudgetaireRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class LigneBudgetaire
 {
@@ -22,43 +24,66 @@ class LigneBudgetaire
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      */
-    private $name;
+    private $num;
+
+
+   
+    /**
+     * @ORM\Column(type="string", length=1)
+     * @Assert\NotBlank()
+     */
+    private $fontionnementInvestissement;
+
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=1000)
      */
-    private $code;
+    private $rubrique;
+
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNum(): ?string
     {
-        return $this->name;
+        return $this->num;
     }
 
-    public function setName(string $name): self
+    public function setNum(string $numMarche): self
     {
-        $this->name = $name;
+        $this->num = $numMarche;
 
         return $this;
     }
 
-    public function getCode(): ?string
+    public function getFontionnementInvestissement(): ?string
     {
-        return $this->code;
+        return $this->fontionnementInvestissement;
     }
 
-    public function setCode(string $code): self
+    public function setFontionnementInvestissement(string $fontionnementInvestissement): self
     {
-        $this->code = $code;
+        $this->fontionnementInvestissement = $fontionnementInvestissement;
 
         return $this;
     }
+
+    public function getRubrique(): ?string
+    {
+        return $this->rubrique;
+    }
+
+    public function setRubrique(string $codedoc): self
+    {
+        $this->rubrique = $codedoc;
+
+        return $this;
+    }
+
 }

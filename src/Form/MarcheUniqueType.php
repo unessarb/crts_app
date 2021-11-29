@@ -23,7 +23,6 @@ class MarcheUniqueType extends AbstractType
         $builder
             ->add('numMarche', null, [
                 "label" => "N° Marché",
-                "html5" => true
                 ])
             ->add('tfs', EntityType::class, [
                 // looks for choices from this entity
@@ -91,7 +90,7 @@ class MarcheUniqueType extends AbstractType
                 ->add('lineBudgetaire', EntityType::class, [
                     // looks for choices from this entity
                     'class' => LigneBudgetaire::class,
-                    'choice_label' => "name",
+                    'choice_label' => "rubrique",
                     "placeholder" => "Selectionner la ligne budgétaire",
                     'label' => "Ligne budgétaire",
                     "attr"=> [
@@ -108,11 +107,9 @@ class MarcheUniqueType extends AbstractType
                 ])
             ->add('anneeBudgetaire', null, [
                 "label" => "Annee budgétaire",
-                "html5" => true
                 ])
             ->add('montant', null, [
                 "label" => "Montant TTC",
-                "html5" => true
                 ])
             ->add('devise', EntityType::class, [
                 // looks for choices from this entity
@@ -124,21 +121,193 @@ class MarcheUniqueType extends AbstractType
                     "class" => "select2bs4"
                 ]
                 ])
-            ->add('documentPassationFile', VichFileType::class, [
+//new
+            ->add('lettreDeLancementFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer',
                 'download_label' => 'Télécharger',
                 'asset_helper' => true,
-                'label' => 'Document Passation'
+                'label' => 'Lettre de lancement'
             ])
-            ->add('documentExecutionFile', VichFileType::class, [
+            ->add('decisionFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer',
                 'download_label' => 'Télécharger',
                 'asset_helper' => true,
-                'label' => 'Document Execution'
+                'label' => 'Décision'
+            ])
+            ->add('avisJournauxFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Avis dans les journaux'
+            ])
+            ->add('convocationTMFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Convocation TM'
+            ])
+            ->add('pvTechniqueFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'PVs et PV technique'
+            ])
+            ->add('lettreJustificationFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Lettre de justification des
+                prix'
+            ])
+            ->add('lettreComplementFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Lettre pour complément de
+                dossier'
+            ])
+            ->add('marcheSigneFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Marché signé, paraphé'
+            ])
+            ->add('certificatAdministratifFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Certificat administratif'
+            ])
+            ->add('avisJournauxEngagementFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Avis dans les journaux'
+            ])
+            ->add('cautionFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Caution provisoire/définitive'
+            ])
+            ->add('pouvoirFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Pouvoirs conférés'
+            ])
+            ->add('retenueFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Retenue de la garantie'
+            ])
+            ->add('ficheModeleFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Fiche modèle D'
+            ])
+            ->add('etatEngagementFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => "Etat d’engagement"
+            ])
+            ->add('marcheSignePaiementFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Marché signé, visé et approuvé'
+            ])
+            ->add('factureFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Facture'
+            ])
+            ->add('ficheInterventionFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => "Fiche d’intervention"
+            ])
+            ->add('decomptesFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Décomptes provisoires et
+                définitifs'
+            ])
+            ->add('procesVerbalFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Procès-verbal'
+            ])
+            ->add('bordereauFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => "Bordereau d’émission"
+            ])
+            ->add('ordonnancementFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Ordonnancement'
+            ])
+            ->add('avisVirementFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Avis de virement'
             ])
         ;
     }

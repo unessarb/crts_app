@@ -1,6 +1,8 @@
+
+
 {% extends 'layouts/base.html.twig' %}
 
-{% block title 'Recettes' %}
+{% block title 'Recette' %}
 
 {% block body %}
 
@@ -9,10 +11,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Recettes</h1>
+            <h1>Recette</h1>
           </div>
           <div class="col-sm-6 text-right">
-            <a role="link" href="{{path('app_new_recettes')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouvelle recette</a>
+            {% if is_granted('ROLE_AGENT') %}  
+              <a role="link" href="{{path('recette_new')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouvelle Recette</a>
+            {% endif %}
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -25,49 +29,79 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Nature Opération</th>
-                    <th>Montant TTC</th>
-                    <th>Crée le</th>
-                    <th>Modifié le</th>
-                    <th>Actions</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    {% for item in recettes %}
-                        <tr>
-                            <td >{{ loop.index }}</td> 
-                            <td>{{item.natureOperation}}</td>           
-                            <td>{{item.montant ~ ' ' ~ item.devise.name}}</td>                         
-                            <td>{{item.createdAt | date() }}</td>                        
-                            <td>{{item.updatedAt | date() }}</td>                        
-                            <td>
-                                <a class="btn btn-info btn-sm"
-                                data-toggle="tooltip" data-placement="top" title="Editer"
-                                 href="{{ path('app_edit_recettes', {id: item.id}) }}">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    Edit
-                                </a>  
-                                <a href="#" 
-                                data-toggle="tooltip" data-placement="top" title="Supprimer"
-                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-recette-delete-form-{{ loop.index }}').submit();" 
-                                class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                    Supprimer
-                                </a>
-
-                                <form id="js-recette-delete-form-{{ loop.index }}" action="{{ path('app_recettes_delete', {id: item.id}) }}" method="post" style="display: none;">
-                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('recette_deletion_' ~ item.id) }}">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                </form> 
-                            </td>                        
-                        </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
+                <div class="table-responsive">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                     
+                      <th>N° des quittances à souches</th>
+                      <th>Partie versante</th>
+                      <th>Nature Recette</th>
+                      <th>Montant TTC</th>
+                      <th>Observations</th>
+                      <th>Justificatifs</th>
+                      <th>Crée le</th>
+                      <th>Modifié le</th>
+                      <th></th>
+                      {% if is_granted('ROLE_AGENT') %}
+                      <th></th>
+                      <th></th>
+                      {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in recettes %}
+                          <tr>
+                              
+                              <td>{{item.numCC}}</td>                        
+                              <td>{{item.Partieversantes}}</td>                        
+                                                     
+                              <td>{{item.natureRecette.natureOperation}}</td>                        
+                              <td>{{item.montant}}</td>       
+                              <td>{{item.obs}}</td>  
+                              <td> 
+                              {% if item.documentPassation %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentPassationFile') }}">Justificatif 1</a>
+                              {% endif %}  -
+                              {% if item.documentExecution %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentExecutionFile') }}">Justificatif 2</a>
+                              {% endif %} 
+                              </td>                
+                              <td>{{item.createdAt | date() }}</td>                        
+                              <td>{{item.updatedAt | date() }}</td>        
+                              <td>
+                                  <a class="btn btn-primary btn-sm"
+                                  data-toggle="tooltip" data-placement="top" title="Afficher détails"
+                                  href="{{ path('recette_show', {id: item.id}) }}">
+                                      <i class="fas fa-eye"></i>
+                                  </a>  
+                              </td>  
+                              {% if is_granted('ROLE_AGENT') %}               
+                              <td>
+                                  <a class="btn btn-info btn-sm"
+                                  data-toggle="tooltip" data-placement="top" title="Editer"
+                                  href="{{ path('recette_edit', {id: item.id}) }}">
+                                      <i class="fas fa-pencil-alt"></i>
+                                  </a>  
+                              </td>      
+                              <td>
+                                  <a href="#" 
+                                  data-toggle="tooltip" data-placement="top" title="Supprimer"
+                                  onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-contrat-delete-form').submit();" 
+                                  class="btn btn-danger btn-sm">
+                                      <i class="fas fa-trash"></i>
+                                  </a>
+                                  <form id="js-contrat-delete-form" action="{{ path('recette_delete', {id: item.id}) }}" method="post" style="display: none;">
+                                      <input type="hidden" name="csrf_token" value="{{ csrf_token('recette_deletion_' ~ item.id) }}">
+                                      <input type="hidden" name="_method" value="DELETE">
+                                  </form> 
+                              </td>    
+                              {% endif %}                    
+                          </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>

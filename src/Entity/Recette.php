@@ -4,10 +4,10 @@ namespace App\Entity;
 
 use App\Repository\RecetteRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Traits\Timestampable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Entity\Traits\Timestampable;
 
 /**
  * @ORM\Entity(repositoryClass=RecetteRepository::class)
@@ -25,35 +25,50 @@ class Recette
     private $id;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $montant;
+    private $numCC;
 
-     /**
-     * @ORM\ManyToOne(targetEntity=Devise::class)
+
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=NatureRecette::class)
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
-    private $devise;
+    private $natureRecette;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=800)
+     * @Assert\NotBlank()
      */
-    private $observations;
+    private $partieversantes;
+
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=1000, nullable = true)
      */
-    private $natureOperation;
+    private $obs;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     */
+    private $montant;
+
+   
 
     /**
      * @ORM\Column(type="string", length=255, nullable = true)
      * @var string
      */
-    private $justifcatif;
+    private $documentPassation;
 
     /**
-     * @Vich\UploadableField(mapping="justificatif", fileNameProperty="justifcatif")
+     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentPassation")
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
@@ -61,11 +76,82 @@ class Recette
      * )
      * @var File
      */
-    private $justifcatifFile;
+    private $documentPassationFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $documentExecution;
+
+    /**
+     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentExecution")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $documentExecutionFile;
+
+
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNumCC(): ?string
+    {
+        return $this->numCC;
+    }
+
+    public function setNumCC(string $numCC): self
+    {
+        $this->numCC = $numCC;
+
+        return $this;
+    }
+
+
+
+
+
+    public function getNatureRecette(): ?NatureRecette
+    {
+        return $this->natureRecette;
+    }
+
+    public function setNatureRecette(?NatureRecette $natureOperation): self
+    {
+        $this->natureRecette = $natureOperation;
+
+        return $this;
+    }
+
+    public function getPartieversantes(): ?string
+    {
+        return $this->partieversantes;
+    }
+
+    public function setPartieversantes(string $fontionnementInvestissement): self
+    {
+        $this->partieversantes = $fontionnementInvestissement;
+
+        return $this;
+    }
+
+    public function getObs(): ?string
+    {
+        return $this->obs;
+    }
+
+    public function setObs(string $fontionnementInvestissement): self
+    {
+        $this->obs = $fontionnementInvestissement;
+
+        return $this;
     }
 
     public function getMontant(): ?float
@@ -80,45 +166,11 @@ class Recette
         return $this;
     }
 
-    public function getDevise(): ?Devise
+
+
+    public function setDocumentPassationFile(File $file = null)
     {
-        return $this->devise;
-    }
-
-    public function setDevise(?Devise $devise): self
-    {
-        $this->devise = $devise;
-
-        return $this;
-    }
-
-    public function getObservations(): ?string
-    {
-        return $this->observations;
-    }
-
-    public function setObservations(string $observations): self
-    {
-        $this->observations = $observations;
-
-        return $this;
-    }
-
-    public function getNatureOperation(): ?string
-    {
-        return $this->natureOperation;
-    }
-
-    public function setNatureOperation(?string $natureOperation): self
-    {
-        $this->natureOperation = $natureOperation;
-
-        return $this;
-    }
-
-    public function setJustifcatifFile(File $file = null)
-    {
-        $this->justifcatifFile = $file;
+        $this->documentPassationFile = $file;
 
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
@@ -129,19 +181,48 @@ class Recette
         }
     }
 
-    public function getJustifcatifFile()
+    public function getDocumentPassationFile()
     {
-        return $this->justifcatifFile;
+        return $this->documentPassationFile;
     }
 
-    public function setJustifcatif($justifcatif)
+    public function setDocumentPassation($documentPassation)
     {
-        $this->justifcatif = $justifcatif;
+        $this->documentPassation = $documentPassation;
     }
 
-    public function getJustifcatif()
+    public function getDocumentPassation()
     {
-        return $this->justifcatif;
+        return $this->documentPassation;
     }
 
+    public function setDocumentExecutionFile(File $file = null)
+    {
+        $this->documentExecutionFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDocumentExecutionFile()
+    {
+        return $this->documentExecutionFile;
+    }
+
+    public function setDocumentExecution($documentExecution)
+    {
+        $this->documentExecution = $documentExecution;
+    }
+
+    public function getDocumentExecution()
+    {
+        return $this->documentExecution;
+    }
+
+    
 }

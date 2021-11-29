@@ -21,3 +21,13 @@ vich_uploader:
       uri_prefix: "%app.path.justificatif%"
       upload_destination: "%kernel.project_dir%/public%app.path.justificatif%"
       namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    recette_files:
+      uri_prefix: "%app.path.recette_files%"
+      upload_destination: "%kernel.project_dir%/public%app.path.recette_files%"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    depense_files:
+      uri_prefix: "%app.path.depense_files%"
+      upload_destination: "%kernel.project_dir%/public%app.path.depense_files%"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

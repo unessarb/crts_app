@@ -20,15 +20,15 @@ class LigneBudgetaireRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return LigneBudgetaire[] Returns an array of LigneBudgetaire objects
+    //  * @return BonCommande[] Returns an array of BonCommande objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
+            ->orderBy('b.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -37,10 +37,10 @@ class LigneBudgetaireRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?LigneBudgetaire
+    public function findOneBySomeField($value): ?BonCommande
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

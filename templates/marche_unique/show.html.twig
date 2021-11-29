@@ -24,107 +24,348 @@
     <section class="content">
 
 		<div class="row">
-				<div class="col-md-6">
-					<div class="card card-primary">
-						<div class="card-header text-center text-uppercase">
-							Code Doc						
-						</div>
-						<div class="card-body text-center ">
-							<strong>
-								{{ marche.codeDoc }}
-							</strong>
-							<br>
-							<a class="btn btn-app mt-5" data-toggle="modal" data-target="#exampleModal">
-								<i class="fas fa-barcode"></i> <strong>Code à barres</strong>
-							</a>
-						</div>
-					<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<div class="col-md-6">
-					<div class="card card-secondary">
-					<div class="card-body">
-						<table class="table table-striped">
-							<tbody>
-								<tr>
-									<td class="label-table" width="50%">N° Enregistrement</td>
-									<td width="50%">{{ marche.id }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">N° Marché</td>
-									<td width="50%">{{ marche.numMarche }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">TFS</td>
-									<td width="50%">{{ marche.tfs.name }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Type Opération</td>
-									<td width="50%">Marché</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Mode Passasion</td>
-									<td width="50%">{{ marche.modePassassion == 0 ? "Ouvert" : (marche.modePassassion == 1 ? "Négocié" : "Restreint")  }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Sté Titulaire</td>
-									<td width="50%">{{ marche.titulaire.name }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Nom Sté</td>
-									<td width="50%">{{ marche.societe.name }}</td>
-								</tr>
-							</tbody>
-						</table>
 
-						<table class="table table-striped mt-5">
-							<tbody>
+				<div class="col-12">
+					<div class="card card-primary card-outline card-tabs">
+						<div class="card-header p-0 pt-1 border-bottom-0">
+							<ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="custom-tabs-details-tab" data-toggle="pill" href="#custom-tabs-details" role="tab" aria-controls="custom-tabs-details" aria-selected="false">Détails</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="custom-tabs-passation-tab" data-toggle="pill" href="#custom-tabs-passation" role="tab" aria-controls="custom-tabs-passation" aria-selected="false">Dossier Lancement et passation</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="custom-tabs-engagement-tab" data-toggle="pill" href="#custom-tabs-engagement" role="tab" aria-controls="custom-tabs-engagement" aria-selected="false">Dossier exécution - Engagement</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link " id="custom-tabs-paiement-tab" data-toggle="pill" href="#custom-tabs-paiement" role="tab" aria-controls="custom-tabs-paiement" aria-selected="true">Dossier exécution - Paiement</a>
+							</li>
+							</ul>
+						</div>
+						<div class="card-body">
+							<div class="tab-content" id="custom-tabs-three-tabContent">
+							<div class="tab-pane fade active show" id="custom-tabs-details" role="tabpanel" aria-labelledby="custom-tabs-details-tab">
+								<div class="row">
 								
-								<tr>
-									<td class="label-table" width="50%" >Code TFS</td>
-									<td width="50%">{{ marche.tfs.code }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Type Opération</td>
-									<td width="50%">1</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Type Marché</td>
-									<td width="50%">{{ marche.typeMarche }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Mode Passasion</td>
-									<td width="50%">{{ marche.modePassassion }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Sté Titulaire</td>
-									<td width="50%">{{ marche.titulaire.id }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Nature Opération</td>
-									<td width="50%">{{ marche.natureOperation.code }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Ligne Budgétaire</td>
-									<td width="50%">{{ marche.lineBudgetaire.code }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Fontionnement (F) <br>Investissement (I) </td>
-									<td width="50%">{{ marche.fontionnementInvestissement }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Année Budgétaire</td>
-									<td width="50%">{{ marche.anneeBudgetaire }}</td>
-								</tr>
-							</tbody>
-						</table>
-						
-					</div>
-					<!-- /.card-body -->
-					</div>
+									<div class="col-md-6">
+										<div class="card card-primary">
+											<div class="card-header text-center text-uppercase">
+												Code Doc						
+											</div>
+											<div class="card-body text-center" >
+												<strong>
+													{{ marche.codeDoc }}
+												</strong>
+												<br>
+												<a class="btn btn-app mt-5" data-toggle="modal" data-target="#exampleModal">
+													<i class="fas fa-barcode"></i> <strong>Code à barres</strong>
+												</a>
+											</div>
+										<!-- /.card-body -->
+										</div>
+										<!-- /.card -->
+										
+									</div>
+
+									<div class="col-md-6">
+										<div class="card card-secondary">
+										<div class="card-body">
+											<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">N° Enregistrement</td>
+														<td width="50%">{{ marche.id }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">N° Marché</td>
+														<td width="50%">{{ marche.numMarche }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">TFS</td>
+														<td width="50%">{{ marche.tfs.name }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Type Opération</td>
+														<td width="50%">Marché</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Mode Passasion</td>
+														<td width="50%">{{ marche.modePassassion == 0 ? "Ouvert" : (marche.modePassassion == 1 ? "Négocié" : "Restreint")  }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Sté Titulaire</td>
+														<td width="50%">{{ marche.titulaire.name }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Nom Sté</td>
+														<td width="50%">{{ marche.societe.name }}</td>
+													</tr>
+												</tbody>
+											</table>
+
+											<table class="table table-striped mt-5">
+												<tbody>
+													
+													<tr>
+														<td class="label-table" width="50%" >Code TFS</td>
+														<td width="50%">{{ marche.tfs.code }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Type Opération</td>
+														<td width="50%">1</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Type Marché</td>
+														<td width="50%">{{ marche.typeMarche }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Mode Passasion</td>
+														<td width="50%">{{ marche.modePassassion }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Sté Titulaire</td>
+														<td width="50%">{{ marche.titulaire.id }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Nature Opération</td>
+														<td width="50%">{{ marche.natureOperation.code }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Ligne Budgétaire</td>
+														<td width="50%">{{ marche.lineBudgetaire.num }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Fontionnement (F) <br>Investissement (I) </td>
+														<td width="50%">{{ marche.fontionnementInvestissement }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Année Budgétaire</td>
+														<td width="50%">{{ marche.anneeBudgetaire }}</td>
+													</tr>
+												</tbody>
+											</table>
+											
+										</div>
+										<!-- /.card-body -->
+										</div>
+										<!-- /.card -->
+									</div>
+
+								</div>
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-passation" role="tabpanel" aria-labelledby="custom-tabs-passation-tab">
+								<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Lettre de lancement</td>
+														<td width="50%">
+															{% if marche.lettreDeLancement %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.lettreDeLancement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Décision</td>
+														<td width="50%">
+															{% if marche.decision %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.decision)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Avis dans les journaux</td>
+														<td width="50%">
+															{% if marche.avisJournaux %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.avisJournaux)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Convocation TM</td>
+														<td width="50%">
+															{% if marche.convocationTM %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.convocationTM)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">PVs et PV technique</td>
+														<td width="50%">
+															{% if marche.pvTechnique %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.pvTechnique)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Lettre de justification des prix</td>
+														<td width="50%">
+															{% if marche.lettreJustification %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.lettreJustification)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Lettre pour complément de dossier</td>
+														<td width="50%">
+															{% if marche.lettreComplement %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.lettreComplement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+												
+												</tbody>
+											</table>	
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-engagement" role="tabpanel" aria-labelledby="custom-tabs-engagement-tab">
+								<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Marché signé, paraphé</td>
+														<td width="50%">
+															{% if marche.marcheSigne %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.marcheSigne)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Certificat administratif</td>
+														<td width="50%">
+															{% if marche.certificatAdministratif %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.certificatAdministratif)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Avis dans les journaux</td>
+														<td width="50%">
+															{% if marche.avisJournauxEngagement %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.avisJournauxEngagement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Caution provisoire/définitive</td>
+														<td width="50%">
+															{% if marche.caution %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.caution)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Pouvoirs conférés</td>
+														<td width="50%">
+															{% if marche.pouvoir %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.pouvoir)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Retenue de la garantie</td>
+														<td width="50%">
+															{% if marche.retenue %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.retenue)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Fiche modèle D</td>
+														<td width="50%">
+															{% if marche.ficheModele %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.ficheModele)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+
+													<tr>
+														<td class="label-table" width="50%">Etat d’engagement</td>
+														<td width="50%">
+															{% if marche.etatEngagement %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.etatEngagement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+												
+												</tbody>
+											</table>	
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-paiement" role="tabpanel" aria-labelledby="custom-tabs-paiement-tab">
+							<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Marché signé, visé et approuvé</td>
+														<td width="50%">
+															{% if marche.marcheSignePaiement %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.marcheSignePaiement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Facture</td>
+														<td width="50%">
+															{% if marche.facture %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.facture)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Fiche d’intervention</td>
+														<td width="50%">
+															{% if marche.ficheIntervention %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.ficheIntervention)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Décomptes provisoires et définitifs</td>
+														<td width="50%">
+															{% if marche.decomptes %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.decomptes)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Procès-verbal</td>
+														<td width="50%">
+															{% if marche.procesVerbal %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.procesVerbal)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Bordereau d’émission</td>
+														<td width="50%">
+															{% if marche.bordereau %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.bordereau)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Ordonnancement</td>
+														<td width="50%">
+															{% if marche.ordonnancement %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.ordonnancement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+
+													<tr>
+														<td class="label-table" width="50%">Avis de virement</td>
+														<td width="50%">
+															{% if marche.avisVirement %}
+															<a href="{{ asset('uploads/files/marche_unique/' ~ marche.avisVirement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+												
+												</tbody>
+											</table></div>
+							</div>
+						</div>
 					<!-- /.card -->
+					</div>
 				</div>
+				
 		</div>
 	
     </section>

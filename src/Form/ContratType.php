@@ -23,7 +23,6 @@ class ContratType extends AbstractType
         $builder
             ->add('numCC', null, [
                 "label" => "N° C-C",
-                "html5" => true
                 ])
             ->add('typeContrat', ChoiceType::class, [
                 'choices'  => [
@@ -66,7 +65,7 @@ class ContratType extends AbstractType
             ->add('lineBudgetaire', EntityType::class, [
                 // looks for choices from this entity
                 'class' => LigneBudgetaire::class,
-                'choice_label' => "name",
+                'choice_label' => "rubrique",
                 "placeholder" => "Selectionner la ligne budgétaire",
                 'label' => "Ligne budgétaire",
                 "attr"=> [
@@ -83,11 +82,9 @@ class ContratType extends AbstractType
                 ])
             ->add('anneeBudgetaire', null, [
                 "label" => "Annee budgétaire",
-                "html5" => true
                 ])
             ->add('montant', null, [
                 "label" => "Montant TTC",
-                "html5" => true
                 ])
             ->add('devise', EntityType::class, [
                 // looks for choices from this entity
@@ -99,22 +96,97 @@ class ContratType extends AbstractType
                     "class" => "select2bs4"
                 ]
                 ])
-            ->add('documentPassationFile', VichFileType::class, [
-                'required' => false,
-                'allow_delete' => true,
-                'delete_label' => 'Supprimer',
-                'download_label' => 'Télécharger',
-                'asset_helper' => true,
-                'label' => 'Document Passation'
-            ])
-            ->add('documentExecutionFile', VichFileType::class, [
-                'required' => false,
-                'allow_delete' => true,
-                'delete_label' => 'Supprimer',
-                'download_label' => 'Télécharger',
-                'asset_helper' => true,
-                'label' => 'Document Execution'
-            ])
+
+                ->add('demandeDevisFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'demandeDevisFile'
+                ])
+                ->add('lettreSntlFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'demandeDevisFile'
+                ])
+                ->add('contratSigneFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => "Contrat signé, paraphé"
+                ])
+                ->add('conventionSigneFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Convention signé'
+                ])
+                ->add('devisContradictoireFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Devis contradictoires x 3'
+                ])
+
+                ->add('contratSignePaiementFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Contrat signé, visé et approuvé'
+                ])
+
+                ->add('bonLivraisonFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Bon de livraison'
+                ])
+                ->add('factureFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Facture'
+                ])
+                ->add('bordereauFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => "Bordereau d’émission"
+                ])
+                ->add('ordonnancementFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Ordonnancement'
+                ])
+                ->add('avisVirementFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Avis de virement'
+                ])
         ;
     }
 

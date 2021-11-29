@@ -130,6 +130,127 @@ class BonCommande
      */
     private $documentExecutionFile;
 
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $demandeDevis;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="demandeDevis")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $demandeDevisFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $devisContradictoire;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="devisContradictoire")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $devisContradictoireFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $bonLivraison;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="bonLivraison")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $bonLivraisonFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $facture;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="facture")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $factureFile;
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $bordereau;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="bordereau")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $bordereauFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $ordonnancement;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="ordonnancement")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $ordonnancementFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $avisVirement;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="avisVirement")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $avisVirementFile;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -356,5 +477,200 @@ class BonCommande
         $this->codeBarImg = $codeBarImg;
 
         return $this;
+    }
+    public function setDemandeDevisFile(File $file = null)
+    {
+        $this->demandeDevisFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDemandeDevisFile()
+    {
+        return $this->demandeDevisFile;
+    }
+
+    public function setDemandeDevis($demandeDevis)
+    {
+        $this->demandeDevis = $demandeDevis;
+    }
+
+    public function getDemandeDevis()
+    {
+        return $this->demandeDevis;
+    }
+
+    public function setDevisContradictoireFile(File $file = null)
+    {
+        $this->devisContradictoireFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDevisContradictoireFile()
+    {
+        return $this->devisContradictoireFile;
+    }
+
+    public function setDevisContradictoire($devisContradictoire)
+    {
+        $this->devisContradictoire = $devisContradictoire;
+    }
+
+    public function getDevisContradictoire()
+    {
+        return $this->devisContradictoire;
+    }
+
+    public function setBonLivraisonFile(File $file = null)
+    {
+        $this->bonLivraisonFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getBonLivraisonFile()
+    {
+        return $this->bonLivraisonFile;
+    }
+
+    public function setBonLivraison($bonLivraison)
+    {
+        $this->bonLivraison = $bonLivraison;
+    }
+
+    public function getBonLivraison()
+    {
+        return $this->bonLivraison;
+    }
+
+    public function setFactureFile(File $file = null)
+    {
+        $this->factureFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getFactureFile()
+    {
+        return $this->factureFile;
+    }
+
+    public function setFacture($facture)
+    {
+        $this->facture = $facture;
+    }
+
+    public function getFacture()
+    {
+        return $this->facture;
+    }
+
+    public function setBordereauFile(File $file = null)
+    {
+        $this->bordereauFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getBordereauFile()
+    {
+        return $this->bordereauFile;
+    }
+
+    public function setBordereau($bordereau)
+    {
+        $this->bordereau = $bordereau;
+    }
+
+    public function getBordereau()
+    {
+        return $this->bordereau;
+    }
+
+    public function setOrdonnancementFile(File $file = null)
+    {
+        $this->ordonnancementFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getOrdonnancementFile()
+    {
+        return $this->ordonnancementFile;
+    }
+
+    public function setOrdonnancement($ordonnancement)
+    {
+        $this->ordonnancement = $ordonnancement;
+    }
+
+    public function getOrdonnancement()
+    {
+        return $this->ordonnancement;
+    }
+
+    public function setAvisVirementFile(File $file = null)
+    {
+        $this->avisVirementFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getAvisVirementFile()
+    {
+        return $this->avisVirementFile;
+    }
+
+    public function setAvisVirement($avisVirement)
+    {
+        $this->avisVirement = $avisVirement;
+    }
+
+    public function getAvisVirement()
+    {
+        return $this->avisVirement;
     }
 }

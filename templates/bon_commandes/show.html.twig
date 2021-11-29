@@ -24,103 +24,220 @@
     <section class="content">
 
 		<div class="row">
-				<div class="col-md-6">
-					<div class="card card-primary">
-						<div class="card-header text-center text-uppercase">
-							Code Doc						
-						</div>
-						<div class="card-body text-center ">
-							<strong>
-								{{ bon_commande.codeDoc }}
-							</strong>
-							<br>
-							<a class="btn btn-app mt-5" data-toggle="modal" data-target="#exampleModal">
-								<i class="fas fa-barcode"></i> <strong>Code à barres</strong>
-							</a>
-						</div>
-					<!-- /.card-body -->
-					</div>
-					<!-- /.card -->
-				</div>
-				<div class="col-md-6">
-					<div class="card card-secondary">
-					<div class="card-body">
-						<table class="table table-striped">
-							<tbody>
-								<tr>
-									<td class="label-table" width="50%">N° Enregistrement</td>
-									<td width="50%">{{ bon_commande.id }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">N° BC-FN</td>
-									<td width="50%">{{ bon_commande.numBc }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">TFS</td>
-									<td width="50%">{{ bon_commande.tfs.name }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Type Opération</td>
-									<td width="50%">Bon de commande</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Type Bc</td>
-									<td width="50%">{{ bon_commande.typeBc == 0 ? "Sans FN" : "Avec FN" }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Sté Titulaire</td>
-									<td width="50%">{{ bon_commande.titulaire.name }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Nom Sté</td>
-									<td width="50%">{{ bon_commande.societe.name }}</td>
-								</tr>
-							</tbody>
-						</table>
 
-						<table class="table table-striped mt-5">
-							<tbody>
+
+				<div class="col-12">
+					<div class="card card-primary card-outline card-tabs">
+						<div class="card-header p-0 pt-1 border-bottom-0">
+							<ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="custom-tabs-details-tab" data-toggle="pill" href="#custom-tabs-details" role="tab" aria-controls="custom-tabs-details" aria-selected="false">Détails</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="custom-tabs-passation-tab" data-toggle="pill" href="#custom-tabs-passation" role="tab" aria-controls="custom-tabs-passation" aria-selected="false">Dossier Lancement et passation</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="custom-tabs-engagement-tab" data-toggle="pill" href="#custom-tabs-engagement" role="tab" aria-controls="custom-tabs-engagement" aria-selected="false">Dossier exécution - Engagement</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link " id="custom-tabs-paiement-tab" data-toggle="pill" href="#custom-tabs-paiement" role="tab" aria-controls="custom-tabs-paiement" aria-selected="true">Dossier exécution - Paiement</a>
+							</li>
+							</ul>
+						</div>
+						<div class="card-body">
+							<div class="tab-content" id="custom-tabs-three-tabContent">
+							<div class="tab-pane fade active show" id="custom-tabs-details" role="tabpanel" aria-labelledby="custom-tabs-details-tab">
+								<div class="row">
 								
-								<tr>
-									<td class="label-table" width="50%" >Code TFS</td>
-									<td width="50%">{{ bon_commande.tfs.code }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Type Opération</td>
-									<td width="50%">1</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Type Bc</td>
-									<td width="50%">{{ bon_commande.typeBc }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Sté Titulaire</td>
-									<td width="50%">{{ bon_commande.titulaire.id }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Code Nature Opération</td>
-									<td width="50%">{{ bon_commande.natureOperation.code }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Ligne Budgétaire</td>
-									<td width="50%">{{ bon_commande.lineBudgetaire.code }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Fontionnement (F) <br>Investissement (I) </td>
-									<td width="50%">{{ bon_commande.fontionnementInvestissement }}</td>
-								</tr>
-								<tr>
-									<td class="label-table" width="50%">Année Budgétaire</td>
-									<td width="50%">{{ bon_commande.anneeBudgetaire }}</td>
-								</tr>
-							</tbody>
-						</table>
-						
-					</div>
-					<!-- /.card-body -->
-					</div>
+									<div class="col-md-6">
+										<div class="card card-primary">
+											<div class="card-header text-center text-uppercase">
+												Code Doc						
+											</div>
+											<div class="card-body text-center ">
+												<strong>
+													{{ bon_commande.codeDoc }}
+												</strong>
+												<br>
+												<a class="btn btn-app mt-5" data-toggle="modal" data-target="#exampleModal">
+													<i class="fas fa-barcode"></i> <strong>Code à barres</strong>
+												</a>
+											</div>
+										<!-- /.card-body -->
+										</div>
+										<!-- /.card -->
+									</div>
+									<div class="col-md-6">
+										<div class="card card-secondary">
+										<div class="card-body">
+											<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">N° Enregistrement</td>
+														<td width="50%">{{ bon_commande.id }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">N° BC-FN</td>
+														<td width="50%">{{ bon_commande.numBc }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">TFS</td>
+														<td width="50%">{{ bon_commande.tfs.name }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Type Opération</td>
+														<td width="50%">Bon de commande</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Type Bc</td>
+														<td width="50%">{{ bon_commande.typeBc == 0 ? "Sans FN" : "Avec FN" }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Sté Titulaire</td>
+														<td width="50%">{{ bon_commande.titulaire.name }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Nom Sté</td>
+														<td width="50%">{{ bon_commande.societe.name }}</td>
+													</tr>
+												</tbody>
+											</table>
+
+											<table class="table table-striped mt-5">
+												<tbody>
+													
+													<tr>
+														<td class="label-table" width="50%" >Code TFS</td>
+														<td width="50%">{{ bon_commande.tfs.code }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Type Opération</td>
+														<td width="50%">1</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Type Bc</td>
+														<td width="50%">{{ bon_commande.typeBc }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Sté Titulaire</td>
+														<td width="50%">{{ bon_commande.titulaire.id }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Nature Opération</td>
+														<td width="50%">{{ bon_commande.natureOperation.code }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Ligne Budgétaire</td>
+														<td width="50%">{{ bon_commande.lineBudgetaire.num }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Fontionnement (F) <br>Investissement (I) </td>
+														<td width="50%">{{ bon_commande.fontionnementInvestissement }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Année Budgétaire</td>
+														<td width="50%">{{ bon_commande.anneeBudgetaire }}</td>
+													</tr>
+												</tbody>
+											</table>
+											
+										</div>
+										<!-- /.card-body -->
+										</div>
+										<!-- /.card -->
+									</div>
+
+								</div>
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-passation" role="tabpanel" aria-labelledby="custom-tabs-passation-tab">
+								<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Demande de devis x 3</td>
+														<td width="50%">
+															{% if bon_commande.demandeDevis %}
+															<a href="{{ asset('uploads/files/bon_commande/' ~ bon_commande.demandeDevis)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													
+												</tbody>
+											</table>	
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-engagement" role="tabpanel" aria-labelledby="custom-tabs-engagement-tab">
+								<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Devis contradictoires x 3</td>
+														<td width="50%">
+															{% if bon_commande.devisContradictoire %}
+															<a href="{{ asset('uploads/files/bon_commande/' ~ bon_commande.devisContradictoire)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													
+												</tbody>
+											</table>	
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-paiement" role="tabpanel" aria-labelledby="custom-tabs-paiement-tab">
+							<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Bon de livraison</td>
+														<td width="50%">
+															{% if bon_commande.bonLivraison %}
+															<a href="{{ asset('uploads/files/bon_commande/' ~ bon_commande.bonLivraison)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Facture</td>
+														<td width="50%">
+															{% if bon_commande.facture %}
+															<a href="{{ asset('uploads/files/bon_commande/' ~ bon_commande.facture)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													
+													
+													<tr>
+														<td class="label-table" width="50%">Bordereau d’émission</td>
+														<td width="50%">
+															{% if bon_commande.bordereau %}
+															<a href="{{ asset('uploads/files/bon_commande/' ~ bon_commande.bordereau)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Ordonnancement</td>
+														<td width="50%">
+															{% if bon_commande.ordonnancement %}
+															<a href="{{ asset('uploads/files/bon_commande/' ~ bon_commande.ordonnancement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+
+													<tr>
+														<td class="label-table" width="50%">Avis de virement</td>
+														<td width="50%">
+															{% if bon_commande.avisVirement %}
+															<a href="{{ asset('uploads/files/bon_commande/' ~ bon_commande.avisVirement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+												
+												</tbody>
+											</table></div>
+							</div>
+						</div>
 					<!-- /.card -->
+					</div>
 				</div>
+
+
+			
+
+			
 		</div>
 	
     </section>

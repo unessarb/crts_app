@@ -124,6 +124,194 @@ class Contrat
     private $documentExecutionFile;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $demandeDevis;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="demandeDevis")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $demandeDevisFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $lettreSntl;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="lettreSntl")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $lettreSntlFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $contratSigne;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="contratSigne")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $contratSigneFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $conventionSigne;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="conventionSigne")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $conventionSigneFile;
+
+     /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $devisContradictoire;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="devisContradictoire")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $devisContradictoireFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $contratSignePaiement;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="contratSignePaiement")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $contratSignePaiementFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $bonLivraison;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="bonLivraison")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $bonLivraisonFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $facture;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="facture")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $factureFile;
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $bordereau;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="bordereau")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $bordereauFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $ordonnancement;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="ordonnancement")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $ordonnancementFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $avisVirement;
+
+    /**
+     * @Vich\UploadableField(mapping="marche_unique_files", fileNameProperty="avisVirement")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $avisVirementFile;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $codeDoc;
@@ -313,6 +501,315 @@ class Contrat
     public function getDocumentExecution()
     {
         return $this->documentExecution;
+    }
+
+    public function setDemandeDevisFile(File $file = null)
+    {
+        $this->demandeDevisFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDemandeDevisFile()
+    {
+        return $this->demandeDevisFile;
+    }
+
+    public function setDemandeDevis($demandeDevis)
+    {
+        $this->demandeDevis = $demandeDevis;
+    }
+
+    public function getDemandeDevis()
+    {
+        return $this->demandeDevis;
+    }
+
+    public function setLettreSntlFile(File $file = null)
+    {
+        $this->lettreSntlFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getLettreSntlFile()
+    {
+        return $this->lettreSntlFile;
+    }
+
+    public function setLettreSntl($lettreSntl)
+    {
+        $this->lettreSntl = $lettreSntl;
+    }
+
+    public function getLettreSntl()
+    {
+        return $this->lettreSntl;
+    }
+
+    public function setContratSigneFile(File $file = null)
+    {
+        $this->contratSigneFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getContratSigneFile()
+    {
+        return $this->contratSigneFile;
+    }
+
+    public function setContratSigne($contratSigne)
+    {
+        $this->contratSigne = $contratSigne;
+    }
+
+    public function getContratSigne()
+    {
+        return $this->contratSigne;
+    }
+
+    public function setConventionSigneFile(File $file = null)
+    {
+        $this->contratSigneFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getConventionSigneFile()
+    {
+        return $this->conventionSigneFile;
+    }
+
+    public function setConventionSigne($conventionSigne)
+    {
+        $this->conventionSigne = $conventionSigne;
+    }
+
+    public function getConventionSigne()
+    {
+        return $this->conventionSigne;
+    }
+
+    public function setDevisContradictoireFile(File $file = null)
+    {
+        $this->devisContradictoireFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDevisContradictoireFile()
+    {
+        return $this->devisContradictoireFile;
+    }
+
+    public function setDevisContradictoire($devisContradictoire)
+    {
+        $this->devisContradictoire = $devisContradictoire;
+    }
+
+    public function getDevisContradictoire()
+    {
+        return $this->devisContradictoire;
+    }
+
+    public function setContratSignePaiementFile(File $file = null)
+    {
+        $this->contratSignePaiementFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getContratSignePaiementFile()
+    {
+        return $this->contratSignePaiementFile;
+    }
+
+    public function setContratSignePaiement($contratSignePaiement)
+    {
+        $this->contratSignePaiement = $contratSignePaiement;
+    }
+
+    public function getContratSignePaiement()
+    {
+        return $this->contratSignePaiement;
+    }
+    
+
+    public function setBonLivraisonFile(File $file = null)
+    {
+        $this->bonLivraisonFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getBonLivraisonFile()
+    {
+        return $this->bonLivraisonFile;
+    }
+
+    public function setBonLivraison($bonLivraison)
+    {
+        $this->bonLivraison = $bonLivraison;
+    }
+
+    public function getBonLivraison()
+    {
+        return $this->bonLivraison;
+    }
+
+    public function setFactureFile(File $file = null)
+    {
+        $this->factureFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getFactureFile()
+    {
+        return $this->factureFile;
+    }
+
+    public function setFacture($facture)
+    {
+        $this->facture = $facture;
+    }
+
+    public function getFacture()
+    {
+        return $this->facture;
+    }
+
+    public function setBordereauFile(File $file = null)
+    {
+        $this->bordereauFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getBordereauFile()
+    {
+        return $this->bordereauFile;
+    }
+
+    public function setBordereau($bordereau)
+    {
+        $this->bordereau = $bordereau;
+    }
+
+    public function getBordereau()
+    {
+        return $this->bordereau;
+    }
+
+    public function setOrdonnancementFile(File $file = null)
+    {
+        $this->ordonnancementFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getOrdonnancementFile()
+    {
+        return $this->ordonnancementFile;
+    }
+
+    public function setOrdonnancement($ordonnancement)
+    {
+        $this->ordonnancement = $ordonnancement;
+    }
+
+    public function getOrdonnancement()
+    {
+        return $this->ordonnancement;
+    }
+
+    public function setAvisVirementFile(File $file = null)
+    {
+        $this->avisVirementFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getAvisVirementFile()
+    {
+        return $this->avisVirementFile;
+    }
+
+    public function setAvisVirement($avisVirement)
+    {
+        $this->avisVirement = $avisVirement;
+    }
+
+    public function getAvisVirement()
+    {
+        return $this->avisVirement;
     }
 
     public function getCodeDoc(): ?string

@@ -65,19 +65,75 @@
 				<!-- /.card -->
 				</div>
 			</div>
-			<div class="card card-secondary">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-6">
-							{{ form_row(form.documentPassationFile) }}
-						</div>
-						<div class="col-6">
-							{{ form_row(form.documentExecutionFile) }}
-						</div>
+			
+			  <div class="card card-secondary">
+			<div class="card-header">
+			Dossier Lancement et passation
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.demandeDevisFile) }}
 					</div>
 				</div>
-			<!-- /.card-body -->
 			</div>
+		<!-- /.card-body -->
+		</div>
+          <!-- /.card -->
+
+
+		<div class="card card-secondary">
+			<div class="card-header">
+			Dossier exécution - Engagement
+			</div>
+			<div class="card-body">
+				
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.devisContradictoireFile) }}
+					</div>
+				</div>
+
+			</div>
+		<!-- /.card-body -->
+		</div>
+          <!-- /.card -->
+
+		<div class="card card-secondary">
+		<div class="card-header">
+			Dossier exécution - Paiement
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.bonLivraisonFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.factureFile) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.bordereauFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.ordonnancementFile) }}
+					</div>
+				</div>
+
+				<div class="row">
+					
+					<div class="col-6">
+						{{ form_row(form.avisVirementFile) }}
+					</div>
+				</div>
+
+				
+			</div>
+		<!-- /.card-body -->
+		</div>
+          <!-- /.card -->
+		  
 			<!-- /.card -->
 			<div class="row">
 				<div class="col-12">

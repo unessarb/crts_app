@@ -55,8 +55,9 @@
 				<div class="card card-secondary">
 				<div class="card-body">
 					{{ form_row(form.natureOperation) }}
-					{{ form_row(form.lineBudgetaire) }}
+					
 					{{ form_row(form.fontionnementInvestissement) }}
+					{{ form_row(form.lineBudgetaire) }}
 					{{ form_row(form.anneeBudgetaire) }}
 					{{ form_row(form.montant) }}
 					{{ form_row(form.devise) }}
@@ -66,16 +67,70 @@
 				<!-- /.card -->
 			</div>
 		</div>
-		<div class="card card-secondary">
+		
+		  <div class="card card-secondary">
+			<div class="card-header">
+			Dossier Lancement et passation
+			</div>
 			<div class="card-body">
 				<div class="row">
 					<div class="col-6">
-						{{ form_row(form.documentPassationFile) }}
-					</div>
-					<div class="col-6">
-						{{ form_row(form.documentExecutionFile) }}
+						{{ form_row(form.demandeDevisFile) }}
 					</div>
 				</div>
+			</div>
+		<!-- /.card-body -->
+		</div>
+          <!-- /.card -->
+
+
+		<div class="card card-secondary">
+			<div class="card-header">
+			Dossier exécution - Engagement
+			</div>
+			<div class="card-body">
+				
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.devisContradictoireFile) }}
+					</div>
+				</div>
+
+			</div>
+		<!-- /.card-body -->
+		</div>
+          <!-- /.card -->
+
+		<div class="card card-secondary">
+		<div class="card-header">
+			Dossier exécution - Paiement
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.bonLivraisonFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.factureFile) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.bordereauFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.ordonnancementFile) }}
+					</div>
+				</div>
+
+				<div class="row">
+					
+					<div class="col-6">
+						{{ form_row(form.avisVirementFile) }}
+					</div>
+				</div>
+
+				
 			</div>
 		<!-- /.card-body -->
 		</div>
@@ -126,4 +181,31 @@
 				
 			
 
+{% endblock %}
+{% block javascript %}
+<script>
+
+$("#bon_commandes_fontionnementInvestissement").on('change', function() {
+  //alert( this.value );
+
+  $.ajax('/ligne/type/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#bon_commandes_lineBudgetaire').empty();
+		$('#bon_commandes_lineBudgetaire').append('<option value="0">Séléctionner Ligne Budgétaire</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['ligne_id'] + '">' + data[i]['ligne_rubrique'] + '</option>';
+			}
+		$('#bon_commandes_lineBudgetaire').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+
+});
+
+</script>
 {% endblock %}
