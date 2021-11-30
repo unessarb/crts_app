@@ -147,6 +147,27 @@
 
 {% block javascript %}
 <script>
+$("#marche_unique_tfs").on('change', function() {
+  //alert( this.value );
+
+$.ajax('/graphique/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		console.log(donutData.datasets);
+		donutData.datasets[0]['data']=data;
+		chart.update();
+		
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+});
+
+</script>
+
+<script>
  //-------------
     //- DONUT CHART -
     //-------------
@@ -171,7 +192,7 @@
     }
     //Create pie or douhnut chart
     // You can switch between pie and douhnut using the method below.
-    new Chart(donutChartCanvas, {
+    var chart=new Chart(donutChartCanvas, {
       type: 'doughnut',
       data: donutData,
       options: donutOptions
