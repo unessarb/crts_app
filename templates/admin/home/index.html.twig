@@ -96,6 +96,8 @@
 			<div class="col-sm-2">
 			</div>
 		<div class="col-sm-8">
+
+
 		         <!-- DONUT CHART -->
             <div class="card card-danger">
               <div class="card-header">
@@ -111,6 +113,16 @@
                 </div>
               </div>
               <div class="card-body">
+			  <center>
+			  		<select id="marche_unique_tfs" class="select2bs4" tabindex="-1" aria-hidden="true" style="width:300px;">
+		<option value="" selected="selected">Selectionner l'année</option>
+		{% for i in 2000..2040 %}
+<option value="{{i}}">{{i}}</option><br>
+{% endfor %}
+
+		</select>
+		</center>
+		
                 <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
               <!-- /.card-body -->
