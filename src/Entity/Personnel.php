@@ -31,7 +31,7 @@ class Personnel
      * @ORM\Column(type="string", length=255, nullable= true)
      * @Assert\NotBlank()
      */
-    private $code_Personnel;
+    private $code;
 
     /**
      * @ORM\Column(type="string", length=255, nullable= true)
@@ -58,14 +58,14 @@ class Personnel
         return $this;
     }
 
-    public function getCodePersonnel(): ?int
+    public function getCode(): ?int
     {
-        return $this->code_Personnel;
+        return $this->code;
     }
 
-    public function setCodePersonnel(int $code_Personnel): self
+    public function setCode(int $code): self
     {
-        $this->code_Personnel = $code_Personnel;
+        $this->code = $code;
 
         return $this;
     }

@@ -38,18 +38,14 @@
             </p>
           </a>
         </li>
+        {% if not is_granted('ROLE_REGIE') %}
         <li class="nav-item">
           <a href="{{ path('app_marches') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_marches' or app.request.attributes.get('_route') == 'app_new_marches' or app.request.attributes.get('_route') == 'app_edit_marches' or app.request.attributes.get('_route') == 'app_show_marches' %}active{% endif %}">
             <i class="far fa-folder-open nav-icon"></i>
             <p>Marchés Unique / Cadre</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{ path('recette_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'recette_index' or app.request.attributes.get('_route') == 'recette_new' or app.request.attributes.get('_route') == 'recette_edit' or app.request.attributes.get('_route') == 'recette_show' %}active{% endif %}">
-            <i class="far fa-folder-open nav-icon"></i>
-            <p>Recettes</p>
-          </a>
-        </li>
+       
         <li class="nav-item">
           <a href="{{ path('app_bon_commandes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_bon_commandes' or app.request.attributes.get('_route') == 'app_new_bon_commande' or app.request.attributes.get('_route') == 'app_edit_bon_commande' or app.request.attributes.get('_route') == 'app_show_bon_commande' %}active{% endif %}">
             <i class="far fa-folder-open nav-icon"></i>
@@ -62,6 +58,27 @@
             <p>Contrat / Convention</p>
           </a>
         </li>
+        {% else %}
+         <li class="nav-item">
+          <a href="{{ path('recette_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'recette_index' or app.request.attributes.get('_route') == 'recette_new' or app.request.attributes.get('_route') == 'recette_edit' or app.request.attributes.get('_route') == 'recette_show' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Recettes</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('app_depenses') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_depenses' or app.request.attributes.get('_route') == 'app_new_depense' or app.request.attributes.get('_route') == 'app_edit_depense' or app.request.attributes.get('_route') == 'app_show_depense' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Depenses</p>
+          </a>
+        </li>
+        <li class="nav-item">
+              <a href="{{ path('app_personnels') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_personnels' or app.request.attributes.get('_route') == 'app_new_personnels' or app.request.attributes.get('_route') == 'app_edit_personnels' %}active{% endif %}">
+                <i class="fas fa-users"></i>
+                <p>MAJ Personnels</p>
+              </a>
+            </li>
+        {% endif %}
+
         {% if is_granted('ROLE_ADMIN') %}
         <li class="nav-item {% if 
                   app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or 
@@ -199,6 +216,7 @@
         <li class="nav-item 
             {% if app.request.attributes.get('_route') == 'app_admins' or app.request.attributes.get('_route') == 'app_new_admin' or app.request.attributes.get('_route') == 'app_edit_admin' or
                   app.request.attributes.get('_route') == 'app_agents' or app.request.attributes.get('_route') == 'app_new_agent' or app.request.attributes.get('_route') == 'app_edit_agent' or
+                  app.request.attributes.get('_route') == 'app_regies' or app.request.attributes.get('_route') == 'app_new_regie' or app.request.attributes.get('_route') == 'app_edit_regie' or
                   app.request.attributes.get('_route') == 'app_users' or app.request.attributes.get('_route') == 'app_new_user' or app.request.attributes.get('_route') == 'app_edit_user'
             %}
             menu-is-opening menu-open
@@ -221,6 +239,12 @@
               <a href="{{ path('app_agents') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_agents' or app.request.attributes.get('_route') == 'app_new_agent' or app.request.attributes.get('_route') == 'app_edit_agent' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Agents</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ path('app_regies') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_regies' or app.request.attributes.get('_route') == 'app_new_regie' or app.request.attributes.get('_route') == 'app_edit_regie' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Regies</p>
               </a>
             </li>
             <li class="nav-item">

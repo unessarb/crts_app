@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Liste des peronnels' %}
+
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Liste des peronnels</h1>
+          </div>
+          <div class="col-sm-6 text-right">
+            <a role="link" href="{{path('app_new_personnels')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouveau peronnel</a>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nom </th>
+                    <th>Adresse</th>
+                    <th>Code</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in personnels %}
+                        <tr>
+                            <td >{{ loop.index }}</td>          
+                            <td>{{item.name}}</td>                        
+                            <td>{{item.adresse}}</td>                        
+                            <td>{{item.code}}</td>                        
+                            <td>
+                                <a class="btn btn-info btn-sm" 
+                                data-toggle="tooltip" data-placement="top" title="Editer"
+                                href="{{ path('app_edit_personnels', {id: item.id}) }}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Edit
+                                </a>  
+                                <a href="#" 
+                                data-toggle="tooltip" data-placement="top" title="Supprimer"
+                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-personnel-delete-form-{{ loop.index }}').submit();" 
+                                class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                    Supprimer
+                                </a>
+
+                                <form id="js-personnel-delete-form-{{ loop.index }}" action="{{ path('app_personnels_delete', {id: item.id}) }}" method="post" style="display: none;">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('personnel_deletion_' ~ item.id) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                </form> 
+                            </td>                        
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+{% endblock %}

@@ -36,8 +36,6 @@ class Depense
      */
     private $reference;
 
-
-
     /**
      * @ORM\ManyToOne(targetEntity=Personnel::class)
      * @ORM\JoinColumn(nullable=false)
@@ -67,8 +65,6 @@ class Depense
      */
     private $montant;
 
-   
-
     /**
      * @ORM\Column(type="string", length=255, nullable = true)
      * @var string
@@ -76,7 +72,7 @@ class Depense
     private $documentPassation;
 
     /**
-     * @Vich\UploadableField(mapping="Depense_files", fileNameProperty="documentPassation")
+     * @Vich\UploadableField(mapping="depense_files", fileNameProperty="documentPassation")
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
@@ -93,7 +89,7 @@ class Depense
     private $documentExecution;
 
     /**
-     * @Vich\UploadableField(mapping="Depense_files", fileNameProperty="documentExecution")
+     * @Vich\UploadableField(mapping="depense_files", fileNameProperty="documentExecution")
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
@@ -123,7 +119,29 @@ class Depense
     }
 
 
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
 
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getTypeDpense(): ?string
+    {
+        return $this->typeDpense;
+    }
+
+    public function setTypeDpense(string $typeDpense): self
+    {
+        $this->typeDpense = $typeDpense;
+
+        return $this;
+    }
 
 
     public function getBeneficiaire(): ?Personnel

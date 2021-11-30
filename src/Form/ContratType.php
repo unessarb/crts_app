@@ -103,7 +103,7 @@ class ContratType extends AbstractType
                     'delete_label' => 'Supprimer',
                     'download_label' => 'Télécharger',
                     'asset_helper' => true,
-                    'label' => 'demandeDevisFile'
+                    'label' => 'Demande de devis x 3'
                 ])
                 ->add('lettreSntlFile', VichFileType::class, [
                     'required' => false,
@@ -111,7 +111,7 @@ class ContratType extends AbstractType
                     'delete_label' => 'Supprimer',
                     'download_label' => 'Télécharger',
                     'asset_helper' => true,
-                    'label' => 'demandeDevisFile'
+                    'label' => 'Letrre SNTL'
                 ])
                 ->add('contratSigneFile', VichFileType::class, [
                     'required' => false,

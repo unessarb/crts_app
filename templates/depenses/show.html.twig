@@ -1,0 +1,308 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Détails marché ' %}
+
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Code à barres pour Contrat / Convention</h1>
+          </div>
+		   <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ path('app_contrats') }}">Archive Contrat / Convention</a></li>
+              <li class="breadcrumb-item active">Détails marché {{ contrat.numCC }}</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+	<!-- Main content -->
+    <section class="content">
+
+		<div class="row">
+
+			<div class="col-12">
+					<div class="card card-primary card-outline card-tabs">
+						<div class="card-header p-0 pt-1 border-bottom-0">
+							<ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="custom-tabs-details-tab" data-toggle="pill" href="#custom-tabs-details" role="tab" aria-controls="custom-tabs-details" aria-selected="false">Détails</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="custom-tabs-passation-tab" data-toggle="pill" href="#custom-tabs-passation" role="tab" aria-controls="custom-tabs-passation" aria-selected="false">Dossier Lancement et passation</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="custom-tabs-engagement-tab" data-toggle="pill" href="#custom-tabs-engagement" role="tab" aria-controls="custom-tabs-engagement" aria-selected="false">Dossier exécution - Engagement</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link " id="custom-tabs-paiement-tab" data-toggle="pill" href="#custom-tabs-paiement" role="tab" aria-controls="custom-tabs-paiement" aria-selected="true">Dossier exécution - Paiement</a>
+							</li>
+							</ul>
+						</div>
+						<div class="card-body">
+							<div class="tab-content" id="custom-tabs-three-tabContent">
+							<div class="tab-pane fade active show" id="custom-tabs-details" role="tabpanel" aria-labelledby="custom-tabs-details-tab">
+								<div class="row">
+								
+									<div class="col-md-6">
+										<div class="card card-primary">
+											<div class="card-header text-center text-uppercase">
+												Code Doc						
+											</div>
+											<div class="card-body text-center ">
+												<strong>
+													{{ contrat.codeDoc }}
+												</strong>
+												<br>
+												<a class="btn btn-app mt-5" data-toggle="modal" data-target="#exampleModal">
+													<i class="fas fa-barcode"></i> <strong>Code à barres</strong>
+												</a>
+											</div>
+										<!-- /.card-body -->
+										</div>
+										<!-- /.card -->
+									</div>
+									<div class="col-md-6">
+										<div class="card card-secondary">
+										<div class="card-body">
+											<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">N° Enregistrement</td>
+														<td width="50%">{{ contrat.id }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">N° C-C</td>
+														<td width="50%">{{ contrat.numCC }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Type Opération</td>
+														<td width="50%">Bon de commande</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Type Contrat</td>
+														<td width="50%">{{ contrat.typeContrat == 0 ? "Contrat" : "Contrat de droit commun" }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Sté Titulaire</td>
+														<td width="50%">{{ contrat.titulaire.name }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Nom Sté</td>
+														<td width="50%">{{ contrat.societe.name }}</td>
+													</tr>
+												</tbody>
+											</table>
+
+											<table class="table table-striped mt-5">
+												<tbody>
+													
+													<tr>
+														<td class="label-table" width="50%">Code Type Opération</td>
+														<td width="50%">1</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Type Bc</td>
+														<td width="50%">{{ contrat.typeContrat }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Sté Titulaire</td>
+														<td width="50%">{{ contrat.titulaire.id }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Code Nature Opération</td>
+														<td width="50%">{{ contrat.natureOperation.code }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Ligne Budgétaire</td>
+														<td width="50%">{{ contrat.lineBudgetaire.num }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Fontionnement (F) <br>Investissement (I) </td>
+														<td width="50%">{{ contrat.fontionnementInvestissement }}</td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Année Budgétaire</td>
+														<td width="50%">{{ contrat.anneeBudgetaire }}</td>
+													</tr>
+												</tbody>
+											</table>
+											
+										</div>
+										<!-- /.card-body -->
+										</div>
+										<!-- /.card -->
+									</div>
+
+								</div>
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-passation" role="tabpanel" aria-labelledby="custom-tabs-passation-tab">
+								<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Demande de devis x 3</td>
+														<td width="50%">
+															{% if contrat.demandeDevis %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.demandeDevis)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+
+													<tr>
+														<td class="label-table" width="50%">Lettre SNTL</td>
+														<td width="50%">
+															{% if contrat.lettreSntl %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.lettreSntl)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													
+												</tbody>
+											</table>	
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-engagement" role="tabpanel" aria-labelledby="custom-tabs-engagement-tab">
+								<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Contrat signé, paraphé</td>
+														<td width="50%">
+															{% if contrat.contratSigne %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.contratSigne)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Convention signé</td>
+														<td width="50%">
+															{% if contrat.conventionSigne %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.conventionSigne)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Devis contradictoires x 3</td>
+														<td width="50%">
+															{% if contrat.devisContradictoire %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.devisContradictoire)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													
+												</tbody>
+											</table>	
+							</div>
+							<div class="tab-pane fade" id="custom-tabs-paiement" role="tabpanel" aria-labelledby="custom-tabs-paiement-tab">
+							<table class="table table-striped">
+												<tbody>
+													<tr>
+														<td class="label-table" width="50%">Contrat signé, visé et approuvé</td>
+														<td width="50%">
+															{% if contrat.contratSignePaiement %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.contratSignePaiement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Bon de livraison</td>
+														<td width="50%">
+															{% if contrat.bonLivraison %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.bonLivraison)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Facture</td>
+														<td width="50%">
+															{% if contrat.facture %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.facture)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													
+													
+													<tr>
+														<td class="label-table" width="50%">Bordereau d’émission</td>
+														<td width="50%">
+															{% if contrat.bordereau %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.bordereau)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+													<tr>
+														<td class="label-table" width="50%">Ordonnancement</td>
+														<td width="50%">
+															{% if contrat.ordonnancement %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.ordonnancement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+
+													<tr>
+														<td class="label-table" width="50%">Avis de virement</td>
+														<td width="50%">
+															{% if contrat.avisVirement %}
+															<a href="{{ asset('uploads/files/contrat/' ~ contrat.avisVirement)}}" download>Télécharger</a>
+															{% endif %}
+														 </td>
+													</tr>
+												
+												</tbody>
+											</table></div>
+							</div>
+						</div>
+					<!-- /.card -->
+					</div>
+				</div>
+
+
+				
+		</div>
+	
+    </section>
+    <!-- /.content -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Code à barres</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body text-center">
+					<div id="codeBar" class="text-center">
+						<img src="{{ asset('uploads/barcode/' ~ contrat.codeBarImg ) }}" style="width:200px; height: 100px" alt="">
+						<br>
+						<strong>
+							{{ contrat.codeDoc }}
+						</strong>	
+					</div>
+					<button type="button" onclick="printContent('codeBar')" class="btn btn-outline-info btn-block btn-flat mt-3"><i class="fa fa-print"></i> Imprimer</button>
+					
+					{# <a href="{{ asset('uploads/barcode/' ~ contrat.codeBarImg ) }}" download class="btn btn-outline-info btn-block btn-flat mt-5"><i class="fa fa-download"></i> Télécharger</a> #}
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	function printContent(el) {
+		var restorepage = document.body.innerHTML;
+		var printcontent = document.getElementById(el).innerHTML;
+		document.body.innerHTML = "<div style='width:100%;margin-top:100px;text-align:center'> "+printcontent+"</div>";
+		window.print();
+		document.body.innerHTML = restorepage;
+	}
+	</script>
+
+				
+			
+
+{% endblock %}
