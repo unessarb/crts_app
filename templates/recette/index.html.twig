@@ -14,7 +14,7 @@
             <h1>Recette</h1>
           </div>
           <div class="col-sm-6 text-right">
-            {% if is_granted('ROLE_AGENT') %}  
+            {% if app.user.roles[0]=='ROLE_AGENT' %}  
               <a role="link" href="{{path('recette_new')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouvelle Recette</a>
             {% endif %}
           </div>
@@ -42,8 +42,10 @@
                       <th>Justificatifs</th>
                       <th>Crée le</th>
                       <th>Modifié le</th>
-                      <th></th>
-                      {% if is_granted('ROLE_AGENT') %}
+                      <!--
+                      <th>{{app.user.roles[0]}}</th>
+                      -->
+                      {% if app.user.roles[0]=='ROLE_AGENT' %}
                       <th></th>
                       <th></th>
                       {% endif %}
@@ -69,14 +71,15 @@
                               </td>                
                               <td>{{item.createdAt | date() }}</td>                        
                               <td>{{item.updatedAt | date() }}</td>        
-                              <td>
+                             <!-- <td>
                                   <a class="btn btn-primary btn-sm"
                                   data-toggle="tooltip" data-placement="top" title="Afficher détails"
                                   href="{{ path('recette_show', {id: item.id}) }}">
                                       <i class="fas fa-eye"></i>
                                   </a>  
                               </td>  
-                              {% if is_granted('ROLE_AGENT') %}               
+                              -->
+                              {% if app.user.roles[0]=='ROLE_AGENT' %}               
                               <td>
                                   <a class="btn btn-info btn-sm"
                                   data-toggle="tooltip" data-placement="top" title="Editer"
