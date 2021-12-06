@@ -9,6 +9,9 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
             <!-- Font Awesome Icons -->
             <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+
+              <!-- daterange picker -->
+            <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
             <!-- Select2 -->
             <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}" >
             <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}" >
@@ -18,7 +21,8 @@
             <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
             <!-- Theme style -->
             <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+             <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" rel="stylesheet"/>
             <style>
                 .alert {
                 padding: 10px;
@@ -85,6 +89,9 @@
             <!-- ChartJS -->
             <script src="../../plugins/chart.js/Chart.min.js"></script>
             <script src="{{ asset('dist/js/app.js') }}"></script>
+
+             <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
         {% endblock %}
 
          {% block javascript %}{% endblock %}

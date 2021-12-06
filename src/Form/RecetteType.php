@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class RecetteType extends AbstractType
 {
@@ -20,6 +21,16 @@ class RecetteType extends AbstractType
             "label" => "N° des quittances à souches"
             ])
             ->add('partieversantes', null, [ "label" => "Nom de la partie versante" ])
+            ->add('dateRecette', DateType::class, [
+    'widget' => 'single_text',
+    'format' => 'yyyy-MM-dd',
+
+    // prevents rendering it as type="date", to avoid HTML5 date pickers
+    'html5' => false,
+
+    // adds a class that can be selected in JavaScript
+    'attr' => ['class' => 'js-datepicker'],
+])
             ->add('obs', null, [ "label" => "Observations" ])
             ->add('montant', null, [
                 "label" => "Montant TTC"
@@ -30,7 +41,7 @@ class RecetteType extends AbstractType
                     'delete_label' => 'Supprimer',
                     'download_label' => 'Télécharger',
                     'asset_helper' => true,
-                    'label' => 'Justificatif 1'
+                    'label' => 'Facture'
                 ])
                 ->add('documentExecutionFile', VichFileType::class, [
                     'required' => false,
@@ -38,7 +49,23 @@ class RecetteType extends AbstractType
                     'delete_label' => 'Supprimer',
                     'download_label' => 'Télécharger',
                     'asset_helper' => true,
-                    'label' => 'Justificatif 2'
+                    'label' => 'Devis'
+                ])
+                ->add('documentAutreFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Convention, Contrat, etc.'
+                ])
+                ->add('documentBonFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Bon de commande'
                 ])
             ->add('natureRecette', EntityType::class, [
                 // looks for choices from this entity

@@ -13,7 +13,7 @@ class NatureOperDepenseType extends AbstractType
     {
         $builder
             ->add('code')
-            ->add('natureOperation', null, [ "label" => "Nature opération" ])
+            ->add('natureOperation', null, [ "label" => "Rubrique" ])
         ;
     }
 

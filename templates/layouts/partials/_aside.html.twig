@@ -10,7 +10,7 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 w-100 text-center ">
-        <a href="#" class="d-block">{{ app.user.fullname }} <br> {{ app.user.roles[0] == "ROLE_ADMIN" ? "Administrateur" : app.user.roles[0] == "ROLE_AGENT" ? "Agent Saisi" : "Utilisateur" }}</a>
+        <a href="#" class="d-block">{{ app.user.fullname }} <br> {{ app.user.roles[0] == "ROLE_ADMIN" ? "Administrateur" : app.user.roles[0] == "ROLE_AGENT" ? "Agent" : app.user.roles[0] == "ROLE_REGIE" ? "Agent" : "Utilisateur" }}</a>
     </div>
 
     {# <!-- SidebarSearch Form -->
@@ -74,8 +74,22 @@
         <li class="nav-item">
               <a href="{{ path('app_personnels') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_personnels' or app.request.attributes.get('_route') == 'app_new_personnels' or app.request.attributes.get('_route') == 'app_edit_personnels' %}active{% endif %}">
                 <i class="fas fa-users"></i>
-                <p>MAJ Personnels</p>
+                <p>MAJ Bénéficiaires</p>
               </a>
+            </li>
+
+              <li class="nav-item">
+              <a href="{{ path('nature_recette_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'nature_recette_index' or app.request.attributes.get('_route') == 'nature_recette_new' or app.request.attributes.get('_route') == 'nature_recette_edit' %}active{% endif %}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>MAJ Nature Recette</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+                    <a href="{{ path('app_nature_operation_depense') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_nature_operation_depense' or app.request.attributes.get('_route') == 'app_new_nature_operation_depense' or app.request.attributes.get('_route') == 'app_edit_nature_operation_depense' %}active{% endif %}">
+                      <i class="far fa-dot-circle nav-icon"></i>
+                      <p>MAJ Rubrique</p>
+                    </a>
             </li>
         {% endif %}
 
@@ -97,7 +111,6 @@
                   app.request.attributes.get('_route') == 'app_new_nature_operation_bon_commande' or 
                   app.request.attributes.get('_route') == 'app_edit_nature_operation_bon_commande' or
                   app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' or
-                  app.request.attributes.get('_route') == 'nature_recette_index' or app.request.attributes.get('_route') == 'nature_recette_new' or app.request.attributes.get('_route') == 'nature_recette_edit' or
                   app.request.attributes.get('_route') == 'app_titulaires' or app.request.attributes.get('_route') == 'app_new_titulaires' or app.request.attributes.get('_route') == 'app_edit_titulaires' or
                   app.request.attributes.get('_route') == 'app_devises' or app.request.attributes.get('_route') == 'app_new_devises' or app.request.attributes.get('_route') == 'app_edit_devises' or
                   app.request.attributes.get('_route') == 'app_tfs' or app.request.attributes.get('_route') == 'app_new_tfs' or app.request.attributes.get('_route') == 'app_edit_tfs' or
@@ -112,12 +125,7 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ path('nature_recette_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'nature_recette_index' or app.request.attributes.get('_route') == 'nature_recette_new' or app.request.attributes.get('_route') == 'nature_recette_edit' %}active{% endif %}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>MAJ Nature Recette</p>
-              </a>
-            </li>
+
             <li class="nav-item">
               <a href="{{ path('app_societes') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_societes' or app.request.attributes.get('_route') == 'app_new_societes' or app.request.attributes.get('_route') == 'app_edit_societes' %}active{% endif %}">
                 <i class="far fa-circle nav-icon"></i>

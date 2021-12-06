@@ -61,10 +61,20 @@
                               <td>{{item.obs}}</td>  
                               <td> 
                               {% if item.documentPassation %}  
-                              <a href="{{ vich_uploader_asset(item, 'documentPassationFile') }}">Justificatif 1</a>
-                              {% endif %}  -
+                              <a href="{{ vich_uploader_asset(item, 'documentPassationFile') }}">Facture</a>
+                              -
+                              {% endif %}  
                               {% if item.documentExecution %}  
-                              <a href="{{ vich_uploader_asset(item, 'documentExecutionFile') }}">Justificatif 2</a>
+                              <a href="{{ vich_uploader_asset(item, 'documentExecutionFile') }}">Devis</a>
+                              -
+                              {% endif %} 
+                              {% if item.documentAutre %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentAutreFile') }}">Autre (Convention, Contrat, etc.)</a>
+                              -
+                              {% endif %}  
+                              {% if item.documentBon %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentBonFile') }}">Bon de commande</a>
+                              -
                               {% endif %} 
                               </td>                
                               <td>{{item.createdAt | date() }}</td>                        

@@ -24,11 +24,6 @@ class Depense
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $numCC;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -44,7 +39,8 @@ class Depense
     private $beneficiaire;
 
     /**
-     * @ORM\Column(type="string", length=800)
+     * @ORM\ManyToOne(targetEntity=NatureOperationDepense::class)
+     * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank()
      */
     private $typeDpense;
@@ -99,23 +95,27 @@ class Depense
      */
     private $documentExecutionFile;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $documentOrdre;
+
+    /**
+     * @Vich\UploadableField(mapping="depense_files", fileNameProperty="documentOrdre")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $documentOrdreFile;
 
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumCC(): ?string
-    {
-        return $this->numCC;
-    }
-
-    public function setNumCC(string $numCC): self
-    {
-        $this->numCC = $numCC;
-
-        return $this;
     }
 
 
@@ -131,14 +131,16 @@ class Depense
         return $this;
     }
 
-    public function getTypeDpense(): ?string
+
+
+    public function getTypeDpense(): ?NatureOperationDepense
     {
         return $this->typeDpense;
     }
 
-    public function setTypeDpense(string $typeDpense): self
+    public function setTypeDpense(?NatureOperationDepense $natureOperation): self
     {
-        $this->typeDpense = $typeDpense;
+        $this->typeDpense = $natureOperation;
 
         return $this;
     }
@@ -263,5 +265,34 @@ class Depense
         return $this->documentExecution;
     }
 
+   
     
+
+    public function setDocumentOrdreFile(File $file = null)
+    {
+        $this->documentOrdreFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDocumentOrdreFile()
+    {
+        return $this->documentOrdreFile;
+    }
+
+    public function setDocumentOrdre($documentExecution)
+    {
+        $this->documentOrdre = $documentExecution;
+    }
+
+    public function getDocumentOrdre()
+    {
+        return $this->documentOrdre;
+    } 
 }

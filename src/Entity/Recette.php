@@ -97,6 +97,52 @@ class Recette
 
 
 
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $documentAutre;
+
+    /**
+     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentAutre")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $documentAutreFile;
+
+
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $documentBon;
+
+    /**
+     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentBon")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $documentBonFile;
+
+
+    /**
+     * @Assert\Date
+     * @var string A "Y-m-d" formatted value
+     */
+    protected $dateRecette;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -224,5 +270,78 @@ class Recette
         return $this->documentExecution;
     }
 
+ 
     
+
+    public function setDocumentAutreFile(File $file = null)
+    {
+        $this->documentAutreFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDocumentAutreFile()
+    {
+        return $this->documentAutreFile;
+    }
+
+    public function setDocumentAutre($documentExecution)
+    {
+        $this->documentAutre = $documentExecution;
+    }
+
+    public function getDocumentAutre()
+    {
+        return $this->documentAutre;
+    }
+
+
+
+
+    public function setDocumentBonFile(File $file = null)
+    {
+        $this->documentBonFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDocumentBonFile()
+    {
+        return $this->documentBonFile;
+    }
+
+    public function setDocumentBon($documentExecution)
+    {
+        $this->documentBon = $documentExecution;
+    }
+
+    public function getDocumentBon()
+    {
+        return $this->documentBon;
+    }
+
+    public function getDateRecette(): ?string
+    {
+        return $this->dateRecette;
+    }
+
+    public function setDateRecette(string $fontionnementInvestissement): self
+    {
+        $this->dateRecette = $fontionnementInvestissement;
+
+        return $this;
+    }
+
 }

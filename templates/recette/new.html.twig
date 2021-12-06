@@ -33,6 +33,7 @@
 				<div class="card card-primary">
 				<div class="card-body">
 					{{ form_row(form.numCC) }}
+					{{ form_row(form.dateRecette, { attr:{ class:'js-datepicker' } }) }}
 					{{ form_row(form.partieversantes) }}
 					{{ form_row(form.natureRecette) }}
 
@@ -58,6 +59,14 @@
 						{{ form_row(form.documentExecutionFile) }}
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(form.documentAutreFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.documentBonFile) }}
+					</div>
+				</div>
 			</div>
 		<!-- /.card-body -->
 		</div>
@@ -79,8 +88,16 @@
 
 {% endblock %}
 {% block javascript %}
-<script>
 
 
-</script>
+
+      
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
 {% endblock %}

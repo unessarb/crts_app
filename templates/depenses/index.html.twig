@@ -31,14 +31,15 @@
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                      <th>#</th>
-                      <th>N° C-C</th>
+                      
+                      <th>N°</th>
                       <th>Référence</th>
                       <th>Bénéficiaire</th>
-                      <th>Type de dépense</th>
+                      <th>Rubrique</th>
                       <th>Objet</th>
                       <th>Observations</th>
                       <th>Montant TTC</th>
+                      <th>Documents</th>
                       <th>Crée le</th>
                       <th>Modifié le</th>
                       {% if is_granted('ROLE_REGIE') %}
@@ -50,14 +51,27 @@
                     <tbody>
                       {% for item in depenses %}
                           <tr>
-                              <td >{{ loop.index }}</td> 
-                              <td>{{item.numCC}}</td>                        
+                              
+                              <td>{{item.id}}</td>                        
                               <td>{{item.reference}}</td>                        
                               <td>{{item.beneficiaire.name}}</td>                        
                               <td>{{item.typeDpense}}</td>                        
                               <td>{{item.objet}}</td>                        
                               <td>{{item.obs}}</td>                        
-                              <td>{{item.montant}}</td>                        
+                              <td>{{item.montant}}</td>    
+                              <td>
+                              {% if item.documentPassation %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentPassationFile') }}">Ordre de paiement</a>
+                               -
+                              {% endif %} 
+                              {% if item.documentExecution %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentExecutionFile') }}">Facture</a>
+                               -
+                              {% endif %} 
+                              {% if item.documentOrdre %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentOrdreFile') }}">Ordre de mission</a>
+                              {% endif %}                              
+                              </td>                    
                               <td>{{item.createdAt | date() }}</td>                        
                               <td>{{item.updatedAt | date() }}</td>        
                              

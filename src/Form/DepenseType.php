@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Depense;
 use App\Entity\Personnel;
+use App\Entity\NatureOperationDepense;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,15 +16,19 @@ class DepenseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('numCC', null, [
-                "label" => "N° C-C",
-                ])
             ->add('reference', null, [
                 "label" => "Référence",
                 ])
-            ->add('typeDpense', null, [
-                "label" => "Type de dépense",
-                ])
+                ->add('typeDpense', EntityType::class, [
+                    // looks for choices from this entity
+                    'class' => NatureOperationDepense::class,
+                    "placeholder" => "Selectionner la Rubrique",
+                    'choice_label' => "natureOperation",
+                    'label' => "Rubrique",
+                    "attr"=> [
+                        "class" => "select2bs4"
+                    ]
+                    ])
             ->add('objet', null, [
                 "label" => "Objet",
                 ])
@@ -37,7 +42,7 @@ class DepenseType extends AbstractType
                 'delete_label' => 'Supprimer',
                 'download_label' => 'Télécharger',
                 'asset_helper' => true,
-                'label' => 'Justificatif 1'
+                'label' => 'Ordre de paiement'
             ])
             ->add('documentExecutionFile', VichFileType::class, [
                 'required' => false,
@@ -45,7 +50,15 @@ class DepenseType extends AbstractType
                 'delete_label' => 'Supprimer',
                 'download_label' => 'Télécharger',
                 'asset_helper' => true,
-                'label' => 'Justificatif 2'
+                'label' => 'Facture'
+            ])
+            ->add('documentOrdreFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => 'Télécharger',
+                'asset_helper' => true,
+                'label' => 'Ordre de mission'
             ])
             ->add('beneficiaire', EntityType::class, [
                 // looks for choices from this entity
