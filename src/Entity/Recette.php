@@ -47,7 +47,11 @@ class Recette
      */
     private $partieversantes;
 
-
+    /**
+     * @ORM\Column(type="string", length=80)
+     * @Assert\NotBlank()
+     */
+    private $typeRecette;
     /**
      * @ORM\Column(type="string", length=1000, nullable = true)
      */
@@ -138,10 +142,47 @@ class Recette
 
 
     /**
-     * @Assert\Date
-     * @var string A "Y-m-d" formatted value
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
      */
-    protected $dateRecette;
+    private $documentNotif;
+
+    /**
+     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentNotif")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $documentNotifFile;
+
+
+
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @var string
+     */
+    private $documentOrdre;
+
+    /**
+     * @Vich\UploadableField(mapping="recette_files", fileNameProperty="documentOrdre")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Veuillez télécharger un PDF valide"
+     * )
+     * @var File
+     */
+    private $documentOrdreFile;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateRecette;
 
     public function getId(): ?int
     {
@@ -187,6 +228,20 @@ class Recette
 
         return $this;
     }
+
+
+    public function getTypeRecette(): ?string
+    {
+        return $this->typeRecette;
+    }
+
+    public function setTypeRecette(string $fontionnementInvestissement): self
+    {
+        $this->typeRecette = $fontionnementInvestissement;
+
+        return $this;
+    }
+
 
     public function getObs(): ?string
     {
@@ -332,16 +387,80 @@ class Recette
         return $this->documentBon;
     }
 
-    public function getDateRecette(): ?string
+
+
+    public function setDocumentNotifFile(File $file = null)
+    {
+        $this->documentNotifFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDocumentNotifFile()
+    {
+        return $this->documentNotifFile;
+    }
+
+    public function setDocumentNotif($documentExecution)
+    {
+        $this->documentNotif = $documentExecution;
+    }
+
+    public function getDocumentNotif()
+    {
+        return $this->documentNotif;
+    }
+
+
+
+
+    public function setDocumentOrdreFile(File $file = null)
+    {
+        $this->documentOrdreFile = $file;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($file) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getDocumentOrdreFile()
+    {
+        return $this->documentOrdreFile;
+    }
+
+    public function setDocumentOrdre($documentExecution)
+    {
+        $this->documentOrdre = $documentExecution;
+    }
+
+    public function getDocumentOrdre()
+    {
+        return $this->documentOrdre;
+    }
+
+
+    public function getDateRecette(): ?\DateTimeInterface
     {
         return $this->dateRecette;
     }
 
-    public function setDateRecette(string $fontionnementInvestissement): self
+    public function setDateRecette(?\DateTimeInterface $dateRecette2): self
     {
-        $this->dateRecette = $fontionnementInvestissement;
+        $this->dateRecette = $dateRecette2;
 
         return $this;
     }
+
+
 
 }

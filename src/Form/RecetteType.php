@@ -31,6 +31,13 @@ class RecetteType extends AbstractType
     // adds a class that can be selected in JavaScript
     'attr' => ['class' => 'js-datepicker'],
 ])
+->add('typeRecette', ChoiceType::class, [
+    'choices'  => [
+        'Recette Directe' => 'Recette Directe',
+        'Recette via GID' => 'Recette via GID'
+    ],
+    "label" => "Type de la recette"
+    ])
             ->add('obs', null, [ "label" => "Observations" ])
             ->add('montant', null, [
                 "label" => "Montant TTC"
@@ -66,6 +73,22 @@ class RecetteType extends AbstractType
                     'download_label' => 'Télécharger',
                     'asset_helper' => true,
                     'label' => 'Bon de commande'
+                ])
+                ->add('documentNotifFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Notification'
+                ])
+                ->add('documentOrdreFile', VichFileType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'delete_label' => 'Supprimer',
+                    'download_label' => 'Télécharger',
+                    'asset_helper' => true,
+                    'label' => 'Ordre de recette de régularisation'
                 ])
             ->add('natureRecette', EntityType::class, [
                 // looks for choices from this entity

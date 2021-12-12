@@ -33,6 +33,7 @@
 				<div class="card card-primary">
 				<div class="card-body">
 					{{ form_row(form.numCC) }}
+					{{ form_row(form.typeRecette) }}
 					{{ form_row(form.dateRecette, { attr:{ class:'js-datepicker' } }) }}
 					{{ form_row(form.partieversantes) }}
 					{{ form_row(form.natureRecette) }}
@@ -49,9 +50,17 @@
 			
 
 		</div>
-		<div class="card card-secondary">
+				<div class="card card-secondary">
 			<div class="card-body">
-				<div class="row">
+				<div class="row" id="fichierL3">
+					<div class="col-6">
+						{{ form_row(form.documentNotifFile) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(form.documentOrdreFile) }}
+					</div>
+				</div>
+				<div class="row" id="fichierL1">
 					<div class="col-6">
 						{{ form_row(form.documentPassationFile) }}
 					</div>
@@ -59,7 +68,7 @@
 						{{ form_row(form.documentExecutionFile) }}
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" id="fichierL2">
 					<div class="col-6">
 						{{ form_row(form.documentAutreFile) }}
 					</div>
@@ -94,6 +103,61 @@
             // you may need to change this code if you are not using Bootstrap Datepicker
             $('.js-datepicker').datepicker({
                 format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+
+	 <script>
+
+	
+	
+
+
+		
+        $(document).ready(function() {
+
+			setTimeout(function(){
+ var recette="{{recette.typeRecette}}";
+ console.log(recette);
+
+			if( recette.includes("Directe"))
+			{
+					$('#fichierL1').show();
+					$('#fichierL2').show();
+					$('#fichierL3').hide();
+			}
+			else
+				{
+					
+					$('#fichierL1').hide();
+					$('#fichierL2').hide();
+					$('#fichierL3').show();
+				
+				}
+}, 2);
+			
+	
+
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('#recette_typeRecette').on('change', function() {
+				
+				if(this.value.includes("Directe"))
+				{
+					
+					$('#fichierL1').show();
+					$('#fichierL2').show();
+					$('#fichierL3').hide();
+					
+					
+				}
+				else
+				{
+					$('#fichierL1').hide();
+					$('#fichierL2').hide();
+					$('#fichierL3').show();
+				
+				}
             });
         });
     </script>
