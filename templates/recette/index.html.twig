@@ -35,13 +35,15 @@
                     <tr>
                      
                       <th>N° des quittances à souches</th>
+                      <th>Type Recette</th>
                       <th>Partie versante</th>
                       <th>Nature Recette</th>
-                      <th>Montant TTC</th>
+                      <th>Montant TTC (MAD)</th>
                       <th>Observations</th>
                       <th>Justificatifs</th>
-                      <th>Crée le</th>
-                      <th>Modifié le</th>
+                      <th>Date de la recette</th>
+                     <!-- <th>Modifié le</th>
+                      -->
                       <!--
                       <th>{{app.user.roles[0]}}</th>
                       -->
@@ -53,13 +55,15 @@
                       {% for item in recettes %}
                           <tr>
                               
-                              <td>{{item.numCC}}</td>                        
+                              <td>{{item.numCC}}</td>   
+                              <td>{{item.typeRecette}}</td>                     
                               <td>{{item.Partieversantes}}</td>                        
                                                      
                               <td>{{item.natureRecette.natureOperation}}</td>                        
                               <td>{{item.montant}}</td>       
                               <td>{{item.obs}}</td>  
                               <td> 
+                               {% if item.typeRecette =="Recette via GID" %} 
                               {% if item.documentPassation %}  
                               <a href="{{ vich_uploader_asset(item, 'documentPassationFile') }}">Facture</a>
                               -
@@ -74,11 +78,24 @@
                               {% endif %}  
                               {% if item.documentBon %}  
                               <a href="{{ vich_uploader_asset(item, 'documentBonFile') }}">Bon de commande</a>
+                              
+                              {% endif %} 
+                               {% else %} 
+                              {% if item.documentNotif %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentNotifFile') }}">Notification</a>
                               -
                               {% endif %} 
-                              </td>                
-                              <td>{{item.createdAt | date() }}</td>                        
-                              <td>{{item.updatedAt | date() }}</td>        
+
+                              {% if item.documentOrdre %}  
+                              <a href="{{ vich_uploader_asset(item, 'documentOrdreFile') }}">Ordre de Régularisation</a>
+                              
+                              {% endif %} 
+                               {% endif %} 
+                              </td>  
+                                <td>{{item.dateRecette| date()  }}</td>                
+                              <!--<td>{{item.createdAt | date() }}</td>                        
+                              <td>{{item.updatedAt | date() }}</td>    
+                              -->    
                              <!-- <td>
                                   <a class="btn btn-primary btn-sm"
                                   data-toggle="tooltip" data-placement="top" title="Afficher détails"

@@ -34,6 +34,7 @@
 				<div class="card-body">
 					
 					{{ form_row(form.beneficiaire) }}
+					{{ form_row(form.dateDepense, { attr:{ class:'js-datepicker' } }) }}
 					{{ form_row(form.reference) }}
 					{{ form_row(form.typeDpense) }}
 
@@ -91,8 +92,15 @@
 
 {% endblock %}
 {% block javascript %}
-<script>
 
 
-</script>
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
 {% endblock %}

@@ -40,7 +40,7 @@ class RecetteType extends AbstractType
     ])
             ->add('obs', null, [ "label" => "Observations" ])
             ->add('montant', null, [
-                "label" => "Montant TTC"
+                "label" => "Montant TTC (MAD)"
                 ])
                 ->add('documentPassationFile', VichFileType::class, [
                     'required' => false,

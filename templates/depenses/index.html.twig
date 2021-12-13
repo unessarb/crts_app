@@ -40,8 +40,9 @@
                       <th>Observations</th>
                       <th>Montant TTC</th>
                       <th>Documents</th>
-                      <th>Crée le</th>
-                      <th>Modifié le</th>
+                     <th>Date de dépense</th>
+                     <!--  <th>Modifié le</th>
+                      -->
                       {% if is_granted('ROLE_REGIE') %}
                       <th></th>
                       <th></th>
@@ -55,7 +56,7 @@
                               <td>{{item.id}}</td>                        
                               <td>{{item.reference}}</td>                        
                               <td>{{item.beneficiaire.name}}</td>                        
-                              <td>{{item.typeDpense}}</td>                        
+                              <td>{{item.typeDpense.natureOperation}}</td>                        
                               <td>{{item.objet}}</td>                        
                               <td>{{item.obs}}</td>                        
                               <td>{{item.montant}}</td>    
@@ -72,8 +73,8 @@
                               <a href="{{ vich_uploader_asset(item, 'documentOrdreFile') }}">Ordre de mission</a>
                               {% endif %}                              
                               </td>                    
-                              <td>{{item.createdAt | date() }}</td>                        
-                              <td>{{item.updatedAt | date() }}</td>        
+                              <td>{{item.dateDepense| date()  }}</td>                        
+                                     
                              
                               {% if is_granted('ROLE_REGIE') %}               
                               <td>

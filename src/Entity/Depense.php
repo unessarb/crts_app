@@ -113,6 +113,11 @@ class Depense
     private $documentOrdreFile;
 
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateDepense;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -295,4 +300,17 @@ class Depense
     {
         return $this->documentOrdre;
     } 
+
+    public function getDateDepense(): ?\DateTimeInterface
+    {
+        return $this->dateDepense;
+    }
+
+    public function setDateDepense(?\DateTimeInterface $dateRecette2): self
+    {
+        $this->dateDepense = $dateRecette2;
+
+        return $this;
+    }
+
 }

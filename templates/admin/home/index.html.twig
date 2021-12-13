@@ -222,7 +222,7 @@
             <div class="card card-info">
               <div class="card-header">
 			
-                <h3 class="card-title">Montant des Dépenses/Recettes</h3>
+                <h3 class="card-title">Montant des Dépenses/Recettes (MAD)</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -425,6 +425,13 @@ $.ajax('/graphique2/{{dateM}}', {
 
 		areaChartData.datasets[1]['data']=data[1];
 		chart1.update();
+
+
+		areaChartData2.datasets[0]['data']=data[2];
+		//chart1.update();
+
+		areaChartData2.datasets[1]['data']=data[3];
+		chart2.update();
 		
     },
     error: function (jqXhr, textStatus, errorMessage) {
@@ -554,6 +561,28 @@ $.ajax('/graphique2/'+this.value, {
 
 		areaChartData.datasets[1]['data']=data[1];
 		chart1.update();
+		
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+});
+
+
+$("#select2").on('change', function() {
+  //alert( this.value );
+
+$.ajax('/graphique2/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		console.log(areaChartData.datasets);
+		areaChartData2.datasets[0]['data']=data[2];
+		//chart1.update();
+
+		areaChartData2.datasets[1]['data']=data[3];
+		chart2.update();
 		
     },
     error: function (jqXhr, textStatus, errorMessage) {

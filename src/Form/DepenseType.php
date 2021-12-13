@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class DepenseType extends AbstractType
 {
@@ -29,13 +30,25 @@ class DepenseType extends AbstractType
                         "class" => "select2bs4"
                     ]
                     ])
+                ->add('dateDepense', DateType::class, [
+                        'widget' => 'single_text',
+                        'format' => 'yyyy-MM-dd',
+                    
+                        // prevents rendering it as type="date", to avoid HTML5 date pickers
+                        'html5' => false,
+                    
+                        // adds a class that can be selected in JavaScript
+                        'attr' => ['class' => 'js-datepicker'],
+                    ])
             ->add('objet', null, [
                 "label" => "Objet",
                 ])
             ->add('obs', null, [
                 "label" => "Observations",
                 ])
-            ->add('montant')
+                ->add('montant', null, [
+                    "label" => "Montant TTC (MAD)"
+                    ])
             ->add('documentPassationFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,

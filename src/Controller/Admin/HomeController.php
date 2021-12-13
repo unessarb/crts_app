@@ -89,29 +89,38 @@ class HomeController extends AbstractController
         $recettes= $recetteRepository->findAll();
        
 $t=array(0,0,0,0,0,0,0,0,0,0,0,0);
+$m=array(0,0,0,0,0,0,0,0,0,0,0,0);
+
 
 foreach($depenses as $depense)
 {
 if("20".$depense->getCreatedAt()->format('y')==$annee)
 {
     $t[intval($depense->getCreatedAt()->format('m'))-1]=$t[intval($depense->getCreatedAt()->format('m'))-1]+1;
+    $m[intval($depense->getCreatedAt()->format('m'))-1]=$m[intval($depense->getCreatedAt()->format('m'))-1]+doubleval($depense->getMontant());
 }
 
 }
 
 $t2=array(0,0,0,0,0,0,0,0,0,0,0,0);
+$m2=array(0,0,0,0,0,0,0,0,0,0,0,0);
 
 foreach($recettes as $recette)
 {
 if("20".$recette->getCreatedAt()->format('y')==$annee)
 {
     $t2[intval($recette->getCreatedAt()->format('m'))-1]=$t2[intval($recette->getCreatedAt()->format('m'))-1]+1;
+    $m2[intval($recette->getCreatedAt()->format('m'))-1]=$m2[intval($recette->getCreatedAt()->format('m'))-1]+doubleval($recette->getMontant());
+
 }
 
 }
         $response = array();
         $response[]=$t;
         $response[]=$t2;
+
+        $response[]=$m;
+        $response[]=$m2;
        // $response[]=count($recettes);
         
 

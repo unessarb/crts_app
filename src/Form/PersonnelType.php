@@ -15,10 +15,10 @@ class PersonnelType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => "Nom Personnel",
+                'label' => "Nom",
             ])
             ->add('code', NumberType::class, [
-                'label' => "Code Personnel"
+                'label' => "Code"
             ])
             ->add('adresse', TextType::class, [
                 'label' => "Adresse"
