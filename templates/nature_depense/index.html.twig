@@ -1,0 +1,89 @@
+
+
+
+
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Liste des Rubriques' %}
+
+{% block body %}
+
+	<!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Liste des Rubriques</h1>
+          </div>
+          <div class="col-sm-6 text-right">
+            <a role="link" href="{{path('app_new_nature_operation_depense')}}" type="button" class="btn btn-primary "><i class="fa fa-plus"></i> Nouvelle Rubrique</a>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                <th>Identifiant</th>
+                <th>Code</th>
+                <th>Rubrique</th>
+                <th>actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in nature_depenses %}
+                        <tr>
+                            <td >{{ loop.index }}</td>          
+                            <td>{{item.id}}</td>                        
+                            <td>{{item.code}}</td>                        
+                            <td>{{item.natureOperation}}</td>                        
+                                                  
+                            <td>
+                                <a class="btn btn-info btn-sm" 
+                                data-toggle="tooltip" data-placement="top" title="Editer"
+                                href="{{ path('app_edit_nature_operation_depense', {id: item.id}) }}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Edit
+                                </a>  
+                                <a href="#" 
+                                data-toggle="tooltip" data-placement="top" title="Supprimer"
+                                onclick="event.preventDefault(); confirm('Êtes-vous sûre') && document.getElementById('js-nature_recette-delete-form').submit();" 
+                                class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                    Supprimer
+                                </a>
+
+                                <form id="js-nature_recette-delete-form" action="{{ path('app_delete_nature_operation_depense', {id: item.id}) }}" method="post" style="display: none;">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token('nature_depense_deletion_' ~ item.id) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                </form> 
+                            </td>                        
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+
+{% endblock %}
