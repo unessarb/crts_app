@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DepenseType extends AbstractType
 {
@@ -65,6 +66,15 @@ class DepenseType extends AbstractType
                 'asset_helper' => true,
                 'label' => 'Facture'
             ])
+            ->add('dap', ChoiceType::class, [
+                'choices'  => [
+                    'Choix 1' => 'Choix1',
+                    'Choix 2' => 'Choix2',
+                    'Choix 3' => 'Choix3',
+                    'Choix 4' => 'Choix4'
+                ],
+                "label" => "DAP"
+                ])
             ->add('documentOrdreFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,

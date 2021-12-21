@@ -31,6 +31,14 @@ class Depense
      */
     private $reference;
 
+
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable = true)
+     * @Assert\NotBlank()
+     */
+    private $dap;
+
     /**
      * @ORM\ManyToOne(targetEntity=Personnel::class)
      * @ORM\JoinColumn(nullable=false)
@@ -137,6 +145,17 @@ class Depense
     }
 
 
+    public function getDap(): ?string
+    {
+        return $this->dap;
+    }
+
+    public function setDap(string $reference): self
+    {
+        $this->dap = $reference;
+
+        return $this;
+    }
 
     public function getTypeDpense(): ?NatureOperationDepense
     {

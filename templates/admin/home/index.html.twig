@@ -81,17 +81,68 @@
 					<div class="icon">
 					<i class="ion ion-bag"></i>
 					</div>
-					{% if is_granted('ROLE_ADMIN') %}
-						<a href="{{ path('app_snature_recette_indexocietes') }}" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
-					{% else %}
-						<a href="#" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
 
-					{% endif %}
+						<a href="{{ path('nature_recette_index') }}" class="small-box-footer">Plus d'infos <i class="fas fa-arrow-circle-right"></i></a>
+
+					
 				</div>
 			</div>
 			<!-- ./col -->
 		</div>
 		<!-- /.row -->
+
+
+ 
+
+	<!-- Small boxes (Stat box) -->
+		<div class="row">
+			
+			<div class="col-lg-4 col-6">
+				<!-- small box -->
+				<div class="small-box bg-success">
+					<div class="inner">
+					<h3>{{ montantD }} MAD</h3>
+
+					<p>Dépenses</p>
+					</div>
+					<div class="icon">
+					<i class="ion ion-stats-bars"></i>
+					</div>
+					</div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-4 col-6">
+				<!-- small box -->
+				<div class="small-box bg-warning">
+					<div class="inner">
+					<h3>{{ montantRD }} MAD</h3>
+
+					<p>Recettes Directes</p>
+					</div>
+					<div class="icon">
+					<i class="ion ion-person-add"></i>
+					</div>
+					</div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-4 col-6">
+				<!-- small box -->
+				<div class="small-box bg-danger">
+					<div class="inner">
+					<h3>{{ montantRG }} MAD</h3>
+
+					<p>Recettes via GID</p>
+					</div>
+					<div class="icon">
+					<i class="ion ion-pie-graph"></i>
+					</div>
+					</div>
+			</div>
+			
+		</div>
+		<!-- /.row -->
+
+
 
 	{% else %} 
 		<!-- Small boxes (Stat box) -->

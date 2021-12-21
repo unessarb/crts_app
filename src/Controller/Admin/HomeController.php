@@ -47,9 +47,55 @@ class HomeController extends AbstractController
         $response[]=count($contrats);
         $response[]=count($bons);
 
+
+
+        $depenses = $depenseRepository->findAll();
+        $recettes= $recetteRepository->findAll();
+
+        $montantRD=0.0;
+        $montantRG=0.0;
+        $ann=new \DateTime('now');
+        $a=$ann->format('y');
+        
+        foreach($recettes as $recette)
+        {
+            //var_dump($recette);
+            if($recette->getDateRecette())
+            {
+
+                //var_dump($recette->getTypeRecette());
+            if($recette->getDateRecette()->format('y')==$a)
+                {
+                    
+                    
+                    if($recette->getTypeRecette()=="Recette Directe")
+                    {
+                        $montantRD=$montantRD+doubleval($recette->getMontant());
+                        //var_dump(doubleval($recette->getMontant()));
+                    }
+                       
+                    else
+                        $montantRG=$montantRG+doubleval($recette->getMontant());
+
+                }
+            }
+
+        }
+
+        //var_dump($montantRD);
+        $montantD=0;
+        foreach($depenses as $depense)
+        {
+            if($depense->getDateDepense())
+        if($depense->getDateDepense()->format('y')==$a)
+        {
+            $montantD=$montantD+doubleval($depense->getMontant());
+        }
+        
+        }
       
         
-        return $this->render('admin/home/index.html.twig', compact('countMarche', 'countContrat', 'countBonCmd', 'countSociete','response','countNatureR', 'countNatureD', 'countR', 'countD','dateM'));
+        return $this->render('admin/home/index.html.twig', compact('montantD','montantRD','montantRG','countMarche', 'countContrat', 'countBonCmd', 'countSociete','response','countNatureR', 'countNatureD', 'countR', 'countD','dateM'));
 
  
     
@@ -94,10 +140,11 @@ $m=array(0,0,0,0,0,0,0,0,0,0,0,0);
 
 foreach($depenses as $depense)
 {
-if("20".$depense->getCreatedAt()->format('y')==$annee)
+    if($depense->getDateDepense())
+if("20".$depense->getDateDepense()->format('y')==$annee)
 {
-    $t[intval($depense->getCreatedAt()->format('m'))-1]=$t[intval($depense->getCreatedAt()->format('m'))-1]+1;
-    $m[intval($depense->getCreatedAt()->format('m'))-1]=$m[intval($depense->getCreatedAt()->format('m'))-1]+doubleval($depense->getMontant());
+    $t[intval($depense->getDateDepense()->format('m'))-1]=$t[intval($depense->getDateDepense()->format('m'))-1]+1;
+    $m[intval($depense->getDateDepense()->format('m'))-1]=$m[intval($depense->getDateDepense()->format('m'))-1]+doubleval($depense->getMontant());
 }
 
 }
@@ -107,10 +154,11 @@ $m2=array(0,0,0,0,0,0,0,0,0,0,0,0);
 
 foreach($recettes as $recette)
 {
-if("20".$recette->getCreatedAt()->format('y')==$annee)
+    if($recette->getDateRecette())
+if("20".$recette->getDateRecette()->format('y')==$annee)
 {
-    $t2[intval($recette->getCreatedAt()->format('m'))-1]=$t2[intval($recette->getCreatedAt()->format('m'))-1]+1;
-    $m2[intval($recette->getCreatedAt()->format('m'))-1]=$m2[intval($recette->getCreatedAt()->format('m'))-1]+doubleval($recette->getMontant());
+    $t2[intval($recette->getDateRecette()->format('m'))-1]=$t2[intval($recette->getDateRecette()->format('m'))-1]+1;
+    $m2[intval($recette->getDateRecette()->format('m'))-1]=$m2[intval($recette->getDateRecette()->format('m'))-1]+doubleval($recette->getMontant());
 
 }
 

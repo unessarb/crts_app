@@ -94,6 +94,18 @@
         {% endif %}
 
         {% if is_granted('ROLE_ADMIN') %}
+                 <li class="nav-item">
+          <a href="{{ path('recette_index') }}" class="nav-link {% if app.request.attributes.get('_route') == 'recette_index' or app.request.attributes.get('_route') == 'recette_new' or app.request.attributes.get('_route') == 'recette_edit' or app.request.attributes.get('_route') == 'recette_show' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Recettes</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('app_depenses') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_depenses' or app.request.attributes.get('_route') == 'app_new_depense' or app.request.attributes.get('_route') == 'app_edit_depense' or app.request.attributes.get('_route') == 'app_show_depense' %}active{% endif %}">
+            <i class="far fa-folder-open nav-icon"></i>
+            <p>Depenses</p>
+          </a>
+        </li>
         <li class="nav-item {% if 
                   app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_marche_unique' or 

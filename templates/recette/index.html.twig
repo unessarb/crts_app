@@ -47,8 +47,10 @@
                       <!--
                       <th>{{app.user.roles[0]}}</th>
                       -->
+                      {% if is_granted('ROLE_REGIE') %}    
                       <th></th>
                       <th></th>
+                       {% endif %} 
                     </tr>
                     </thead>
                     <tbody>
