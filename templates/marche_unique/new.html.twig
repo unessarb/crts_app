@@ -13,7 +13,7 @@
           </div>
 		   <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ path('app_marches') }}">Archive Marché Unique - Cadre</a></li>
+              <li class="breadcrumb-item"><a href="{{ path('app_marches') }}">Archive Marché Unique - Cadre - Reconductible</a></li>
               <li class="breadcrumb-item active">Nouveau marché</li>
             </ol>
           </div>
@@ -274,6 +274,30 @@ $("#marche_unique_fontionnementInvestissement").on('change', function() {
    			option += '<option value="'+ data[i]['ligne_id'] + '">' + data[i]['ligne_rubrique'] + '</option>';
 			}
 		$('#marche_unique_lineBudgetaire').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+
+});
+
+
+
+$("#marche_unique_titulaire").on('change', function() {
+  //alert( this.value );
+
+  $.ajax('/societe/type/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#marche_unique_societe').empty();
+		$('#marche_unique_societe').append('<option value="0">Séléctionner Société</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['societe_id'] + '">' + data[i]['societe_rubrique'] + '</option>';
+			}
+		$('#marche_unique_societe').append(option);
     },
     error: function (jqXhr, textStatus, errorMessage) {
             console.log('Error' + errorMessage);

@@ -16,8 +16,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 /**
- * @IsGranted("ROLE_ADMIN")
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_AGENT')")
  */
 class SocieteController extends AbstractController
 {
@@ -132,5 +134,23 @@ class SocieteController extends AbstractController
            
       
        
+    }
+
+
+    #[Route('/societe/type/{type}', name: 'societe_type', methods: ['GET'])]
+    public function getSocieteFromTitulire($type,SocieteRepository $societeRepository): Response
+    {
+        
+        $lignes = $societeRepository->findBy(['titulaire' => $type]);
+
+        $response = array();
+    foreach ($lignes as $ligne) {
+        $response[] = array(
+            'societe_id' => $ligne->getId(),
+            'societe_rubrique' => $ligne->getName()
+        );
+    }
+        return new JsonResponse(($response));
+
     }
 }

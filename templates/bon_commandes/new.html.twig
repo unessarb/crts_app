@@ -207,5 +207,28 @@ $("#bon_commandes_fontionnementInvestissement").on('change', function() {
 
 });
 
+
+$("#bon_commandes_titulaire").on('change', function() {
+  //alert( this.value );
+
+  $.ajax('/societe/type/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#bon_commandes_societe').empty();
+		$('#bon_commandes_societe').append('<option value="0">Séléctionner Société</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['societe_id'] + '">' + data[i]['societe_rubrique'] + '</option>';
+			}
+		$('#bon_commandes_societe').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+
+});
+
 </script>
 {% endblock %}

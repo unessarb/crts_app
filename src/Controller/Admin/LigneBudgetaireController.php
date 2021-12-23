@@ -12,8 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 /**
- * @IsGranted("ROLE_ADMIN")
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_AGENT')")
  */
 class LigneBudgetaireController extends AbstractController
 {

@@ -43,6 +43,7 @@ class MarcheUniqueType extends AbstractType
                 'choices'  => [
                     '0 | Unique' => 0,
                     '1 | Cadre' => 1,
+                    '2 | Reconductible' => 2,
                 ],
                 "placeholder" => "Selectionner le type du marché",
                 "label" => "Type Marché"

@@ -38,8 +38,8 @@
                       <th>Société</th>
                       <th>Nature Opération</th>
                       <th>Montant TTC</th>
-                      <th>Crée le</th>
-                      <th>Modifié le</th>
+                      <th>Année</th>
+
                       {% if is_granted('ROLE_AGENT') %}
                       <th></th>
                       <th></th>
@@ -57,8 +57,8 @@
                               <td>{{item.societe.name}}</td>                        
                               <td>{{item.natureOperation.natureOperation}}</td>                        
                               <td>{{item.montant ~ ' ' ~ item.devise.name}}</td>                        
-                              <td>{{item.createdAt | date() }}</td>                        
-                              <td>{{item.updatedAt | date() }}</td>        
+                              <td>{{item.anneeBudgetaire }}</td>                        
+                                     
                               <td>
                                   <a class="btn btn-primary btn-sm"
                                   data-toggle="tooltip" data-placement="top" title="Afficher détails"

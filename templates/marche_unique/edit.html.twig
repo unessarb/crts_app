@@ -9,11 +9,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit marché</h1>
+            <h1>Modifier marché</h1>
           </div>
 		  <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ path('app_marches') }}">Archive Marché Unique - Cadre</a></li>
+              <li class="breadcrumb-item"><a href="{{ path('app_marches') }}">Archive Marché Unique - Cadre - Reconductible</a></li>
               <li class="breadcrumb-item active">Edit marché</li>
             </ol>
           </div>
@@ -55,8 +55,9 @@
 				<div class="card card-secondary">
 					<div class="card-body">
 					{{ form_row(form.natureOperation) }}
-					{{ form_row(form.lineBudgetaire) }}
+					
 					{{ form_row(form.fontionnementInvestissement) }}
+					{{ form_row(form.lineBudgetaire) }}
 					{{ form_row(form.anneeBudgetaire) }}
 					{{ form_row(form.montant) }}
 					{{ form_row(form.devise) }}
@@ -248,4 +249,57 @@
 				
 			
 
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+
+$("#marche_unique_fontionnementInvestissement").on('change', function() {
+  //alert( this.value );
+
+  $.ajax('/ligne/type/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#marche_unique_lineBudgetaire').empty();
+		$('#marche_unique_lineBudgetaire').append('<option value="0">Séléctionner Ligne Budgétaire</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['ligne_id'] + '">' + data[i]['ligne_rubrique'] + '</option>';
+			}
+		$('#marche_unique_lineBudgetaire').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+
+});
+
+
+
+$("#marche_unique_titulaire").on('change', function() {
+  //alert( this.value );
+
+  $.ajax('/societe/type/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#marche_unique_societe').empty();
+		$('#marche_unique_societe').append('<option value="0">Séléctionner Société</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['societe_id'] + '">' + data[i]['societe_rubrique'] + '</option>';
+			}
+		$('#marche_unique_societe').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+
+});
+
+</script>
 {% endblock %}

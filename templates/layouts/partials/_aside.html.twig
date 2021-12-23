@@ -42,7 +42,7 @@
         <li class="nav-item">
           <a href="{{ path('app_marches') }}" class="nav-link {% if app.request.attributes.get('_route') == 'app_marches' or app.request.attributes.get('_route') == 'app_new_marches' or app.request.attributes.get('_route') == 'app_edit_marches' or app.request.attributes.get('_route') == 'app_show_marches' %}active{% endif %}">
             <i class="far fa-folder-open nav-icon"></i>
-            <p>Marchés Unique / Cadre</p>
+            <p>Marchés</p>
           </a>
         </li>
        
@@ -106,6 +106,8 @@
             <p>Depenses</p>
           </a>
         </li>
+        {% endif %}">
+        {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_AGENT') %}
         <li class="nav-item {% if 
                   app.request.attributes.get('_route') == 'app_nature_operation_marche_unique' or 
                   app.request.attributes.get('_route') == 'app_new_nature_operation_marche_unique' or 
@@ -232,7 +234,8 @@
             
           </ul>
         </li>
-
+ {% endif %}
+ {% if is_granted('ROLE_ADMIN') %}
         <li class="nav-item 
             {% if app.request.attributes.get('_route') == 'app_admins' or app.request.attributes.get('_route') == 'app_new_admin' or app.request.attributes.get('_route') == 'app_edit_admin' or
                   app.request.attributes.get('_route') == 'app_agents' or app.request.attributes.get('_route') == 'app_new_agent' or app.request.attributes.get('_route') == 'app_edit_agent' or
