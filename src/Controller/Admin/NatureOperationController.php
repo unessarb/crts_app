@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -39,6 +40,44 @@ class NatureOperationController extends AbstractController
      * NATURE OPERATION MARCHE UNIQUE / CADRE
      * ======================================
      */
+
+
+    #[Route('/natureUC/type/{type}', name: 'natureUC_type', methods: ['GET'])]
+    public function getNatureCFromTitulire($type,NatureOperationMarcheUniqueRepository $natureOperation): Response
+    {
+        
+        $lignes = $natureOperation->findBy(['tfs' => $type]);
+
+        $response = array();
+    foreach ($lignes as $ligne) {
+        $response[] = array(
+            'nature_id' => $ligne->getId(),
+            'nature_rubrique' => $ligne->getNatureOperation()
+        );
+    }
+        return new JsonResponse(($response));
+
+    }
+
+
+    #[Route('/natureR/type/{type}', name: 'natureR_type', methods: ['GET'])]
+    public function getNatureRFromTitulire($type,NatureOperationMarcheReconductibleRepository $natureOperation): Response
+    {
+        
+        $lignes = $natureOperation->findBy(['tfs' => $type]);
+
+        $response = array();
+    foreach ($lignes as $ligne) {
+        $response[] = array(
+            'nature_id' => $ligne->getId(),
+            'nature_rubrique' => $ligne->getNatureOperation()
+        );
+    }
+        return new JsonResponse(($response));
+
+    }
+
+
     #[Route('/nature-operation-marche-unique', name: 'app_nature_operation_marche_unique')]
     public function index_marche_unique(NatureOperationMarcheUniqueRepository $natureOperation): Response
     {
@@ -170,6 +209,11 @@ class NatureOperationController extends AbstractController
      * ======================================
      */
 
+
+
+
+
+
     #[Route('/nature-operation-contrat', name: 'app_nature_operation_contrat')]
     public function index_contrat(NatureOperationContratRepository $natureOperation): Response
     {
@@ -235,6 +279,27 @@ class NatureOperationController extends AbstractController
      * NATURE OPERATION BON COMMANDE
      * ======================================
      */
+
+
+    #[Route('/natureBC/type/{type}', name: 'natureBC_type', methods: ['GET'])]
+    public function getSocieteFromTitulire($type,NatureOperationBonCommandeRepository $natureOperation): Response
+    {
+        
+        $lignes = $natureOperation->findBy(['tfs' => $type]);
+
+        $response = array();
+    foreach ($lignes as $ligne) {
+        $response[] = array(
+            'nature_id' => $ligne->getId(),
+            'nature_rubrique' => $ligne->getNatureOperation()
+        );
+    }
+        return new JsonResponse(($response));
+
+    }
+
+
+
 
     #[Route('/nature-operation-bon-commande', name: 'app_nature_operation_bon_commande')]
     public function index_bon_commande(NatureOperationBonCommandeRepository $natureOperation): Response

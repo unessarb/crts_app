@@ -306,5 +306,96 @@ $("#marche_unique_titulaire").on('change', function() {
 
 });
 
+
+
+$("#marche_unique_tfs").on('change', function() {
+  console.log( $(this).val() );
+  console.log( $("#marche_unique_typeMarche").val() );
+
+if($("#marche_unique_typeMarche").val() ==0 || $("#marche_unique_typeMarche").val() ==1)
+  $.ajax('/natureUC/type/'+this.value, {
+   type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#marche_unique_natureOperation').empty();
+		$('#marche_unique_natureOperation').append('<option value="0">Selectionner la nature opération</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['nature_id'] + '">' + data[i]['nature_rubrique'] + '</option>';
+			}
+		$('#marche_unique_natureOperation').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+else
+{
+	  $.ajax('/natureR/type/'+this.value, {
+   type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#marche_unique_natureOperation').empty();
+		$('#marche_unique_natureOperation').append('<option value="0">Selectionner la nature opération</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['nature_id'] + '">' + data[i]['nature_rubrique'] + '</option>';
+			}
+		$('#marche_unique_natureOperation').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+}
+
+});
+
+
+
+$("#marche_unique_typeMarche").on('change', function() {
+  console.log( $(this).val() );
+  console.log( $("#marche_unique_tfs").val() );
+
+if($(this).val() ==0 || $(this).val() ==1)
+  $.ajax('/natureUC/type/'+this.value, {
+   type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#marche_unique_natureOperation').empty();
+		$('#marche_unique_natureOperation').append('<option value="0">Selectionner la nature opération</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['nature_id'] + '">' + data[i]['nature_rubrique'] + '</option>';
+			}
+		$('#marche_unique_natureOperation').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+else
+{
+	  $.ajax('/natureR/type/'+this.value, {
+   type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#marche_unique_natureOperation').empty();
+		$('#marche_unique_natureOperation').append('<option value="0">Selectionner la nature opération</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['nature_id'] + '">' + data[i]['nature_rubrique'] + '</option>';
+			}
+		$('#marche_unique_natureOperation').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+}
+
+});
+
+
 </script>
 {% endblock %}

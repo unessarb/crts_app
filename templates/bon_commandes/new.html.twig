@@ -230,5 +230,29 @@ $("#bon_commandes_titulaire").on('change', function() {
 
 });
 
+
+
+$("#bon_commandes_tfs").on('change', function() {
+  //alert( this.value );
+
+  $.ajax('/natureBC/type/'+this.value, {
+    type: 'GET',  // http method
+    success: function (data, status, xhr) {
+        console.log(data);
+		$('#bon_commandes_natureOperation').empty();
+		$('#bon_commandes_natureOperation').append('<option value="0">Selectionner la nature opération</option>');
+		var option = '';
+			for (var i=0;i<data.length;i++){
+   			option += '<option value="'+ data[i]['nature_id'] + '">' + data[i]['nature_rubrique'] + '</option>';
+			}
+		$('#bon_commandes_natureOperation').append(option);
+    },
+    error: function (jqXhr, textStatus, errorMessage) {
+            console.log('Error' + errorMessage);
+    }
+});
+
+});
+
 </script>
 {% endblock %}
